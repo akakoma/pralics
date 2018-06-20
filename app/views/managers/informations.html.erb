@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="managers-info-wrapper">
+    <h1>お知らせ情報</h1>
+    <h2>お知らせ総数 : <%= @informations.length %></h2>
+
+    <select class="" name="">
+      <option value="">id</option>
+      <option value="">user_id</option>
+      <option value="">group_id</option>
+      <option value="">company_id</option>
+      <option value="">title</option>
+      <option value="">image</option>
+      <option value="">body</option>
+      <option value="">created_at</option>
+      <option value="">updated_at</option>
+    </select>
+    <input type="serch" name="" value="">
+    <div class="managers-each-info">
+      <h3>All</h3>
+      <table border="1" class="managers-info-content">
+        <tr>
+          <th>id</th>
+          <th>user_id</th>
+          <th>group_id</th>
+          <th>company_id</th>
+          <th>title</th>
+          <th>image</th>
+          <th>body</th>
+          <th>created_at</th>
+          <th>updated_at</th>
+          <th>編集</th>
+        </tr>
+
+        <% @informations.each do |information| %>
+        <tr>
+          <td><%= information.id %></td>
+          <td><%= information.user_id %></td>
+          <td><%= information.group_id %></td>
+          <td><%= information.company_id %></td>
+          <td><%= information.title %></td>
+          <td><%= information.image %></td>
+          <td><%= information.body %></td>
+          <td><%= information.created_at %></td>
+          <td><%= information.updated_at %></td>
+          <td><%= link_to "編集","/managers/informations/#{information.id}/edit"%></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+
+  </div>
+</div>

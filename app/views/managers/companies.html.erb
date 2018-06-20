@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="managers-info-wrapper">
+    <h1>企業情報</h1>
+    <h2>企業総数 : <%= @companies.length %></h2>
+
+    <select class="" name="">
+      <option value="">id</option>
+      <option value="">name</option>
+      <option value="">image</option>
+      <option value="">genre</option>
+      <option value="">email</option>
+      <option value="">password</option>
+      <option value="">manager</option>
+      <option value="">tel</option>
+      <option value="">company_info</option>
+      <option value="">body</option>
+      <option value="">created_at</option>
+      <option value="">updated_at</option>
+    </select>
+    <input type="serch" name="" value="">
+    <div class="managers-each-info">
+      <h3>All</h3>
+      <table border="1" class="managers-info-content">
+        <tr>
+          <th>id</th>
+          <th>name</th>
+          <th>image</th>
+          <th>genre</th>
+          <th>email</th>
+          <th>password_digest</th>
+          <th>manager</th>
+          <th>tel</th>
+          <th>company_info</th>
+          <th>body</th>
+          <th>created_at</th>
+          <th>updated_at</th>
+          <th>編集</th>
+        </tr>
+
+        <% @companies.each do |company| %>
+        <tr>
+          <td><%= company.id %></td>
+          <td><%= company.name %></td>
+          <td><%= company.image %></td>
+          <td><%= company.genre %></td>
+          <td><%= company.email %></td>
+          <td><%= company.password_digest %></td>
+          <td><%= company.manager %></td>
+          <td><%= company.tel %></td>
+          <td><%= company.company_info %></td>
+          <td><%= company.body %></td>
+          <td><%= company.created_at %></td>
+          <td><%= company.updated_at %></td>
+          <td><%= link_to "編集","/managers/companies/#{company.id}/edit"%></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+
+  </div>
+</div>

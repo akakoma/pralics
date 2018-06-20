@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="wrapper-type-a">
+    <%= form_tag("/groups/#{@group.id}/group_login_system",class: "managers-login-form") do%>
+    <%= image_tag("/group_images/#{@group.image}",class:'group-manager-login-image')%>
+    <h1>【<%= @group.name %>】</h1>
+    <h2>管理者パスワード</h2>
+    <% if flash[:notice] %>
+      <p style="color:red;"><%= flash[:notice] %></p>
+    <% end %>
+    <input type="password" name="mana_password">
+    <input type="submit" class=" hover" value="ログイン">
+    <% end %>
+  </div>
+</div>

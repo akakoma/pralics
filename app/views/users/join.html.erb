@@ -1,0 +1,27 @@
+<div class="white-out"></div>
+
+<a href="/pralics/index"><div id="join-mask"></div></a>
+
+<div class="find-join-wrapper content">
+    <%= image_tag "/group_images/#{@group.image}",class: "find-join-image"%>
+    <p class="find-join-name"><%= @group.name %>(<%= Usersubgroup.where(group_id: @group.id).length %>)</p>
+    <p class="find-join-genre"><%= @group.genre %></p>
+    <div class="find-join-btn">
+      <% if Appsubgroup.find_by(user_id: @current_user.id,group_id: @group.id) %>
+      <a href="/pralics/index" style="width:100%;"class="hover"><span><i class="fas fa-ban join-icon"></i></span><br>申請中です</a>
+      <% elsif Usersubgroup.find_by(user_id: @current_user.id,group_id: @group.id) %>
+        <a href="/pralics/index" style="width:100%;"class="hover"><span><i class="fas fa-ban join-icon"></i></span><br>加入しています</a>
+      <% else %>
+      <%= link_to"/users/appsubgroup/#{@group.id}/create",{method: :post,class:'hover'} do %><i class="fas fa-sign-in-alt join-icon"></i><br>申請を送る<%end%><a href="/pralics/index" class="hover"><span><i class="fas fa-ban join-icon"></i></span><br>やめておく</a>
+      <% end %>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  $(function(){
+    $(document).ready(function() {
+      $('.find-join-wrapper').fadeIn(800);
+    });
+  });
+</script>

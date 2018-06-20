@@ -1,0 +1,889 @@
+<ul class="header-menu">
+  <li id="event-menu"><i class="fab fa-fw fa-hubspot menu-icon-size"></i>イベント一覧</li>
+  <li id="join-menu"><i class="fas fa-fw fa-users menu-icon-size count-box">
+    <% @i = 0 %>
+    <% @users.usersubgroups.each do |usersubgroup|%>
+    <% top_group = Group.find_by(id: usersubgroup.group_id) %>
+    <% if top_group %>
+    <% c = Information.where(group_id: top_group.id) %>
+    <% d = Information.where(group_id: 0) %>
+    <% @g_informations = c + d %>
+    <% usercount = Usersubgroup.find_by(user_id: @current_user.id,group_id: top_group.id)%>
+    <% if usercount.group_info != @g_informations.length && usercount.group_info < @g_informations.length %>
+    <% @i += @g_informations.length - usercount.group_info%>
+    <%end%>
+    <% end %>
+    <% end %>
+    <% if @i > 0 %>
+    <span class="header-menu-count" ><%= @i %></span>
+    <% end %>
+    </i>所属団体
+  </li>
+  <li id="like-menu"><i class="far fa-fw fa-heart menu-icon-size"></i>お気に入り</li>
+  <li id="contact-menu">
+    <i class="far fa-fw fa-comment menu-icon-size count-box">
+      <% @j = 0 %>
+      <% @estaevents.each do |estaevent| %>
+      <% messages = Message.where(room_id: estaevent.room_id)%>
+      <% messages.each do |message| %>
+      <% if  estaevent.user_count == message.user_count %>
+      <% @j += 1 %>
+      <% end %>
+      <% end %>
+      <% end %>
+      <% @events.each do |event| %>
+      <% messages = Message.where(room_id: event.room_id)%>
+      <% estaevent = Estaevent.find_by(event_id: event.id)%>
+        <% if event.organizer_id != "" && estaevent == nil && event.room_id != "" %>
+      <% messages.each do |message| %>
+        <% if  event.user_count == message.user_count  %>
+          <% @j += 1 %>
+        <% end %>
+        <% end %>
+        <% end %>
+        <% end %>
+      <% if @j != 0 %>
+      <p class="header-menu-count"><%= @j %></p>
+      <% end %>
+    </i>
+    トーク
+  </li>
+</ul>
+
+<div class="container">
+  <div class="wrapper-type-a">
+    <div class="event-wrapper clearfix content">
+      <h1>おすすめ</h1>
+      <div class="each-products-wrapper crearfix">
+        <% @events_reco.each do |event| %>
+        <% estaevent = Estaevent.find_by(event_id: event.id)%>
+        <% @company = Company.find_by(id: event.company_id) %>
+        <% if event.provide == "open" && estaevent != nil && estaevent.review != "" %>
+        <%= link_to("/events/#{event.id}/about") do%>
+        <div class="product">
+          <div class="product-image-wrapper">
+            <%= image_tag "/company_event_images/#{event.image}" ,class: "product-image"%>
+            <div class="count-content">
+              <% if Like.find_by(user_id: @current_user.id, event_id: event.id) %>
+              <%= link_to("/likes/#{event.id}/destroy", {method: "post"}) do %>
+              <span class="fa fa-heart like-active"></span>
+              <%end%>
+              <% else %>
+              <%= link_to("/likes/#{event.id}/create", {method: "post"}) do %>
+              <span class="fa fa-heart like-nomal"></span>
+              <%end%>
+              <%end%>
+              <% if Like.find_by(event_id: event.id) %>
+              : <%= Like.where(event_id: event.id).length %>
+              <% else %>
+              <span>: 0</span>
+              <% end %>
+              <i class="fas fa-walking awsome-size"></i>
+              <% if estaevents = Estaevent.where(event_id: event.id) %>
+              <% i = 0 %>
+              <% estaevents.each do |estaevent|%>
+              <% if estaevent.review != "" && estaevent.room_id == "" %>
+              <% i += estaevent.people %>
+              <% end %>
+              <% end %>
+              <span>: </span><%= "#{i}人"%>
+              <% else %>
+              <span>: 0</span>
+              <% end %>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <% end %>
+          <div class="product-content-wrapper">
+            <%= link_to("/events/#{event.id}/about" , class: "color-black" ) do%>
+            <h2><%= event.title %></h2>
+            <p><i class="far fa-fw fa-question-circle"></i> <%= event.genre %></p>
+            <p><i class="fas fa-fw fa-yen-sign"></i> <%= event.bottom_price %>～<%= event.top_price %>円</p>
+            <p><i class="fas fa-fw fa-users"></i> <%= event.bottom_people %>～<%= event.top_people %>人</p>
+            <p><i class="fas fa-fw fa-map-marker"></i> <%= event.place %></p>
+            <p><i class="far fa-fw fa-clock"></i> <%= event.time %></p>
+            <p><i class="far fa-fw fa-calendar-alt"></i> <%= event.day %></p>
+            <p id="company">運営会社 : <%= @company.name %></p>
+          </div>
+        </div>
+        <% end %>
+        <% end %>
+        <% end %>
+      </div>
+
+      <h1>新着情報</h1>
+      <div class="each-products-wrapper clearfix" >
+        <% @events_time.each do |event| %>
+        <% estaevent = Estaevent.find_by(event_id: event.id)%>
+        <% @company = Company.find_by(id: event.company_id) %>
+        <% if event.provide == "open" && estaevent != nil && estaevent.review != "" %>
+        <%= link_to("/events/#{event.id}/about") do%>
+        <div class="product">
+          <div class="product-image-wrapper">
+            <%= image_tag "/company_event_images/#{event.image}" ,class: "product-image"%>
+            <div class="count-content">
+              <% if Like.find_by(user_id: @current_user.id, event_id: event.id) %>
+              <%= link_to("/likes/#{event.id}/destroy", {method: "post"}) do %>
+              <span class="fa fa-heart like-active"></span>
+              <%end%>
+              <% else %>
+              <%= link_to("/likes/#{event.id}/create", {method: "post"}) do %>
+              <span class="fa fa-heart like-nomal"></span>
+              <%end%>
+              <%end%>
+              <% if Like.find_by(event_id: event.id) %>
+              : <%= Like.where(event_id: event.id).length %>
+              <% else %>
+              <span>: 0</span>
+              <% end %>
+              <i class="fas fa-walking awsome-size"></i>
+              <% if estaevents = Estaevent.where(event_id: event.id) %>
+              <% i = 0 %>
+              <% estaevents.each do |estaevent|%>
+              <% if estaevent.review != "" && estaevent.room_id == "" %>
+              <% i += estaevent.people %>
+              <% end %>
+              <% end %>
+              <span>: </span><%= "#{i}人"%>
+              <% else %>
+              <span>: 0</span>
+              <% end %>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <% end %>
+          <div class="product-content-wrapper">
+            <%= link_to("/events/#{event.id}/about" , class: "color-black" ) do%>
+            <h2><%= event.title %></h2>
+            <p><i class="far fa-fw fa-question-circle"></i> <%= event.genre %></p>
+            <p><i class="fas fa-fw fa-yen-sign"></i> <%= event.bottom_price %>～<%= event.top_price %>円</p>
+            <p><i class="fas fa-fw fa-users"></i> <%= event.bottom_people %>～<%= event.top_people %>人</p>
+            <p><i class="fas fa-fw fa-map-marker"></i> <%= event.place %></p>
+            <p><i class="far fa-fw fa-clock"></i> <%= event.time %></p>
+            <p><i class="far fa-fw fa-calendar-alt"></i> <%= event.day %></p>
+            <p id="company">運営会社 : <%= @company.name %></p>
+          </div>
+        </div>
+        <% end %>
+        <% end %>
+        <% end %>
+      </div>
+
+      <h1>パーティ―</h1>
+        <div class="each-products-wrapper clearfix" >
+          <% @events_par.each do |event| %>
+          <% estaevent = Estaevent.find_by(event_id: event.id)%>
+          <% @company = Company.find_by(id: event.company_id) %>
+          <% if event.provide == "open" && estaevent != nil && estaevent.review != "" %>
+          <%= link_to("/events/#{event.id}/about") do%>
+          <div class="product">
+            <div class="product-image-wrapper">
+              <%= image_tag "/company_event_images/#{event.image}" ,class: "product-image"%>
+              <div class="count-content">
+                <% if Like.find_by(user_id: @current_user.id, event_id: event.id) %>
+                <%= link_to("/likes/#{event.id}/destroy", {method: "post"}) do %>
+                <span class="fa fa-heart like-active"></span>
+                <%end%>
+                <% else %>
+                <%= link_to("/likes/#{event.id}/create", {method: "post"}) do %>
+                <span class="fa fa-heart like-nomal"></span>
+                <%end%>
+                <%end%>
+                <% if Like.find_by(event_id: event.id) %>
+                : <%= Like.where(event_id: event.id).length %>
+                <% else %>
+                <span>: 0</span>
+                <% end %>
+                <i class="fas fa-walking awsome-size"></i>
+                <% if estaevents = Estaevent.where(event_id: event.id) %>
+                <% i = 0 %>
+                <% estaevents.each do |estaevent|%>
+                <% if estaevent.review != "" && estaevent.room_id == "" %>
+                <% i += estaevent.people %>
+                <% end %>
+                <% end %>
+                <span>: </span><%= "#{i}人"%>
+                <% else %>
+                <span>: 0</span>
+                <% end %>
+              </div>
+              <div class="clear"></div>
+            </div>
+            <% end %>
+            <div class="product-content-wrapper">
+              <%= link_to("/events/#{event.id}/about" , class: "color-black" ) do%>
+              <h2><%= event.title %></h2>
+              <p><i class="far fa-fw fa-question-circle"></i> <%= event.genre %></p>
+              <p><i class="fas fa-fw fa-yen-sign"></i> <%= event.bottom_price %>～<%= event.top_price %>円</p>
+              <p><i class="fas fa-fw fa-users"></i> <%= event.bottom_people %>～<%= event.top_people %>人</p>
+              <p><i class="fas fa-fw fa-map-marker"></i> <%= event.place %></p>
+              <p><i class="far fa-fw fa-clock"></i> <%= event.time %></p>
+              <p><i class="far fa-fw fa-calendar-alt"></i> <%= event.day %></p>
+              <p id="company">運営会社 : <%= @company.name %></p>
+            </div>
+          </div>
+          <% end %>
+          <% end %>
+          <% end %>
+          <a href="/events/party">パーティーの一覧を見る</a>
+        </div>
+
+      <h1>旅行</h1>
+        <div class="each-products-wrapper clearfix" >
+          <% @events_trip.each do |event| %>
+          <% estaevent = Estaevent.find_by(event_id: event.id)%>
+          <% @company = Company.find_by(id: event.company_id) %>
+          <% if event.provide == "open" && estaevent != nil && estaevent.review != "" %>
+          <%= link_to("/events/#{event.id}/about") do%>
+          <div class="product">
+            <div class="product-image-wrapper">
+              <%= image_tag "/company_event_images/#{event.image}" ,class: "product-image"%>
+              <div class="count-content">
+                <% if Like.find_by(user_id: @current_user.id, event_id: event.id) %>
+                <%= link_to("/likes/#{event.id}/destroy", {method: "post"}) do %>
+                <span class="fa fa-heart like-active"></span>
+                <%end%>
+                <% else %>
+                <%= link_to("/likes/#{event.id}/create", {method: "post"}) do %>
+                <span class="fa fa-heart like-nomal"></span>
+                <%end%>
+                <%end%>
+                <% if Like.find_by(event_id: event.id) %>
+                : <%= Like.where(event_id: event.id).length %>
+                <% else %>
+                <span>: 0</span>
+                <% end %>
+                <i class="fas fa-walking awsome-size"></i>
+                <% if estaevents = Estaevent.where(event_id: event.id) %>
+                <% i = 0 %>
+                <% estaevents.each do |estaevent|%>
+                <% if estaevent.review != "" && estaevent.room_id == "" %>
+                <% i += estaevent.people %>
+                <% end %>
+                <% end %>
+                <span>: </span><%= "#{i}人"%>
+                <% else %>
+                <span>: 0</span>
+                <% end %>
+              </div>
+              <div class="clear"></div>
+            </div>
+            <% end %>
+            <div class="product-content-wrapper">
+              <%= link_to("/events/#{event.id}/about" , class: "color-black" ) do%>
+              <h2><%= event.title %></h2>
+              <p><i class="far fa-fw fa-question-circle"></i> <%= event.genre %></p>
+              <p><i class="fas fa-fw fa-yen-sign"></i> <%= event.bottom_price %>～<%= event.top_price %>円</p>
+              <p><i class="fas fa-fw fa-users"></i> <%= event.bottom_people %>～<%= event.top_people %>人</p>
+              <p><i class="fas fa-fw fa-map-marker"></i> <%= event.place %></p>
+              <p><i class="far fa-fw fa-clock"></i> <%= event.time %></p>
+              <p><i class="far fa-fw fa-calendar-alt"></i> <%= event.day %></p>
+              <p id="company">運営会社 : <%= @company.name %></p>
+            </div>
+          </div>
+          <% end %>
+          <% end %>
+          <% end %>
+          <a href="/events/trip">旅行の一覧を見る</a>
+        </div>
+
+      <h1>フィットネス</h1>
+        <div class="each-products-wrapper clearfix" >
+          <% @events_fit.each do |event| %>
+          <% estaevent = Estaevent.find_by(event_id: event.id)%>
+          <% @company = Company.find_by(id: event.company_id) %>
+          <% if event.provide == "open" && estaevent != nil && estaevent.review != "" %>
+          <%= link_to("/events/#{event.id}/about") do%>
+          <div class="product">
+            <div class="product-image-wrapper">
+              <%= image_tag "/company_event_images/#{event.image}" ,class: "product-image"%>
+              <div class="count-content">
+                <% if Like.find_by(user_id: @current_user.id, event_id: event.id) %>
+                <%= link_to("/likes/#{event.id}/destroy", {method: "post"}) do %>
+                <span class="fa fa-heart like-active"></span>
+                <%end%>
+                <% else %>
+                <%= link_to("/likes/#{event.id}/create", {method: "post"}) do %>
+                <span class="fa fa-heart like-nomal"></span>
+                <%end%>
+                <%end%>
+                <% if Like.find_by(event_id: event.id) %>
+                : <%= Like.where(event_id: event.id).length %>
+                <% else %>
+                <span>: 0</span>
+                <% end %>
+                <i class="fas fa-walking awsome-size"></i>
+                <% if estaevents = Estaevent.where(event_id: event.id) %>
+                <% i = 0 %>
+                <% estaevents.each do |estaevent|%>
+                <% if estaevent.review != "" && estaevent.room_id == "" %>
+                <% i += estaevent.people %>
+                <% end %>
+                <% end %>
+                <span>: </span><%= "#{i}人"%>
+                <% else %>
+                <span>: 0</span>
+                <% end %>
+              </div>
+              <div class="clear"></div>
+            </div>
+            <% end %>
+            <div class="product-content-wrapper">
+              <%= link_to("/events/#{event.id}/about" , class: "color-black" ) do%>
+              <h2><%= event.title %></h2>
+              <p><i class="far fa-fw fa-question-circle"></i> <%= event.genre %></p>
+              <p><i class="fas fa-fw fa-yen-sign"></i> <%= event.bottom_price %>～<%= event.top_price %>円</p>
+              <p><i class="fas fa-fw fa-users"></i> <%= event.bottom_people %>～<%= event.top_people %>人</p>
+              <p><i class="fas fa-fw fa-map-marker"></i> <%= event.place %></p>
+              <p><i class="far fa-fw fa-clock"></i> <%= event.time %></p>
+              <p><i class="far fa-fw fa-calendar-alt"></i> <%= event.day %></p>
+              <p id="company">運営会社 : <%= @company.name %></p>
+            </div>
+          </div>
+          <% end %>
+          <% end %>
+          <% end %>
+          <a href="/events/fitness">フィットネスの一覧を見る</a>
+        </div>
+
+        <h1>セミナー</h1>
+          <div class="each-products-wrapper clearfix" >
+            <% @events_sem.each do |event| %>
+            <% estaevent = Estaevent.find_by(event_id: event.id)%>
+            <% @company = Company.find_by(id: event.company_id) %>
+            <% if event.provide == "open" && estaevent != nil && estaevent.review != "" %>
+            <%= link_to("/events/#{event.id}/about") do%>
+            <div class="product">
+              <div class="product-image-wrapper">
+                <%= image_tag "/company_event_images/#{event.image}" ,class: "product-image"%>
+                <div class="count-content">
+                  <% if Like.find_by(user_id: @current_user.id, event_id: event.id) %>
+                  <%= link_to("/likes/#{event.id}/destroy", {method: "post"}) do %>
+                  <span class="fa fa-heart like-active"></span>
+                  <%end%>
+                  <% else %>
+                  <%= link_to("/likes/#{event.id}/create", {method: "post"}) do %>
+                  <span class="fa fa-heart like-nomal"></span>
+                  <%end%>
+                  <%end%>
+                  <% if Like.find_by(event_id: event.id) %>
+                  : <%= Like.where(event_id: event.id).length %>
+                  <% else %>
+                  <span>: 0</span>
+                  <% end %>
+                  <i class="fas fa-walking awsome-size"></i>
+                  <% if estaevents = Estaevent.where(event_id: event.id) %>
+                  <% i = 0 %>
+                  <% estaevents.each do |estaevent|%>
+                  <% if estaevent.review != "" && estaevent.room_id == "" %>
+                  <% i += estaevent.people %>
+                  <% end %>
+                  <% end %>
+                  <span>: </span><%= "#{i}人"%>
+                  <% else %>
+                  <span>: 0</span>
+                  <% end %>
+                </div>
+                <div class="clear"></div>
+              </div>
+              <% end %>
+              <div class="product-content-wrapper">
+                <%= link_to("/events/#{event.id}/about" , class: "color-black" ) do%>
+                <h2><%= event.title %></h2>
+                <p><i class="far fa-fw fa-question-circle"></i> <%= event.genre %></p>
+                <p><i class="fas fa-fw fa-yen-sign"></i> <%= event.bottom_price %>～<%= event.top_price %>円</p>
+                <p><i class="fas fa-fw fa-users"></i> <%= event.bottom_people %>～<%= event.top_people %>人</p>
+                <p><i class="fas fa-fw fa-map-marker"></i> <%= event.place %></p>
+                <p><i class="far fa-fw fa-clock"></i> <%= event.time %></p>
+                <p><i class="far fa-fw fa-calendar-alt"></i> <%= event.day %></p>
+                <p id="company">運営会社 : <%= @company.name %></p>
+              </div>
+            </div>
+            <% end %>
+            <% end %>
+            <% end %>
+            <a href="/events/seminar">セミナーの一覧を見る</a>
+          </div>
+
+      <h1>その他</h1>
+        <div class="each-products-wrapper clearfix" >
+          <% @events_other.each do |event| %>
+          <% estaevent = Estaevent.find_by(event_id: event.id)%>
+          <% @company = Company.find_by(id: event.company_id) %>
+          <% if event.provide == "open" && estaevent != nil && estaevent.review != "" %>
+          <%= link_to("/events/#{event.id}/about") do%>
+          <div class="product">
+            <div class="product-image-wrapper">
+              <%= image_tag "/company_event_images/#{event.image}" ,class: "product-image"%>
+              <div class="count-content">
+                <% if Like.find_by(user_id: @current_user.id, event_id: event.id) %>
+                <%= link_to("/likes/#{event.id}/destroy", {method: "post"}) do %>
+                <span class="fa fa-heart like-active"></span>
+                <%end%>
+                <% else %>
+                <%= link_to("/likes/#{event.id}/create", {method: "post"}) do %>
+                <span class="fa fa-heart like-nomal"></span>
+                <%end%>
+                <%end%>
+                <% if Like.find_by(event_id: event.id) %>
+                : <%= Like.where(event_id: event.id).length %>
+                <% else %>
+                <span>: 0</span>
+                <% end %>
+                <i class="fas fa-walking awsome-size"></i>
+                <% if estaevents = Estaevent.where(event_id: event.id) %>
+                <% i = 0 %>
+                <% estaevents.each do |estaevent|%>
+                <% if estaevent.review != "" && estaevent.room_id == "" %>
+                <% i += estaevent.people %>
+                <% end %>
+                <% end %>
+                <span>: </span><%= "#{i}人"%>
+                <% else %>
+                <span>: 0</span>
+                <% end %>
+              </div>
+              <div class="clear"></div>
+            </div>
+            <% end %>
+            <div class="product-content-wrapper">
+              <%= link_to("/events/#{event.id}/about" , class: "color-black" ) do%>
+              <h2><%= event.title %></h2>
+              <p><i class="far fa-fw fa-question-circle"></i> <%= event.genre %></p>
+              <p><i class="fas fa-fw fa-yen-sign"></i> <%= event.bottom_price %>～<%= event.top_price %>円</p>
+              <p><i class="fas fa-fw fa-users"></i> <%= event.bottom_people %>～<%= event.top_people %>人</p>
+              <p><i class="fas fa-fw fa-map-marker"></i> <%= event.place %></p>
+              <p><i class="far fa-fw fa-clock"></i> <%= event.time %></p>
+              <p><i class="far fa-fw fa-calendar-alt"></i> <%= event.day %></p>
+              <p id="company">運営会社 : <%= @company.name %></p>
+            </div>
+          </div>
+          <% end %>
+          <% end %>
+          <% end %>
+          <a href="/events/other">その他の一覧を見る</a>
+        </div>
+
+    </div>
+
+
+    <div class="join-wrapper clearfix content active">
+      <h1>新しい仲間を見つけませんか？</h1>
+      <% if flash[:notice]%>
+      <p class="flash-message"><%= flash[:notice] %></p>
+      <% end %>
+      <div class="join-content clearfix">
+        <%= link_to "/groups/signup" ,class: 'join-content-link clearfix  hover' do %>
+          <%= image_tag 'makegroup.jpg',class: 'join-content-image'%>
+          <p>団体を作成する</p>
+        <% end %>
+        <div class="join-content-link clearfix  hover" id="join-group-btn">
+          <%= image_tag 'joingroup.jpg',class: 'join-content-image'%>
+          <p>団体に加入する</p>
+        </div>
+      </div>
+      <% appsubgroups = Appsubgroup.where(user_id: @current_user.id) %>
+        <h1>申請中</h1>
+          <% appsubgroups.each do |appsubgroup|%>
+          <% @group = Group.find_by(id: appsubgroup.group_id) %>
+          <div class="join-groups-wrapper ">
+            <%= link_to "申請を取り消す", "/users/appsubgroup/#{@group.id}/destroy",method: :post,class: "appsubgroup-destroy"%>
+            <%= link_to  "/users/appsubgroup/#{@group.id}/destroy",method: :post,class: "appsubgroup-destroy-icon" do %><i class="fas fa-times"></i><%end%>
+              <div class="join-groups color-black clearfix">
+                <%= image_tag "/group_images/#{@group.image}",class: 'join-group-image' %>
+                <p><%= @group.name%>(<%= Usersubgroup.where(group_id: @group.id).length %>)</p>
+              </div>
+            </div>
+      <% end %>
+
+      <h1>加入団体一覧</h1>
+          <% @users.usersubgroups.each do |usersubgroup|%>
+          <% @group = Group.find_by(id: usersubgroup.group_id) %>
+        <div class="join-groups-wrapper hover">
+          <% if @group %>
+          <% c = Information.where(group_id: @group.id) %>
+          <% d = Information.where(group_id: 0) %>
+          <% @g_informations = c + d %>
+          <% usercount = Usersubgroup.find_by(user_id: @current_user.id,group_id: @group.id)%>
+          <%= link_to("/groups/#{@group.id}/about",class: "join-groups count-box black clearfix") do %>
+          <% if usercount.group_info != @g_informations.length && usercount.group_info < @g_informations.length %>
+          <span class="group-info-count" ><%= @g_informations.length - usercount.group_info %></span>
+          <% end %>
+          <%= image_tag "/group_images/#{@group.image}",class: 'join-group-image' %>
+          <p><%= @group.name%>(<%= Usersubgroup.where(group_id: @group.id).length %>)</p>
+          <% estas = Estaevent.where(group_id: @group.id) %>
+          <% estas.each do |esta|%>
+            <% attend = Attend.find_by(estaevent_id: esta.id)%>
+            <% if attend != nil && esta.review == nil && esta.room_id != nil %>
+              <p class="esta-notification"><%= esta.day %> に開催されるイベントがあります！</p>
+            <% end %>
+          <end>
+          <% end %>
+          <% end %>
+          </div>
+            <% end %>
+          <%end%>
+    </div>
+
+
+    <div class="like-wrapper clearfix content">
+      <div class="like-content clearfix">
+      <h1>お気に入り</h1>
+      <% @likes.each do |like| %>
+        <% event = Event.find_by(id: like.event_id) %>
+        <% estaevent = Estaevent.find_by(event_id: event.id)%>
+        <% if event.provide == "open" && estaevent.review != "" %>
+        <%= link_to("/events/#{event.id}/about") do%>
+        <div class="product">
+          <div class="product-image-wrapper">
+            <%= image_tag "/company_event_images/#{event.image}" ,class: "product-image"%>
+            <div class="count-content">
+              <% if Like.find_by(user_id: @current_user.id, event_id: event.id) %>
+              <%= link_to("/likes/#{event.id}/destroy", {method: "post"}) do %>
+              <span class="fa fa-heart like-active"></span>
+              <%end%>
+              <% else %>
+              <%= link_to("/likes/#{event.id}/create", {method: "post"}) do %>
+              <span class="fa fa-heart like-nomal"></span>
+              <%end%>
+              <%end%>
+              <% if Like.find_by(event_id: event.id) %>
+              : <%= Like.where(event_id: event.id).length %>
+              <% else %>
+              <span>: 0</span>
+              <% end %>
+              <i class="fas fa-walking awsome-size"></i>
+              <% if estaevents = Estaevent.where(event_id: event.id) %>
+              <% i = 0 %>
+              <% estaevents.each do |estaevent|%>
+              <% if estaevent.review != "" && estaevent.room_id == "" %>
+                <% i += estaevent.people %>
+              <% end %>
+              <% end %>
+              <span>: </span><%= "#{i}人"%>
+              <% else %>
+              <span>: 0</span>
+              <% end %>
+            </div>
+            <div class="clear"></div>
+            </div>
+            <% end %>
+          <div class="product-content-wrapper">
+            <%= link_to("/events/#{event.id}/about" , class: "color-black" ) do%>
+            <h2><%= event.title %></h2>
+            <p><i class="far fa-fw fa-question-circle"></i> <%= event.genre %></p>
+            <p><i class="fas fa-fw fa-yen-sign"></i> <%= event.bottom_price %>～<%= event.top_price %>円</p>
+            <p><i class="fas fa-fw fa-users"></i> <%= event.bottom_people %>～<%= event.top_people %>人</p>
+            <p><i class="fas fa-fw fa-map-marker"></i> <%= event.place %></p>
+            <p><i class="far fa-fw fa-clock"></i> <%= event.time %></p>
+            <p><i class="far fa-fw fa-calendar-alt"></i> <%= event.day %></p>
+            <p id="company">運営会社 : <%= @company.name %></p>
+          </div>
+        </div>
+        <% end %>
+        <% end %>
+      <% end %>
+    </div>
+      <h1>参加したイベント</h1>
+      <% @attends.each do |attend| %>
+      <% estaevent = Estaevent.find_by(id: attend.estaevent_id)%>
+        <% group = Group.find_by(id: estaevent.group_id )%>
+        <% if estaevent && estaevent.review != ""%>
+        <%= link_to("/events/#{estaevent.id}/estaevent", class: "color-black") do %>
+        <div class="product">
+          <div class="product-image-wrapper">
+            <%= image_tag "/company_event_images/#{estaevent.image}" ,class: "product-image"%>
+            <div class="clear"></div>
+            </div>
+            <% end %>
+          <div class="product-content-wrapper">
+            <%= link_to("/events/#{estaevent.id}/estaevent", class: "color-black") do %>
+            <h2><%= estaevent.title %></h2>
+            <p><i class="far fa-fw fa-question-circle"></i> <%= estaevent.genre %></p>
+            <p><i class="fas fa-fw fa-yen-sign"></i> <%= estaevent.price %>円</p>
+            <p><i class="fas fa-fw fa-users"></i> <%= estaevent.people %>人</p>
+            <p><i class="fas fa-fw fa-map-marker"></i> <%= estaevent.place %></p>
+            <p><i class="far fa-fw fa-clock"></i> <%= estaevent.time %></p>
+            <p><i class="far fa-fw fa-calendar-alt"></i> <%= estaevent.day %></p>
+            <p id="company">参加団体 : <%= group.name %></p>
+          </div>
+        </div>
+        <% end %>
+        <% end %>
+      <% end %>
+    </div>
+
+
+    <div class="contact-wrapper clearfix content">
+      <div class="contact-top-content">
+        <h1>イベントを計画してみましょう</h1>
+        <p class="evemt-jump hover">イベントを探す</p>
+      </div>
+        <h2>企画中の団体イベント</h2>
+        <% @estaevents.each do |estaevent| %>
+        <% messages = Message.where(room_id: estaevent.room_id)%>
+        <% @attend = Attend.find_by(estaevent_id: estaevent.id)%>
+        <%= link_to("/contacts/#{estaevent.room_id}/room") do %>
+          <% if @attend == nil && estaevent != nil  && estaevent.room_id != nil && estaevent.review == nil %>
+            <div class="contact-prot-content clearfix black">
+              <% i = 0 %>
+              <% messages.each do |message| %>
+              <% if  estaevent.user_count == message.user_count %>
+                <% i += 1 %>
+              <% end %>
+              <% end %>
+              <% if i != 0 %>
+                <p class="count"><%= i %></p>
+              <% end %>
+              <% company = Company.find_by(id: estaevent.company_id)%>
+              <% group = Group.find_by(id: estaevent.group_id)%>
+              <%= image_tag "/company_event_images/#{company.image}",class: "contact-prot-image" %>
+              <div class="contact-prot-det">
+                <h2><%= estaevent.title %></h2>
+                <% if estaevent.day != "" %>
+                  <p><i class="far fa-fw fa-calendar-alt"></i><%= estaevent.day %></p>
+                <% else %>
+                  <p><i class="far fa-fw fa-calendar-alt"></i>未定</p>
+                <% end %>
+                <p><i class="fas fa-fw fa-users"></i> <%= group.name %> × <i class="fas fa-fw fa-building"></i> <%= company.name %></p>
+                </div>
+            </div>
+          <% elsif @attend && estaevent.room_id != "" && estaevent.review == "" || estaevent != nil  && estaevent.room_id != nil && estaevent.review == nil%>
+            <div class="contact-esta-content clearfix black">
+              <% i = 0 %>
+              <% messages.each do |message| %>
+              <% if  estaevent.user_count == message.user_count %>
+                <% i += 1 %>
+              <% end %>
+              <% end %>
+              <% if i != 0 %>
+                <p class="count"><%= i %></p>
+              <% end %>
+              <% company = Company.find_by(id: estaevent.company_id)%>
+              <% group = Group.find_by(id: estaevent.group_id)%>
+              <%= image_tag "/company_event_images/#{company.image}",class: "contact-prot-image" %>
+              <div class="contact-prot-det">
+                <h2><%= estaevent.title %></h2>
+                <% if estaevent.day != "" %>
+                  <p><i class="far fa-fw fa-calendar-alt"></i><%= estaevent.day %></p>
+                <% else %>
+                  <p><i class="far fa-fw fa-calendar-alt"></i>未定</p>
+                <% end %>
+                <p><i class="fas fa-fw fa-users"></i> <%= group.name %> × <i class="fas fa-fw fa-building"></i> <%= company.name %></p>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+        <% end %>
+        <% if @current_user.organizer_id %>
+        <h2>作成中のイベント</h2>
+        <% @events.each do |event| %>
+        <% messages = Message.where(room_id: event.room_id)%>
+        <% company = Company.find_by(id: event.company_id)%>
+        <% estaevent = Estaevent.find_by(event_id: event.id)%>
+        <%= link_to("/contacts/#{event.room_id}/org_room") do %>
+        <% if estaevent == nil && event.room_id %>
+        <div class="contact-esta-content clearfix black">
+          <% i = 0 %>
+          <% messages.each do |message| %>
+          <% if  event.user_count == message.user_count%>
+            <% i += 1 %>
+          <% end %>
+          <% end %>
+          <% if i != 0 %>
+            <p class="count"><%= i %></p>
+          <% end %>
+          <%= image_tag "/company_event_images/#{company.image}",class: "contact-prot-image" %>
+          <div class="contact-prot-det">
+            <h2><%= event.title %></h2>
+              <p><i class="far fa-fw fa-question-circle"></i><%= event.genre %></p>
+            <p><i class="fas fa-fw fa-user"></i> <%= @current_user.name %> × <i class="fas fa-fw fa-building"></i> <%= company.name %></p>
+          </div>
+      </div>
+      <% end %>
+      <% end %>
+      <% end %>
+      <% end %>
+    </div>
+
+
+    <div class="conf-wrapper content">
+      <h1>設定</h1>
+      <div class="conf-user-content clearfix">
+        <%= image_tag "/user_images/#{@current_user.image}",class: "conf-user-image" %>
+        <div class="conf-user-info">
+          <h2><%= @current_user.name%></h2>
+          <p>ID : <%= @current_user.user_id%></p>
+          <p><i class="far fa-envelope"></i> : <%= @current_user.email %></p>
+        </div>
+      </div>
+      <ul class="conf-select">
+        <li><%=link_to 'ユーザー情報',"/users/#{@current_user.id}/info" ,class:"each-conf-menu"%></li>
+        <% if @current_user.organizer_id %>
+        <li><%= link_to('イベントを作成する',"/events/#{@current_user.organizer_id}/make_event",class:"each-conf-menu")%></li>
+        <% else %>
+        <li><%= link_to('主催者になる',"/users/#{@current_user.id}/organizer",class:"each-conf-menu")%></li>
+        <% end %>
+        <li><%= link_to('企業一覧',"/companies/list",class:"each-conf-menu")%></li>
+        <li class="count-box"><a href="/users/informations" class="each-conf-menu">お知らせ</a>
+          <% if @current_user.user_info != @informations.length && @current_user.user_info < @informations.length && @informations.length - @current_user.user_info > 0 %>
+          <p class="user-info-count"><%= @informations.length - @current_user.user_info %></p>
+          <% end %>
+        </li>
+        <li><a href="/contacts" class="each-conf-menu">フィードバック</a></li>
+        <li id='logout-open-menu' >ログアウト</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id="mask hidden"></div>
+
+<div id="group-search-wrapper" class="hidden">
+  <h2>団体検索</h2>
+  <h3>お探しの団体の名前とパスワードを入力してください</h3>
+  <%= form_tag('/pralics/search',class: "group-search-form") do %>
+    <p>団体名</p>
+      <input type="text" name="name" value="<%= @name %>">
+    <p>パスワード</p>
+     <input type="text" name="sub_password" value="<%= @sub_password %>">
+     <input type="submit" class="hover" value="検索" id="search">
+  <% end%>
+  <div id="search-cancel" class="hover">
+    キャンセル
+  </div>
+</div>
+
+
+
+
+<div class="top-footer">
+  <ul>
+    <li class="footer-icon" id="event-icon"><i class="fab fa-hubspot"></i></li>
+    <li class="footer-icon icon-active" id="join-icon">
+      <i class="fas fa-users count-box">
+        <% if @i > 0 %>
+        <span class="top-footer-count" ><%= @i %></span>
+        <% end %>
+      </i>
+    </li>
+    <li class="footer-icon" id="like-icon"><i class="far fa-heart"></i></li>
+    <li class="footer-icon" id="contact-icon">
+      <i class="far fa-comment count-box">
+      <% if @j != 0 %>
+      <p class="top-footer-count"><%= @j %></p>
+      <% end %>
+    </i>
+    </li>
+    <li class="footer-icon" id="conf-icon" >
+      <i class="fas fa-cog count-box">
+        <% if @current_user.user_info != @informations.length && @current_user.user_info < @informations.length %>
+          <p class="top-footer-count"><%= @informations.length - @current_user.user_info %></p>
+        <% end %>
+      </i>
+    </li>
+  </ul>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  $(document).on('turbolinks:load', function(){
+    $('#event-icon').click(function(){
+      $('.content').hide();
+      $('.event-wrapper').fadeIn();
+      $('.footer-icon').removeClass('icon-active')
+      $('#event-icon').addClass('icon-active');
+    });
+
+    $('#join-icon').click(function(){
+      $('.content').hide();
+      $('.join-wrapper').fadeIn();
+      $('.footer-icon').removeClass('icon-active')
+      $('#join-icon').addClass('icon-active');
+    });
+
+    $('#like-icon').click(function(){
+      $('.content').hide();
+      $('.like-wrapper').fadeIn();
+      $('.footer-icon').removeClass('icon-active')
+      $('#like-icon').addClass('icon-active');
+    });
+
+    $('#contact-icon').click(function(){
+      $('.content').hide();
+      $('.contact-wrapper').fadeIn();
+      $('.footer-icon').removeClass('icon-active')
+      $('#contact-icon').addClass('icon-active');
+    });
+
+    $('#conf-icon').click(function(){
+      $('.content').hide();
+      $('.conf-wrapper').fadeIn();
+      $('.footer-icon').removeClass('icon-active')
+      $('#conf-icon').addClass('icon-active');
+    });
+
+    $('#event-menu').click(function(){
+      $('.content').hide();
+      $('.event-wrapper').fadeIn();
+      $('.footer-icon').removeClass('icon-active')
+      $('#event-icon').addClass('icon-active');
+    });
+
+    $('#join-menu').click(function(){
+      $('.content').hide();
+      $('.join-wrapper').fadeIn();
+      $('.footer-icon').removeClass('icon-active')
+      $('#join-icon').addClass('icon-active');
+    });
+
+    $('#like-menu').click(function(){
+      $('.content').hide();
+      $('.like-wrapper').fadeIn();
+      $('.footer-icon').removeClass('icon-active')
+      $('#like-icon').addClass('icon-active');
+    });
+
+    $('#contact-menu').click(function(){
+      $('.content').hide();
+      $('.contact-wrapper').fadeIn();
+      $('.footer-icon').removeClass('icon-active')
+      $('#contact-icon').addClass('icon-active');
+    });
+
+    $('#logout-open-menu').click(function(){
+      $('#logout-wrapper').show();
+      $('#mask').show();
+    });
+
+    $('#mask').click(function(){
+      $('#logout-wrapper').hide();
+      $('#mask').hide();
+      $('#group-search-wrapper').hide();
+    });
+
+    $('#cancel').click(function(){
+      $('#logout-wrapper').hide();
+      $('#mask').hide();
+      $('#group-search-wrapper').hide();
+    });
+
+    $('#search-cancel').click(function(){
+      $('#group-search-wrapper').hide();
+      $('#mask').hide();
+    });
+
+    $('#join-group-btn').click(function(){
+      $('#group-search-wrapper').fadeIn();
+      $('#mask').show();
+    });
+
+    $('.evemt-jump').click(function(){
+      $('.content').hide();
+      $('.event-wrapper').fadeIn();
+      $('.footer-icon').removeClass('icon-active')
+      $('#event-icon').addClass('icon-active');
+    });
+
+  });
+</script>

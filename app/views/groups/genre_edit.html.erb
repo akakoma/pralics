@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="wrapper-type-a">
+    <div class="users-edit">
+      <h1>ジャンル</h1>
+      <%= form_tag("/groups/#{@group.id}/edit",class:"users-edit-form") do %>
+      <input type="text" name="genre" value="<%=@group.genre%>">
+      <input type="submit" class=" hover" value="変更">
+      <% end %>
+    </div>
+  </div>
+</div>

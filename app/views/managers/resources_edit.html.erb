@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="managers-info-wrapper">
+    <h1 style="padding-left:10px;">リソース共有編集画面</h1>
+      <h2 style="padding-left:10px;">リソース共有ID: <%= @resource.id %></h2>
+      <h2 style="padding-left:10px;">created_at : <%= @resource.created_at %></h2>
+      <h2 style="padding-left:10px;">updated_at : <%= @resource.updated_at %></h2>
+      <%= form_tag("/managers/resources/#{@resource.id}/update",method: :post,class: "edit-wrapper") do %>
+        <h2>group_id</h2>
+        <input type="text" name="group_id" value="<%= @resource.group_id %>">
+        <h2>user_id</h2>
+        <input type="text" name="user_id" value="<%= @resource.user_id %>">
+        <h2>title</h2>
+        <input type="text" name="title" value="<%= @resource.title %>">
+        <h2>body</h2>
+        <textarea name="body" rows="8" cols="80"><%= @resource.body %></textarea>
+        <input type="submit" value="編集">
+      <%end%>
+        <%= link_to "削除","/managers/resources/#{@resource.id}/destroy",method: :post,id: "edit-destroy" %>
+  </div>
+</div>

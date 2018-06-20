@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  image: MyString
+  name: MyString
+  genre: MyString
+  type: 
+  format: MyString
+  sub_password: MyString
+  mana_password: MyString
+
+two:
+  image: MyString
+  name: MyString
+  genre: MyString
+  type: 
+  format: MyString
+  sub_password: MyString
+  mana_password: MyString

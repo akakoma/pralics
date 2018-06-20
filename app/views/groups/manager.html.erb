@@ -1,0 +1,188 @@
+
+<%= image_tag("/group_images/#{@group.image}",class: "group-about-image")%>
+
+<div class="bg"></div>
+
+<div class="group-about-top" >
+  <div class="group-manager-top-wrapper">
+    <h1><%= @group.name %></h1>
+    <% if Estaevent.where(group_id: @group.id) %>
+      <p><i class="fas fa-users"></i> : <%= @usersubgroups.length%> <i class="fas fa-certificate"></i> : <%= Estaevent.where(group_id: @group.id).length%></p>
+    <% else %>
+    <p><i class="fas fa-users"></i> : <%= @usersubgroups.length%> <i class="fas fa-certificate"></i> : 0</p>
+    <% end %>
+  </div>
+</div>
+
+<% if @current_group.id == @group.id %>
+<div class="group-manager-menu-wrapper">
+  <ul class="group-manager-menu">
+    <li class="group-manager-edit">団体情報編集</li>
+    <li class="group-manager-add count-box">
+      <% if @appsubgroups.length != 0 %>
+        <span class="group-about-menu-c-count" ><%= @appsubgroups.length %></span>
+      <% end %>
+      加入ユーザーの申請
+    </li>
+    <li class="group-manager-info">お知らせの作成</li>
+  </ul>
+  <ul class="group-manager-icon">
+    <li class="group-manager-edit"><i class="fas fa-edit"></i></li>
+    <li class="group-manager-add count-box"><i class="fas fa-users">
+      <% if @appsubgroups.length != 0 %>
+        <span class="group-about-menu-c-count" ><%= @appsubgroups.length %></span>
+      <% end %>
+    </i></li>
+    <li class="group-manager-info"><i class="fas fa-envelope"></i></li>
+  </ul>
+</div>
+
+
+
+<div class="group-manager-wrapper">
+  <div class="group-edit-part content">
+    <h1>団体情報編集</h1>
+    <div class="group-edit-part-content">
+      <h2>イメージ画像</h2>
+      <%= link_to("/groups/#{@group.id}/image_edit") do %>
+        <%= image_tag "/group_images/#{@group.image}",class:"group-edit-image hover"%>
+      <% end %>
+      <h2>団体名</h2>
+      <%= link_to("#{@group.name}","/groups/#{@group.id}/name_edit",class:' hover')%><i class="fas fa-edit hover"></i>
+      <h2>ジャンル</h2>
+      <%= link_to("#{@group.genre}","/groups/#{@group.id}/genre_edit",class:' hover')%><i class="fas fa-edit hover"></i>
+      <h2>加入パスワード</h2>
+      <%= link_to("#{@group.sub_password.truncate(4) }","/groups/#{@group.id}/password_edit",class:' hover')%><i class="fas fa-edit hover"></i>
+      <p id="group-destroy-btn" style="cursor:pointer;" class="hover">団体を削除する</p>
+    </div>
+  </div>
+
+  <div class="group-information-part content">
+    <h1>お知らせ作成</h1>
+    <% if flash[:notice]%>
+    <p class="flash-message"><%= flash[:notice] %></p>
+    <% end %>
+    <%= form_tag("/groups/#{@group.id}/information_create",{multipart: true,class: "group-information-form"}) do%>
+      <h2>タイトル</h2>
+      <input type="text" name="title" value="">
+      <h2>内容</h2>
+      <textarea name="body" rows="8" cols="80"></textarea>
+      <h2>画像</h2>
+      <label class="image-label-b">
+        <img src="no-image.jpg" alt="" class="group-manager-image-box">
+        <i class="fas fa-camera message-camera hover"></i>
+        <input type="file" name="image" class="message-image-file">
+      </label>
+      <input type="submit" class=" hover" value="団体ページに送信する">
+    <% end %>
+  </div>
+
+  <div class="usersubgroup-part">
+      <h1>ユーザー情報</h1>
+      <h2>加入申請ユーザー</h2>
+      <% @appsubgroups.each do |appsubgroup|%>
+      <div class="usersubgroup-add-user clearfix">
+        <% user = User.find_by(id: appsubgroup.user_id)%>
+        <%= link_to("users/#{user.id}/info") do%>
+        <%= image_tag("/user_images/#{user.image}",class:'group-manager-user-image hover')%>
+        <p class="add-user-name"><%=user.user_id %></p>
+        <% end %>
+        <%= link_to('申請を削除する',"/groups/#{appsubgroup.id}/cancel_add",{method: :post,class: 'cancel-add-btn group-manager-add-btn hover'})%><%= link_to('加入を承認する',"/groups/#{appsubgroup.id}/per_add",{method: :post,class:'per-add-btn group-manager-add-btn hover'})%>
+        <%= link_to("/groups/#{appsubgroup.id}/cancel_add",{method: :post,class: 'cancel-add-icon group-manager-add-btn hover'}) do%><i class="fas fa-times"></i><% end %><%= link_to("/groups/#{appsubgroup.id}/per_add",{method: :post,class: 'per-add-icon group-manager-add-btn hover'}) do%><i class="far fa-circle"></i><% end %>
+      </div>
+      <% end %>
+      <h2>加入ユーザー</h2>
+      <% @usersubgroups.each do |usersubgroup|%>
+      <div class="usersubgroup-add-user clearfix">
+        <% user = User.find_by(id: usersubgroup.user_id)%>
+        <%= link_to("users/#{user.id}/info",class:'group-manager-users-link') do%>
+        <%= image_tag("/user_images/#{user.image}",class:'group-manager-user-image hover')%>
+        <p class="add-user-name"><%=user.user_id %></p>
+        <% end %>
+        <% if @usersubgroups.length > 1 %>
+        <%= link_to('退会させる',"/groups/#{usersubgroup.id}/sub_destroy",{method: :post,class: 'cancel-add-btn group-manager-add-btn hover'})%>
+        <%= link_to("/groups/#{usersubgroup.id}/sub_destroy",{method: :post,class: 'cancel-add-icon group-manager-add-btn hover'}) do%><i class="fas fa-times"></i><% end %>
+        <% end %>
+      </div>
+      <% end %>
+  </div>
+
+</div>
+<% end %>
+
+<div id="mask" class="content"></div>
+<div class="group-destroy-wrapper content">
+  <h1>本当に【<%= @group.name%>】を削除しますか？</h1>
+  <p>※一度削除すると、団体情報の復元はできません。</p>
+  <%= link_to("削除します","/groups/#{@group.id}/destroy",{method: :post,class:"decide-destroy-btn hover"})%><span class="destroy-cancel-btn hover">キャンセル</span>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).on('turbolinks:load', function(){
+    var setFileInput = $('.image-label-b'),
+    setFileImg = $('.group-manager-image-box');
+
+    setFileInput.each(function(){
+        var selfFile = $(this),
+        selfInput = $(this).find('input[type=file]'),
+        prevElm = selfFile.find(setFileImg),
+        orgPass = prevElm.attr('src');
+
+        selfInput.change(function(){
+            var file = $(this).prop('files')[0],
+            fileRdr = new FileReader();
+
+            if (!this.files.length){
+                prevElm.attr('src', orgPass);
+                return;
+            } else {
+                if (!file.type.match('image.*')){
+                    prevElm.attr('src', orgPass);
+                    return;
+                } else {
+                    fileRdr.onload = function() {
+                        prevElm.attr('src', fileRdr.result);
+                    }
+                    fileRdr.readAsDataURL(file);
+                }
+            }
+        });
+    });
+
+    $('.group-manager-info').click(function(){
+      $('.usersubgroup-part').hide();
+      $('.group-information-part').fadeIn();
+      $('.group-edit-part').hide();
+    });
+
+    $('.group-manager-add').click(function(){
+      $('.usersubgroup-part').fadeIn();
+      $('.group-information-part').hide();
+      $('.group-edit-part').hide();
+    });
+
+    $('.group-manager-edit').click(function(){
+      $('.usersubgroup-part').hide();
+      $('.group-information-part').hide();
+      $('.group-edit-part').fadeIn();
+    });
+
+    $('#group-destroy-btn').click(function(){
+      $('.group-destroy-wrapper').show();
+      $('#mask').show();
+    });
+
+    $('#mask').click(function(){
+      $('.group-destroy-wrapper').hide();
+      $('#mask').hide();
+    });
+
+    $('.destroy-cancel-btn').click(function(){
+      $('.group-destroy-wrapper').hide();
+      $('#mask').hide();
+    });
+
+
+});
+</script>

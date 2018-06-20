@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="wrapper-type-a">
+    <div class="adjustment">
+      <h1>企業一覧</h1>
+      <ul>
+        <% @companies.each do |company| %>
+        <%= link_to("/companies/#{company.id}/about") do %>
+        <div class="company-list-wrapper clearfix hover">
+          <%= image_tag("/company_event_images/#{company.image}",class:"company-list-image")%>
+          <div class="company-list-content">
+            <h2><%= company.name %></h2>
+            <p>ジャンル : <%= company.genre %></p>
+          </div>
+        </div>
+        <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

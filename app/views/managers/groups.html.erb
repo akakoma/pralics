@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="managers-info-wrapper">
+    <h1>グループ情報</h1>
+    <h2>グループ総数 : <%= @groups.length %></h2>
+
+    <select class="" name="">
+      <option value="">id</option>
+      <option value="">image</option>
+      <option value="">name</option>
+      <option value="">genre</option>
+      <option value="">group_type</option>
+      <option value="">format</option>
+      <option value="">sub_password</option>
+      <option value="">mana_password</option>
+      <option value="">created_at</option>
+      <option value="">updated_at</option>
+    </select>
+    <input type="serch" name="" value="">
+    <div class="managers-each-info">
+      <h3>All</h3>
+      <table border="1" class="managers-info-content">
+        <tr>
+          <th>id</th>
+          <th>image</th>
+          <th>name</th>
+          <th>genre</th>
+          <th>group_type</th>
+          <th>format</th>
+          <th>sub_password</th>
+          <th>mana_password</th>
+          <th>created_at</th>
+          <th>updated_at</th>
+          <th>編集</th>
+        </tr>
+
+        <% @groups.each do |group| %>
+        <tr>
+          <td><%= group.id %></td>
+          <td><%= group.image %></td>
+          <td><%= group.name %></td>
+          <td><%= group.genre %></td>
+          <td><%= group.group_type %></td>
+          <td><%= group.format %></td>
+          <td><%= group.sub_password %></td>
+          <td><%= group.mana_password %></td>
+          <td><%= group.created_at %></td>
+          <td><%= group.updated_at %></td>
+          <td><%= link_to "編集","/managers/groups/#{group.id}/edit"%></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+
+  </div>
+</div>

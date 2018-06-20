@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="managers-info-wrapper">
+    <h1>イベント情報</h1>
+    <h2>イベント総数 : <%= @events.length %></h2>
+
+    <select class="" name="">
+      <option value="">id</option>
+      <option value="">title</option>
+      <option value="">image</option>
+      <option value="">place</option>
+      <option value="">top_price</option>
+      <option value="">bottom_price</option>
+      <option value="">top_people</option>
+      <option value="">bottom_people</option>
+      <option value="">time</option>
+      <option value="">day</option>
+      <option value="">genre</option>
+      <option value="">room_id</option>
+      <option value="">conf</option>
+      <option value="">organizer_id</option>
+      <option value="">company_id</option>
+      <option value="">likes_count</option>
+      <option value="">permission</option>
+      <option value="">body</option>
+      <option value="">company_count</option>
+      <option value="">user_count</option>
+      <option value="">provide</option>
+      <option value="">created_at</option>
+      <option value="">updated_at</option>
+    </select>
+    <input type="serch" name="" value="">
+
+    <div class="managers-each-info">
+      <h3>全体</h3>
+      <table border="1" class="managers-info-content">
+        <tr>
+          <th>id</th>
+          <th>title</th>
+          <th>image</th>
+          <th>room_id</th>
+          <th>place</th>
+          <th>top_price</th>
+          <th>bottom_price</th>
+          <th>top_people</th>
+          <th>bottom_people</th>
+          <th>time</th>
+          <th>day</th>
+          <th>genre</th>
+          <th>conf</th>
+          <th>provide</th>
+          <th>organizer_id</th>
+          <th>company_id</th>
+          <th>likes_count</th>
+          <th>permission</th>
+          <th>user_count</th>
+          <th>company_count</th>
+          <th>body</th>
+          <th>created_at</th>
+          <th>updated_at</th>
+          <th>編集</th>
+        </tr>
+
+        <% @events.each do |event|%>
+        <tr>
+          <td><%= event.id %></td>
+          <td><%= event.title %></td>
+          <td><%= event.room_id %></td>
+          <td><%= event.image %></td>
+          <td><%= event.place %></td>
+          <td><%= event.top_price %></td>
+          <td><%= event.bottom_price %></td>
+          <td><%= event.top_people %></td>
+          <td><%= event.bottom_people %></td>
+          <td><%= event.time %></td>
+          <td><%= event.day %></td>
+          <td><%= event.genre %></td>
+          <td><%= event.conf %></td>
+          <td><%= event.provide %></td>
+          <td><%= event.organizer_id %></td>
+          <td><%= event.company_id %></td>
+          <td><%= event.likes_count %></td>
+          <td><%= event.permission %></td>
+          <td><%= event.user_count %></td>
+          <td><%= event.company_count %></td>
+          <td><%= event.body %></td>
+          <td><%= event.created_at %></td>
+          <td><%= event.updated_at %></td>
+          <th><%= link_to "編集","/managers/events/#{event.id}/edit"%></th>
+        </tr>
+        <%end%>
+      </table>
+    </div>
+
+
+  </div>
+</div>

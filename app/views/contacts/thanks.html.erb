@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="wrapper-type-a">
+    <div class="thanks-wrapper">
+      <h1>フィードバックいただきありがとうございます。</h1>
+      <p>※ご返信は、ご登録されているメールアドレスにご返信させていただきます。</p>
+      <p>※返答に関しましては、2～3日いただく場合がございますのでご了承ください。</p>
+      <p>※万が一4日たっても返信がない場合は、お手数ですが再度フィードバックいただきますよう宜しくお願い致します。</p>
+      <% if @current_company %>
+      <a href="/companies/index" class="thanks-btn">戻る</a>
+      <% else %>
+      <a href="/pralics/index" class="thanks-btn">戻る</a>
+      <% end %>
+    </div>
+  </div>
+</div>

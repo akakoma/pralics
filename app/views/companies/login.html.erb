@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="wrapper-type-b" id="center">
+    <div class="into-content">
+      <h2>企業ログイン</h2>
+      <% if @error_message %>
+        <div class="errors-message">
+          <%= @error_message%>
+        </div>
+        <%end%>
+        <div class="into-form">
+        <%= form_tag('/companies/login_system') do %>
+          <h3>企業名</h3>
+          <input type="text" name="name" value="<%= @name %>">
+          <h3>パスワード</h3>
+          <input type="password" name="password" value="<%= @password %>">
+          <input type="submit" value="ログイン" class="into-btn hover">
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

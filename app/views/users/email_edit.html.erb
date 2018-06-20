@@ -1,0 +1,13 @@
+<% if @current_user.id == @user.id %>
+<div class="container">
+  <div class="wrapper-type-a">
+    <div class="users-edit">
+      <h1>メールアドレス</h1>
+      <%= form_tag("/users/#{@user.id}/edit",class:"users-edit-form") do %>
+      <input type="text" name="email" value="<%= @user.email%>">
+      <input type="submit" class=" hover" value="変更">
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>

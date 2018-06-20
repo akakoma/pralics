@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="managers-info-wrapper">
+    <h1 style="padding-left:10px;">イベント編集画面</h1>
+    <h2 style="padding-left:10px;">イベントID: <%= @event.id %></h2>
+    <h2 style="padding-left:10px;">created_at : <%= @event.created_at %></h2>
+    <h2 style="padding-left:10px;">updated_at : <%= @event.updated_at %></h2>
+      <%= form_tag("/managers/events/#{@event.id}/update",multipart: true,method: :post,class: "edit-wrapper") do |f| %>
+        <h2>title</h2>
+        <input type="text" name="title" value="<%= @event.title %>">
+        <h2>image</h2>
+          <img src="<%= "/company_event_images/#{@event.image}"%>" style="width:160px;height:120px;">
+        <input type="file" id="file" name="image" value="<%= @event.image %>">
+        <h2>place</h2>
+        <input type="text" name="place" value="<%= @event.place %>">
+        <h2>top_price</h2>
+        <input type="text" name="top_price" value="<%= @event.top_price %>">
+        <h2>bottom_price</h2>
+        <input type="text" name="bottom_price" value="<%= @event.bottom_price %>">
+        <h2>top_people</h2>
+        <input type="text" name="top_people" value="<%= @event.top_people %>">
+        <h2>bottom_people</h2>
+        <input type="text" name="bottom_people" value="<%= @event.bottom_people %>">
+        <h2>time</h2>
+        <input type="text" name="time" value="<%= @event.time %>">
+        <h2>day</h2>
+        <input type="text" name="day" value="<%= @event.day %>">
+        <h2>genre</h2>
+        <select class="make-event-select"  name="genre">
+          <option selected value="<%= @event.genre %>"><%= @event.genre %></option>
+          <option value="パーティー">パーティー</option>
+          <option value="旅行">旅行</option>
+          <option value="フィットネス">フィットネス</option>
+          <option value="セミナー">セミナー</option>
+          <option value="その他">その他</option>
+        </select>
+        <h2>conf</h2>
+        <input type="text" name="conf" value="<%= @event.conf %>">
+        <h2>company_count</h2>
+        <input type="text" name="company_count" value="<%= @event.company_count %>">
+        <h2>user_count</h2>
+        <input type="text" name="user_count" value="<%= @event.user_count %>">
+        <h2>provide</h2>
+        <select name="provide">
+          <option value="close">close</option>
+          <option value="open">open</option>
+        </select>
+        <h2>orgabizer_id</h2>
+        <input type="text" name="organizer_id" value="<%= @event.organizer_id %>">
+        <h2>company_id</h2>
+        <input type="text" name="company_id" value="<%= @event.company_id %>">
+        <h2>permission</h2>
+        <input type="text" name="permission" value="<%= @event.permission %>">
+        <h2>body</h2>
+        <textarea name="body" rows="8" cols="1"><%= @event.body %></textarea>
+        <input type="submit" value="編集">
+        <%end%>
+        <%= link_to "削除","/managers/events/#{@event.id}/destroy",method: :post,id: "edit-destroy" %>
+  </div>
+</div>

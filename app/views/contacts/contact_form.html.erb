@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="wrapper-type-a">
+    <h1>フィードバック</h1>
+    <% if @error_message %>
+    <p class="error-message"><%= @error_message %></p>
+    <% end %>
+    <%= form_tag("/contacts/contact_create",class:"contact-form") do%>
+      <p>フィードバックの種類(必須)</p>
+      <input type="text" name="title" value="<%= @title%>">
+      <p>フィードバックの内容(必須)</p>
+      <textarea name="message" rows="8" cols="80"><%= @message %></textarea>
+      <input type="submit" class=" hover" value="送信">
+    <% end %>
+  </div>
+</div>

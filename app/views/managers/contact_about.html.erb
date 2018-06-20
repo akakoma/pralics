@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="wrapper-type-a">
+    <h1><%= @contact.id %>.<%= @contact.title %></h1>
+    <p><i class="fas fa-fw fa-users"></i>: <%= @contact.name%></p>
+    <i class="fas fa-fw fa-envelope-square"></i>: <%= @contact.email%>
+    <% if @contact.reply == 'not'%>
+      <p>状態 : 未回答</p>
+    <% else %>
+      <p>状態 : 回答済み</p>
+    <% end %>
+    <h2>内容</h2>
+    <%= simple_format(@contact.message)%>
+    <div class="contact-btns">
+        <% if @contact.reply == 'not'%>
+          <%= link_to('回答済みに送る',"/managers/contacts/#{@contact.id}/reply",{method: :post,class:'contact-btn-edit'})%>
+        <% else %>
+          <%= link_to('未回答にする',"/managers/contacts/#{@contact.id}/reply",{method: :post,class:'contact-btn-edit'})%>
+        <% end %>
+        <%= link_to('削除',"/managers/contacts/#{@contact.id}/destroy",{method: :post,class:'contact-btn-destroy'})%>
+        <a href="/managers/contacts" style="background:#555;">戻る</a>
+    </div>
+  </div>
+</div>

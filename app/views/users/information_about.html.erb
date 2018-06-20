@@ -1,0 +1,16 @@
+<% if @current_user.id == @user.id %>
+<div class="container">
+  <div class="wrapper-type-a">
+    <p class="day"><%= @information.created_at.strftime('%Y/%m/%d') %></p>
+    <div class="information-about-wrapper">
+      <h1><%= @information.title%></h1>
+      <div class="information-about-container">
+        <% if @information.image %>
+        <%= image_tag "/information_images/#{@information.image}",class: 'information-about-image'%>
+        <% end %>
+        <%= simple_format("#{@information.body}")%>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

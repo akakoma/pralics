@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="managers-info-wrapper">
+    <h1 style="padding-left:10px;">ユーザー編集画面</h1>
+    <h2 style="padding-left:10px;">ユーザーID : <%= @user.id %></h2>
+    <h2 style="padding-left:10px;">created_at : <%= @user.created_at %></h2>
+    <h2 style="padding-left:10px;">updated_at : <%= @user.updated_at %></h2>
+      <%= form_tag("/managers/users/#{@user.id}/update",method: :post,class: "edit-wrapper") do %>
+        <h2>name</h2>
+        <input type="text" name="name" value="<%= @user.name %>">
+        <h2>userId</h2>
+        <input type="text" name="user_id" value="<%= @user.user_id %>">
+        <h2>email</h2>
+        <input type="text" name="email" value="<%= @user.email %>">
+        <h2>age</h2>
+        <select class="" name="age">
+          <% for i in 15..100 %>
+          <option value="<%= i %>"><%= i %></option>
+          <% end %>
+        </select>
+        <h2>image</h2>
+        <input type="text" name="image" value="<%= @user.image %>">
+        <h2>sex</h2>
+        <div class="sex">
+          <input type="radio" name="sex" value="Man">男性<br>
+          <input type="radio" name="sex" value="Woman">女性<br>
+          <input type="radio" name="sex" value="LGBT">LGBT<br>
+        </div>
+        <h2>password</h2>
+        <input type="text" name="password" value="<%= @user.password %>">
+        <h2>user_info</h2>
+        <input type="text" name="user_info" value="<%= @user.user_info %>">
+        <h2>organizer_id</h2>
+        <input type="text" name="organizer_id" value="<%= @user.organizer_id %>">
+        <input type="submit" value="編集">
+      <%end%>
+        <%= link_to "削除","/managers/users/#{@user.id}/destroy",method: :post,id: "edit-destroy" %>
+  </div>
+</div>

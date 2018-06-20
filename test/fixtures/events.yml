@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  image: MyString
+  place: MyString
+  top_price: 1
+  bottom_price: 1
+  body: MyText
+  top_people: 1
+  bottom_people: 1
+  time: MyString
+  day: MyString
+  genre: MyString
+  organizer_id: 1
+  company_id: 1
+
+two:
+  title: MyString
+  image: MyString
+  place: MyString
+  top_price: 1
+  bottom_price: 1
+  body: MyText
+  top_people: 1
+  bottom_people: 1
+  time: MyString
+  day: MyString
+  genre: MyString
+  organizer_id: 1
+  company_id: 1

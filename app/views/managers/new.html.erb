@@ -1,0 +1,318 @@
+<div class="container">
+  <div class="wrapper-type-a">
+    <h1>新規登録</h1>
+  <ul class="manager-new-menu">
+    <li class="menu-item choose" data-id='user'>User</li>
+    <li class="menu-item" data-id='group'>Group</li>
+    <li class="menu-item" data-id='company'>Comany</li>
+    <li class="menu-item" data-id='event'>Event</li>
+    <li class="menu-item" data-id='estaevent'>Estaevent</li>
+    <li class="menu-item" data-id='manager'>Manager</li>
+    <li class="menu-item" data-id='attend'>Attend</li>
+    <li class="menu-item" data-id='like'>Like</li>
+    <li class="menu-item" data-id='usersubgroup'>Usersubgroup</li>
+    <li class="menu-item" data-id='message'>Message</li>
+    <li class="menu-item" data-id='appsubgroup'>Appsubgroup</li>
+    <li class="menu-item" data-id='resource'>Resource</li>
+  </ul>
+
+  <div class=" content active" id="user">
+    <div class="new-wrapper clearfix">
+      <h1>User</h1>
+    <%= form_tag('/managers/users/create',class:"user-new-wrapper") do %>
+    <h2>name</h2>
+    <input type="text" name="name" value="<%= @user.name %>">
+    <h2>user_id</h2>
+    <input type="text" name="user_id" value="<%= @user.user_id %>">
+    <h2>email</h2>
+    <input type="text" name="email" value="<%= @user.email %>">
+    <h2>age</h2>
+    <select class="" name="age">
+      <% for i in 15..100 %>
+      <option value="<%= i %>"><%= i %></option>
+      <% end %>
+    </select>
+    <h2>sex</h2>
+    <div class="new-sex">
+      <input type="radio" name="sex" value="Man">男性<br>
+      <input type="radio" name="sex" value="Woman">女性<br>
+      <input type="radio" name="sex" value="LGBT">LGBT<br>
+    </div>
+    <h2>password</h2>
+    <input type="text" name="password" value="<%= @user.password %>">
+    <h2>organizer_id</h2>
+    <input type="text" name="organizer_id" value="<%= @user.organizer_id %>">
+    <input type="submit" value="作成">
+    <% end %>
+  </div>
+  </div>
+
+  <div class=" content" id="group">
+    <div class="new-wrapper clearfix">
+      <h1>Group</h1>
+    <%= form_tag('/managers/groups/create') do %>
+    <h2>name</h2>
+    <input type="text" name="name" value="<%= @group.name %>">
+    <h2>genre</h2>
+    <input type="text" name="genre" value="<%= @group.genre %>">
+    <h2>group_type</h2>
+    <input type="text" name="group_type" value="<%= @group.group_type %>">
+    <h2>format</h2>
+    <input type="text" name="format" value="<%= @group.format %>">
+    <h2>sub_password</h2>
+    <input type="text" name="sub_password" value="<%= @group.sub_password %>">
+    <h2>mana_password</h2>
+    <input type="text" name="mana_password" value="<%= @group.mana_password %>">
+    <input type="submit" name="" value="作成">
+    <% end %>
+  </div>
+  </div>
+
+  <div class="content " id="company">
+    <div class="new-wrapper clearfix">
+      <h1>Company</h1>
+    <%= form_tag('/managers/companies/create') do %>
+    <h2 style="color:#333;">name</h2>
+    <input type="text" name="name" value="<%= @company.name %>">
+    <h2 style="color:#333;">genre</h2>
+    <input type="text" name="genre" value="<%= @company.genre %>">
+    <h2 style="color:#333;">email</h2>
+    <input type="text" name="email" value="<%= @company.email %>">
+    <h2 style="color:#333;">password</h2>
+    <input type="text" name="password" value="<%= @company.password %>">
+    <h2 style="color:#333;">manager</h2>
+    <input type="text" name="manager" value="<%= @company.manager %>">
+    <h2 style="color:#333;">tel</h2>
+    <input type="text" name="tel" value="<%= @company.tel %>">
+    <h2 style="color:#333;">image</h2>
+    <input type="text" name="image" value="<%= @company.image %>">
+    <input type="submit" name="" value="作成">
+    <% end %>
+  </div>
+  </div>
+
+  <div class="content" id="event">
+    <div class="new-wrapper clearfix">
+      <h1>Event</h1>
+    <%= form_tag('/managers/events/create') do %>
+    <h2>title</h2>
+    <input type="text" name="title" value="<%= @event.title %>">
+    <h2>place</h2>
+    <input type="text" name="place" value="<%= @event.place %>">
+    <h2>top_price</h2>
+    <input type="text" name="top_price" value="<%= @event.top_price %>">
+    <h2>bottom_price</h2>
+    <input type="text" name="bottom_price" value="<%= @event.bottom_price %>">
+    <h2>top_people</h2>
+    <input type="text" name="top_people" value="<%= @event.top_people %>">
+    <h2>bottom_people</h2>
+    <input type="text" name="bottom_people" value="<%= @event.bottom_people %>">
+    <h2>time</h2>
+    <input type="text" name="time" value="<%= @event.time %>">
+    <h2>day</h2>
+    <input type="text" name="day" value="<%= @event.day %>">
+    <h2>genre</h2>
+    <select class="make-event-select"  name="genre">
+      <option selected>選択してください</option>
+      <option value="パーティー">パーティー</option>
+      <option value="旅行">旅行</option>
+      <option value="フィットネス">フィットネス</option>
+      <option value="セミナー">セミナー</option>
+      <option value="その他">その他</option>
+    </select>
+    <h2>provide</h2>
+    <select name="provide">
+      <option value="close">close</option>
+      <option value="open">open</option>
+    </select>
+    <h2>organizer_id</h2>
+    <input type="text" name="organizer_id" value="<%= @event.organizer_id %>">
+    <h2>room_id</h2>
+    <input type="text" name="room_id" value="<%= @event.room_id %>">
+    <h2>conf</h2>
+    <input type="text" name="conf" value="<%= @event.conf %>">
+    <h2>permission</h2>
+    <input type="text" name="permission" value="<%= @event.permission %>">
+    <h2>company_id</h2>
+    <input type="text" name="company_id" value="<%= @event.company_id %>">
+    <h2>body</h2>
+    <textarea name="body" rows="8" cols="80"><%= @event.body %></textarea>
+    <input type="submit" name="" value="作成">
+    <% end %>
+  </div>
+  </div>
+
+  <div class="content " id="estaevent">
+    <div class="new-wrapper clearfix">
+      <h1>Estaevent</h1>
+    <%= form_tag('/managers/estaevents/create') do %>
+    <h2>title</h2>
+    <input type="text" name="title" value="<%= @estaevent.title %>">
+    <h2>place</h2>
+    <input type="text" name="place" value="<%= @estaevent.place %>">
+    <h2>price</h2>
+    <input type="text" name="price" value="<%= @estaevent.price %>">
+    <h2>time</h2>
+    <input type="text" name="time" value="<%= @estaevent.time %>">
+    <h2>people</h2>
+    <input type="text" name="people" value="<%= @estaevent.people %>">
+    <h2>day</h2>
+    <input type="text" name="day" value="<%= @estaevent.day %>">
+    <h2>genre</h2>
+    <input type="text" name="genre" value="<%= @estaevent.genre %>">
+    <h2>conf</h2>
+    <input type="text" name="conf" value="<%= @estaevent.conf %>">
+    <h2>room_id</h2>
+    <input type="text" name="room_id" value="<%= @estaevent.room_id %>">
+    <h2>user_id</h2>
+    <input type="text" name="user_id" value="<%= @estaevent.user_id %>">
+    <h2>company_id</h2>
+    <input type="text" name="company_id" value="<%= @estaevent.company_id %>">
+    <h2>event_id</h2>
+    <input type="text" name="event_id" value="<%= @estaevent.event_id %>">
+    <h2>group_id</h2>
+    <input type="text" name="group_id" value="<%= @estaevent.group_id %>">
+    <h2>body</h2>
+    <textarea name="body" rows="8" cols="80"><%= @estaevent.body %></textarea>
+    <h2>review</h2>
+    <textarea name="review" rows="8" cols="80"><%= @estaevent.review %></textarea>
+    <input type="submit" name="" value="作成">
+    <% end %>
+  </div>
+  </div>
+
+  <div class="content " id="manager">
+    <div class="new-wrapper clearfix">
+      <h1>Manager</h1>
+    <%= form_tag('/managers/managers/create') do %>
+    <h2>name</h2>
+    <input type="text" name="name" value="<%= @manager.name %>">
+    <h2>password</h2>
+    <input type="text" name="password" value="<%= @manager.password %>">
+    <input type="submit" name="" value="作成">
+    <% end %>
+  </div>
+  </div>
+
+  <div class="content " id="attend">
+    <div class="new-wrapper clearfix">
+      <h1>Attend</h1>
+    <%= form_tag('/managers/attends/create') do %>
+    <h2>user_id</h2>
+    <input type="text" name="user_id" value="<%= @attend.user_id %>">
+    <h2>estaevent_id</h2>
+    <input type="text" name="estaevent_id" value="<%= @attend.estaevent_id %>">
+    <input type="submit" name="" value="作成">
+    <% end %>
+  </div>
+  </div>
+
+  <div class=" content" id="like">
+    <div class="new-wrapper clearfix">
+      <h1>Like</h1>
+    <%= form_tag('/managers/likes/create') do %>
+    <h2>user_id</h2>
+    <input type="text" name="user_id" value="<%= @like.user_id %>">
+    <h2>event_id</h2>
+    <input type="text" name="event_id" value="<%= @like.event_id %>">
+    <input type="submit" name="" value="作成">
+    <% end %>
+  </div>
+  </div>
+
+  <div class=" content" id="usersubgroup">
+    <div class="new-wrapper clearfix">
+      <h1>Usersubgroup</h1>
+    <%= form_tag('/managers/usersubgroups/create') do %>
+    <h2>group_id</h2>
+    <input type="text" name="group_id" value="<%= @usersubgroup.group_id %>">
+    <h2>user_id</h2>
+    <input type="text" name="user_id" value="<%= @usersubgroup.user_id %>">
+    <input type="submit" name="" value="作成">
+    <% end %>
+  </div>
+  </div>
+
+
+  <div class=" content" id="message">
+    <div class="new-wrapper clearfix">
+      <h1>Message</h1>
+    <%= form_tag('/managers/messages/create') do %>
+    <h2>to_name</h2>
+    <input type="text" name="to_name" value="<%= @message.to_name %>">
+    <h2>from_name</h2>
+    <input type="text" name="from_name" value="<%= @message.from_name %>">
+    <h2>room_id</h2>
+    <input type="text" name="room_id" value="<%= @message.room_id %>">
+    <h2>image</h2>
+    <input type="file" name="" value="">
+    <h2>text</h2>
+    <input type="text" name="text" value="<%= @message.text %>">
+    <input type="submit" name="" value="作成">
+    <% end %>
+  </div>
+  </div>
+
+  <div class=" content" id="appsubgroup">
+    <div class="new-wrapper clearfix">
+      <h1>Appsubgroup</h1>
+    <%= form_tag('/managers/appsubgroups/create') do %>
+    <h2>user_id</h2>
+    <input type="text" name="user_id" value="<%= @appsubgroup.user_id %>">
+    <h2>group_id</h2>
+    <input type="text" name="group_id" value="<%= @appsubgroup.group_id %>">
+    <input type="submit" name="" value="作成">
+    <% end %>
+  </div>
+  </div>
+
+  <div class=" content" id="resource">
+    <div class="new-wrapper clearfix">
+      <h1>Resource</h1>
+    <%= form_tag('/managers/resources/create') do %>
+    <h2>user_id</h2>
+    <input type="text" name="user_id" value="<%= @resource.user_id %>">
+    <h2>group_id</h2>
+    <input type="text" name="group_id" value="<%= @resource.group_id %>">
+    <h2>title</h2>
+    <input type="text" name="title" value="<%= @resource.title %>">
+    <h2>body</h2>
+    <textarea name="body" rows="8" cols="80"><%= @resource.body %></textarea>
+    <input type="submit" name="" value="作成">
+    <% end %>
+  </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+  (function(){
+    'use strict';
+
+    var menuItems = document.getElementsByClassName('menu-item');
+    var contents = document.getElementsByClassName('content');
+
+    var i;
+    for(i = 0; i < menuItems.length; i++){
+      menuItems[i].addEventListener('click',function(e){
+        e.preventDefault();
+
+        var i;
+        for(i = 0; i < menuItems.length; i++){
+          menuItems[i].className = 'menu-item';
+        }
+
+        this.className = 'menu-item choose';
+
+        var i;
+        for(i = 0; i < contents.length; i++){
+          contents[i].className = 'content';
+        }
+
+        document.getElementById(this.dataset.id).className = 'content active';
+
+      });
+    }
+  })();
+</script>

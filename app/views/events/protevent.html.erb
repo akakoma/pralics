@@ -1,0 +1,84 @@
+<div class="container">
+    <div class="protevent-image-wrapper">
+      <h1>申込内容をご確認ください</h1>
+      <div class="protevent-each-image">
+        <%= image_tag "/user_images/#{@current_user.image}",class:"protevent-user-image" %>
+        <p><%= @current_user.name %></p>
+      </div>
+      <i class="fas fa-angle-double-right protevent-angle"></i>
+      <div class="protevent-each-image">
+        <%= image_tag "/company_event_images/#{@company.image}",class:"protevent-company-image" %>
+        <p><%= @company.name%></p>
+      </div>
+    </div>
+    <div class="protevent-confirmation">
+      <h1><%= @estaevent.title %></h1>
+      <div class="protevent-confirmation-content">
+        <div class="each-confirmation-content clearfix">
+          <h2>団体</h2>
+          <%= image_tag "/group_images/#{@group.image}",class:"protevent-group-image" %>
+          <p class="protevent-group-name"><%= @group.name%></p>
+        </div>
+        <div class="each-confirmation-content">
+          <h2>ジャンル</h2>
+          <% if @estaevent.genre %>
+          <p><%= @estaevent.genre %></p>
+          <% else %>
+          <p>未定</p>
+          <% end %>
+        </div>
+        <div class="each-confirmation-content">
+          <h2>予算</h2>
+          <% if @estaevent.price %>
+          <p><%= @estaevent.price %></p>
+          <% else %>
+          <p>未定</p>
+          <% end %>
+        </div>
+        <div class="each-confirmation-content">
+          <h2>予定人数</h2>
+          <% if @estaevent.people %>
+          <p><%= @estaevent.people %></p>
+          <% else %>
+          <p>未定</p>
+          <% end %>
+        </div>
+        <div class="each-confirmation-content">
+          <h2>希望場所</h2>
+          <% if @estaevent.place %>
+          <p><%= @estaevent.place %></p>
+          <% else %>
+          <p>未定</p>
+          <% end %>
+        </div>
+        <div class="each-confirmation-content">
+          <h2>希望日程</h2>
+          <% if @estaevent.day %>
+          <p><%= @estaevent.day %></p>
+          <% else %>
+          <p>未定</p>
+          <% end %>
+        </div>
+        <div class="each-confirmation-content">
+          <h2>時間</h2>
+          <% if @estaevent.time %>
+          <p><%= @estaevent.time %></p>
+          <% else %>
+          <p>未定</p>
+          <% end %>
+        </div>
+        <div class="each-confirmation-content">
+          <h2>詳細・その他希望</h2>
+          <% if @estaevent.body %>
+          <p><%= simple_format(@estaevent.body) %></p>
+          <% else %>
+          <p>特になし</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <%= link_to('送信する(この後企業と内容の打ち合わせを行います)',"/events/#{@estaevent.id}/room_id_create",{method: :post,class:'make-contact hover'})%>
+    <%= link_to('キャンセルする',"/events/#{@estaevent.event_id}/about",class:'cansel-product hover')%>
+
+  </div>

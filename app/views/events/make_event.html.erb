@@ -1,0 +1,94 @@
+<% if @current_user.organizer_id && @current_user.organizer_id == @organizer.organizer_id%>
+<div class="container">
+  <div class="wrapper-type-a">
+    <div class="company-2 ">
+      <h1>イベント作成</h1>
+      <% @event.errors.full_messages.each do |message| %>
+        <div class="errors-message">
+          ※<%= message %>
+        </div>
+      <%end%>
+      <div class="new-wrapper clearfix">
+        <%= form_tag("/events/#{@current_user.organizer_id}/event_create",{multipart: true}) do %>
+        <h2>主催者ID : <%= @current_user.organizer_id%></h2>
+        <h2>協賛企業</h2>
+        <select class="make-event-select" name="company_id">
+          <% @companies.each do |company|%>
+            <option value="<%=company.id%>"><%=company.name%> : <%=company.genre%></option>
+          <% end %>
+        </select>
+        <h2>画像</h2>
+        <label class="image-label-c">
+          <img src="no-image.jpg" alt="" class="signup-image-box">
+          <i class="fas fa-camera signup-camera"></i>
+          <input type="file" name="image" class="message-image-file">
+        </label>
+        <h2>タイトル</h2>
+        <input type="text" name="title" value="<%= @event.title%>" >
+        <h2>ジャンル</h2>
+        <select class="make-event-select"  name="genre">
+          <option selected>選択してください</option>
+          <option value="パーティー">パーティー</option>
+          <option value="旅行">旅行</option>
+          <option value="フィットネス">フィットネス</option>
+          <option value="セミナー">セミナー</option>
+          <option value="その他">その他</option>
+        </select>
+        <h2>場所</h2>
+        <input type="text" name="place"value="<%= @event.place%>">
+        <h2>最高料金</h2>
+        <input type="text" name="top_price" value="<%= @event.top_price%>">
+        <h2>最低料金</h2>
+        <input type="text" name="bottom_price" value="<%= @event.bottom_price%>">
+        <h2>最高人数</h2>
+        <input type="text" name="top_people"value="<%= @event.top_people%>">
+        <h2>最低人数</h2>
+        <input type="text" name="bottom_people" value="<%= @event.bottom_people%>">
+        <h2>対応可能時間</h2>
+        <input type="text" name="time" value="<%= @event.time%>">
+        <h2>日程</h2>
+        <input type="text" name="day" value="<%= @event.day%>">
+        <h2>詳細</h2>
+        <textarea name="body" rows="8" cols="80"><%= @event.body%></textarea>
+        <input type="submit" class=" hover" value="作成を依頼する">
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  $(document).on('turbolinks:load', function(){
+
+    var setFileInput = $('.image-label-c'),
+    setFileImg = $('.signup-image-box');
+
+    setFileInput.each(function(){
+        var selfFile = $(this),
+        selfInput = $(this).find('input[type=file]'),
+        prevElm = selfFile.find(setFileImg),
+        orgPass = prevElm.attr('src');
+
+        selfInput.change(function(){
+            var file = $(this).prop('files')[0],
+            fileRdr = new FileReader();
+
+            if (!this.files.length){
+                prevElm.attr('src', orgPass);
+                return;
+            } else {
+                if (!file.type.match('image.*')){
+                    prevElm.attr('src', orgPass);
+                    return;
+                } else {
+                    fileRdr.onload = function() {
+                        prevElm.attr('src', fileRdr.result);
+                    }
+                    fileRdr.readAsDataURL(file);
+                }
+            }
+        });
+    });
+  });
+</script>

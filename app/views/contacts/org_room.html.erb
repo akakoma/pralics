@@ -1,0 +1,448 @@
+<div class="container contact-container">
+  <div class="wrapper-type-a ">
+    <div class="contact-image-wrapper">
+      <% if @current_company %>
+        <div class="protevent-each-image">
+          <%= link_to("/companies/#{@company.id}/about", class:'hover') do %>
+          <%= image_tag "/company_event_images/#{@company.image}",class:"protevent-company-image" %>
+          <% end %>
+          <p><%= @company.name%></p>
+        </div>
+        <i class="fas fa-exchange-alt protevent-angle"></i>
+        <div class="protevent-each-image">
+          <%= link_to("/users/#{@organizer.id}/info", class:'hover') do %>
+          <%= image_tag "/user_images/#{@organizer.image}",class:"protevent-user-image" %>
+          <% end %>
+          <p><%= @organizer.name %></p>
+        </div>
+      <% else %>
+        <div class="protevent-each-image">
+          <%= link_to("/users/#{@organizer.id}/info", class:'hover') do %>
+          <%= image_tag "/user_images/#{@organizer.image}",class:"protevent-user-image" %>
+          <% end %>
+          <p><%= @organizer.name %></p>
+        </div>
+        <i class="fas fa-exchange-alt protevent-angle"></i>
+        <div class="protevent-each-image">
+          <%= link_to("/companies/#{@company.id}/about", class:'hover') do %>
+          <%= image_tag "/company_event_images/#{@company.image}",class:"protevent-company-image" %>
+          <% end %>
+          <p><%= @company.name%></p>
+        </div>
+      <% end %>
+    </div>
+
+
+    <div class="talk-session">
+      <% if @current_company %>
+        <div class="to-comment">
+          <div class="to-contact-top clearfix">
+              <%= image_tag "/user_images/#{@organizer.image}",class:"talk-session-img"%>
+              <p class="contact-name"><%= @organizer.name%></p>
+              <span class="time"><%= time_ago_in_words(@event.created_at) %></span>
+            </div>
+          <div class="contact-content">
+            <div class="contact-protevent">
+                <span>イベント番号: <%= @event.id%></span>
+                <h2>イベント作成が提案されました</h2>
+                <p>申し込みユーザー: <span style="color:orange;"><%= @organizer.name %></span></p>
+                <% if @event.title %>
+                  <p>タイトル: <span style="color:orange;"><%= @event.title %></span></p>
+                <% else %>
+                  <p>タイトル: 未定</p>
+                <% end %>
+                <% if @event.genre %>
+                  <p>ジャンル: <span style="color:orange;"><%= @event.genre %></span></p>
+                <% else %>
+                  <p>ジャンル: 未定</p>
+                <% end %>
+                <% if @event.top_price && @event.bottom_price %>
+                  <p>金額: <span style="color:orange;"><%= @event.bottom_price %>～<%= @event.top_price %>円</span></p>
+                <% elsif @event.top_price %>
+                  <p>金額: <span style="color:orange;"><%= @event.top_price %>円</span></p>
+                <% elsif @event.bottom_price %>
+                  <p>金額: <span style="color:orange;"><%= @event.bottom_price %>円</span></p>
+                <% else %>
+                  <p>金額: 未定</p>
+                <% end %>
+                <% if @event.top_people && @event.bottom_people %>
+                  <p>人数: <span style="color:orange;"><%= @event.bottom_people %>～<%= @event.top_people %>人</span></p>
+                <% elsif @event.top_people %>
+                  <p>人数: <span style="color:orange;"><%= @event.top_people %>人</span></p>
+                <% elsif @event.bottom_people %>
+                  <p>人数: <span style="color:orange;"><%= @event.bottom_people %>人</span></p>
+                <% else %>
+                  <p>人数: 未定</p>
+                <% end %>
+                <% if @event.place %>
+                  <p>場所: <span style="color:orange;"><%= @event.place %></span></p>
+                <% else %>
+                  <p>場所: 未定</p>
+                <% end %>
+                <% if @event.time %>
+                  <p>時間: <span style="color:orange;"><%= @event.time %></span></p>
+                <% else %>
+                  <p>時間: 未定</p>
+                <% end %>
+                <% if @event.day %>
+                  <p>日にち: <span style="color:orange;"><%= @event.day %></span></p>
+                <% else %>
+                  <p>日にち: 未定</p>
+                <% end %>
+                <% if @event.body %>
+                  <p>その他希望:<span style="color:orange;"><%= simple_format(@event.body)%></span></p>
+                <% else %>
+                  <p>その他希望: 特になし</p>
+                <% end %>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <div class="from-comment">
+          <div class="from-contact-top clearfix">
+            <%= image_tag "/user_images/#{@organizer.image}",class:"talk-session-img"%>
+            <p class="contact-name"><%= @organizer.name%></p>
+            <span class="time"><%= time_ago_in_words(@event.created_at) %></span>
+          </div>
+          <div class="contact-content">
+            <div class="contact-protevent">
+              <span>イベント番号: <%= @event.id%></span>
+              <h2>イベント作成が提案されました</h2>
+              <p>申し込みユーザー: <span style="color:orange;"><%= @organizer.name %></span></p>
+              <% if @event.title %>
+                <p>タイトル: <span style="color:orange;"><%= @event.title %></span></p>
+              <% else %>
+                <p>タイトル: 未定</p>
+              <% end %>
+              <% if @event.genre %>
+                <p>ジャンル: <span style="color:orange;"><%= @event.genre %></span></p>
+              <% else %>
+                <p>ジャンル: 未定</p>
+              <% end %>
+              <% if @event.top_price && @event.bottom_price %>
+              <p>金額: <span style="color:orange;"><%= @event.bottom_price %>～<%= @event.top_price %>円</span></p>
+              <% elsif @event.top_price %>
+              <p>金額: <span style="color:orange;"><%= @event.top_price %>円</span></p>
+              <% elsif @event.bottom_price %>
+              <p>金額: <span style="color:orange;"><%= @event.bottom_price %>円</span></p>
+              <% else %>
+              <p>金額: 未定</p>
+              <% end %>
+              <% if @event.top_people && @event.bottom_people %>
+              <p>人数: <span style="color:orange;"><%= @event.bottom_people %>～<%= @event.top_people %>人</span></p>
+              <% elsif @event.top_people %>
+              <p>人数: <span style="color:orange;"><%= @event.top_people %>人</span></p>
+              <% elsif @event.bottom_people %>
+              <p>人数: <span style="color:orange;"><%= @event.bottom_people %>人</span></p>
+              <% else %>
+              <p>人数: 未定</p>
+              <% end %>
+              <% if @event.place %>
+                <p>場所: <span style="color:orange;"><%= @event.place %></span></p>
+              <% else %>
+                <p>場所: 未定</p>
+              <% end %>
+              <% if @event.time %>
+                <p>時間: <span style="color:orange;"><%= @event.time %></span></p>
+              <% else %>
+                <p>時間: 未定</p>
+              <% end %>
+              <% if @event.day %>
+                <p>日にち: <span style="color:orange;"><%= @event.day %></span></p>
+              <% else %>
+                <p>日にち: 未定</p>
+              <% end %>
+              <% if @event.body %>
+                <p>その他希望:<span style="color:orange;"><%= simple_format(@event.body)%></span></p>
+              <% else %>
+                <p>その他希望: 特になし</p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <% if @messages %>
+      <% @messages.each do |message| %>
+      <% if message.from_name == @company.name && @current_company  %>
+        <div class="from-comment">
+          <div class="from-contact-top clearfix">
+            <%= image_tag "/company_event_images/#{@company.image}",class:"talk-session-img"%>
+            <p class="contact-name"><%= @company.name%></p>
+            <span class="time"><%= time_ago_in_words(message.created_at) %></span>
+          </div>
+          <div class="contact-content">
+            <% if message.text %>
+              <%= simple_format(message.text)%>
+            <% end %>
+            <% if message.image %>
+              <%= image_tag "/message_images/#{message.image}",class:"talk-content-img" %>
+            <% end %>
+          </div>
+        </div>
+      <% elsif message.from_name == @company.name && @current_company == nil %>
+        <div class="to-comment">
+            <div class="to-contact-top clearfix">
+              <%= image_tag "/company_event_images/#{@company.image}",class:"talk-session-img"%>
+              <p class="contact-name"><%= @company.name%></p>
+              <span class="time"><%= time_ago_in_words(message.created_at) %></span>
+            </div>
+          <div class="contact-content">
+            <% if message.text %>
+              <%= simple_format(message.text)%>
+            <% end %>
+            <% if message.image %>
+              <%= image_tag "/message_images/#{message.image}",class:"talk-content-img" %>
+            <% end %>
+          </div>
+        </div>
+      <% elsif  message.to_name == @company.name && @current_company %>
+        <div class="to-comment">
+          <div class="to-contact-top clearfix">
+            <%= image_tag "/user_images/#{@organizer.image}",class:"talk-session-img"%>
+            <p class="contact-name"><%= @organizer.name%></p>
+            <span class="time"><%= time_ago_in_words(message.created_at) %></span>
+          </div>
+          <div class="contact-content">
+            <% if message.text %>
+              <%= simple_format(message.text)%>
+            <% end %>
+            <% if message.image %>
+              <%= image_tag "/message_images/#{message.image}",class:"talk-content-img" %>
+            <% end %>
+          </div>
+        </div>
+      <% else %>
+        <div class="from-comment">
+          <div class="from-contact-top clearfix">
+            <%= image_tag "/user_images/#{@organizer.image}",class:"talk-session-img"%>
+            <p class="contact-name"><%= @organizer.name%></p>
+            <span class="time"><%= time_ago_in_words(message.created_at) %></span>
+          </div>
+          <div class="contact-content">
+            <% if message.text %>
+              <%= simple_format(message.text)%>
+            <% end %>
+            <% if message.image %>
+              <%= image_tag "/message_images/#{message.image}",class:"talk-content-img" %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="make-message-wrapper">
+  <%= form_tag("/contacts/#{@event.id}/org_create",{multipart: true,class: "message-form"}) do %>
+    <textarea name="text" id="ta" rows="1" cols="1"></textarea>
+      <label class="image-label">
+        <img src="no-image.jpg" alt="" class="message-image-box">
+        <i class="fas fa-camera message-camera hover"></i>
+        <input type="file" name="image" class="message-image-file">
+      </label>
+      <label class="tran-label">
+        <i class="fas fa-location-arrow message-tran hover"></i>
+        <input type="submit" class="message-tran-btn">
+      </label>
+  <% end %>
+</div>
+
+<p class="event-edit-btn">イベント内容を確認する</p>
+
+<div id="mask" class="content"></div>
+<div class="event_edit-wrapper content clearfix">
+  <i class="fas fa-times cancel-mark"></i>
+<% if @current_company %>
+    <%=form_tag("/events/#{@event.id}/event_edit" ,class: "container") do %>
+    <input type="text" name="title" class="event_edit-title" value="<%= @event.title %>">
+    <% if @event.genre %>
+    <select class="make-event-select"  name="genre">
+      <option selected value="<%= @event.genre %>"><%= @event.genre %></option>
+      <option value="パーティー">パーティー</option>
+      <option value="旅行">旅行</option>
+      <option value="フィットネス">フィットネス</option>
+      <option value="セミナー">セミナー</option>
+      <option value="その他">その他</option>
+    </select>
+    <% else %>
+    <select class="make-event-select"  name="genre">
+      <option selected>選択してください</option>
+      <option value="パーティー">パーティー</option>
+      <option value="旅行">旅行</option>
+      <option value="フィットネス">フィットネス</option>
+      <option value="セミナー">セミナー</option>
+      <option value="その他">その他</option>
+    </select>
+    <% end %>
+    <% if @event.bottom_people != "" && @event.top_people != "" %>
+      <p>人数: <input type="text" name="bottom_people" value="<%= @event.bottom_people %>">～<input type="text" name="top_people" value="<%= @event.top_people %>">人</p>
+    <% elsif @event.bottom_people != "" && @event.top_people == ""%>
+      <p>人数: <input type="text" name="bottom_people" value="<%= @event.bottom_people %>">～<input type="text" name="top_people" value="未定">人</p>
+    <% elsif @event.bottom_people == "" && @event.top_people != "" %>
+      <p>人数: <input type="text" name="bottom_people" value="未定">～<input type="text" name="top_people" value="<%= @event.top_people %>">人</p>
+    <% else %>
+      <p>人数: <input type="text" name="bottom_people" value="未定">～<input type="text" name="top_people" value="未定">人</p>
+    <% end %>
+    <% if @event.bottom_price != "" && @event.top_price != "" %>
+      <p>金額: <input type="text" name="bottom_price" value="<%= @event.bottom_price %>">～<input type="text" name="top_price" value="<%= @event.top_price %>">円</p>
+    <% elsif @event.bottom_price != "" && @event.top_price == ""%>
+      <p>金額: <input type="text" name="bottom_price" value="<%= @event.bottom_price %>">～<input type="text" name="top_price" value="未定">円</p>
+    <% elsif @event.bottom_price == "" && @event.top_price != "" %>
+      <p>金額: <input type="text" name="bottom_price" value="未定">～<input type="text" name="top_price" value="<%= @event.top_price %>">円</p>
+    <% else %>
+      <p>金額: <input type="text" name="bottom_price" value="未定">～<input type="text" name="top_price" value="未定">円</p>
+    <% end %>
+    <% if @event.place %>
+      <p>場所: <input type="text" name="place" value="<%= @event.place %>"></p>
+    <% else %>
+    <p>場所: <input type="text" name="place" value="未定"></p>
+    <% end %>
+    <% if @event.time %>
+      <p>時間: <input type="text" name="time" value="<%= @event.time %>"></p>
+    <% else %>
+      <p>時間: <input type="text" name="time" value="未定"></p>
+    <% end %>
+    <% if @event.day %>
+      <p>日にち: <input type="text" name="day" value="<%= @event.day %>"></p>
+    <% else %>
+      <p>日にち: <input type="text" name="day" value="未定"></p>
+    <% end %>
+      <p>内容</p>
+      <textarea name="body" rows="8" cols="80"><%= @event.body%></textarea>
+    <% if @event.conf != 'ok'%>
+      <input type="submit"  value="編集する" class="event-edit-edit-btn hover">
+    <% end %>
+    <% end %>
+    <% if @event.conf == 'ok' && @event.permission != 'ok' %>
+      <%= link_to('内容を確定する',"/events/#{@event.id}/permission",{method: :post,class:"event-edit-decision-btn hover"})%>
+    <% end %>
+  <% else %>
+    <h1><%= @event.title %></h1>
+    <div class="container">
+    <% if @event.genre %>
+      <p>ジャンル: <span style="color:orange;"><%= @event.genre %></span></p>
+    <% else %>
+      <p>ジャンル: 未定</p>
+    <% end %>
+    <% if @event.bottom_people != "" && @event.top_people != "" %>
+      <p>金額: <span style="color:orange;"><%= @event.bottom_people %></span>～<span style="color:orange;"><%= @event.top_people %></span>円</p>
+    <% elsif @event.bottom_people != "" && @event.top_people == ""%>
+      <p>金額: <span style="color:orange;"><%= @event.bottom_people %></span>～<span style="color:orange;">未定</span>円</p>
+    <% elsif @event.bottom_people == "" && @event.top_people != "" %>
+      <p>金額: <span style="color:orange;">未定</span>～<span style="color:orange;"><%= @event.top_people %></span>円</p>
+    <% else %>
+      <p>金額: <span style="color:orange;">未定</span>～<span style="color:orange;">未定</span>円</p>
+    <% end %>
+    <% if @event.bottom_price != "" && @event.top_price != "" %>
+      <p>金額: <span style="color:orange;"><%= @event.bottom_price %></span>～<span style="color:orange;"><%= @event.top_price %></span>円</p>
+    <% elsif @event.bottom_price != "" && @event.top_price == ""%>
+      <p>金額: <span style="color:orange;"><%= @event.bottom_price %></span>～<span style="color:orange;">未定</span>円</p>
+    <% elsif @event.bottom_price == "" && @event.top_price != "" %>
+      <p>金額: <span style="color:orange;">未定</span>～<span style="color:orange;"><%= @event.top_price %></span>円</p>
+    <% else %>
+      <p>金額: <span style="color:orange;">未定</span>～<span style="color:orange;">未定</span>円</p>
+    <% end %>
+    <% if @event.place %>
+      <p>場所: <span style="color:orange;"><%= @event.place %></span></p>
+    <% else %>
+      <p>場所: 未定</p>
+    <% end %>
+    <% if @event.time %>
+      <p>時間: <span style="color:orange;"><%= @event.time %></span></p>
+    <% else %>
+      <p>時間: 未定</p>
+    <% end %>
+    <% if @event.day %>
+      <p>日にち: <span style="color:orange;"><%= @event.day %></span></p>
+    <% else %>
+      <p>日にち: 未定</p>
+    <% end %>
+    <% if @event.body %>
+      <p>内容</p>
+      <p class="event_edit-content"><%= @event.body %></p>
+    <% else %>
+      <p>内容: 未定</p>
+    <% end %>
+    <% if @event.conf != 'ok' %>
+      <%= link_to('承認する',"/contacts/#{@event.id}/org_conf",{method: :post, class:"conf-btn hover"})%>
+    <% elsif @event.conf == 'ok' && @event.permission != 'ok' %>
+      <%= link_to('承認を取り消す',"/contacts/#{@event.id}/cancel_org_conf",{method: :post, class:"cansel-conf-btn hover"})%>
+    <% else %>
+      <%= link_to('ユーザー情報へ行く',"/users/#{@current_user.id}/info", class:"conf-btn hover")%>
+    <% end %>
+  </div>
+  <% end %>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  $(document).on('turbolinks:load', function(){
+    window.scrollTo(0,document.body.scrollHeight);
+
+    var setFileInput = $('.image-label'),
+    setFileImg = $('.message-image-box');
+
+    setFileInput.each(function(){
+        var selfFile = $(this),
+        selfInput = $(this).find('input[type=file]'),
+        prevElm = selfFile.find(setFileImg),
+        orgPass = prevElm.attr('src');
+
+        selfInput.change(function(){
+            var file = $(this).prop('files')[0],
+            fileRdr = new FileReader();
+
+            if (!this.files.length){
+                prevElm.attr('src', orgPass);
+                return;
+            } else {
+                if (!file.type.match('image.*')){
+                    prevElm.attr('src', orgPass);
+                    return;
+                } else {
+                    fileRdr.onload = function() {
+                        prevElm.attr('src', fileRdr.result);
+                    }
+                    fileRdr.readAsDataURL(file);
+                }
+            }
+        });
+    });
+
+    $("#ta").height(20);
+    $("#ta").css("lineHeight","20px");
+
+    $("#ta").on("input",function(evt){
+      if(evt.target.scrollHeight > evt.target.offsetHeight){
+        $(evt.target).height(evt.target.scrollHeight);
+      }else{
+        var lineHeight = Number($(evt.target).css("lineHeight").split("px")[0]);
+        while (true){
+            $(evt.target).height($(evt.target).height() - lineHeight);
+            if(evt.target.scrollHeight > evt.target.offsetHeight){
+                $(evt.target).height(evt.target.scrollHeight);
+                break;
+            }
+        }
+    }
+});
+
+$('.event-edit-btn').click(function(){
+  $('.event_edit-wrapper').show();
+  $('#mask').show();
+});
+
+$('.cancel-mark').click(function(){
+  $('.event_edit-wrapper').hide();
+  $('#mask').hide();
+});
+
+$('#mask').click(function(){
+  $('.event_edit-wrapper').hide();
+  $('#mask').hide();
+});
+
+});
+</script>

@@ -1,0 +1,96 @@
+<%= image_tag "/company_event_images/#{@estaevent.image}",class: 'estaevent-about-image'%>
+<div class="estaevent-about-attend">
+  <i class="fas fa-walking"></i>
+  <span>: </span><%= @attends.length %>
+</div>
+<div class="estaevent-about-wrapper">
+  <div class="container">
+      <h1><%= @estaevent.title %></h1>
+      <p>定員目安数 : <%= @estaevent.people %>人</p>
+      <% if @attends.length < @estaevent.people %>
+        <p>現在出席数 : <span style="color:red"><%= @attends.length %></span>人</p>
+      <% else %>
+        <p>現在出席数 : <span style="color:skyblue;"><%= @attends.length %></span>人</p>
+      <% end %>
+      <p>ジャンル: <%= @estaevent.genre%></p>
+      <p>料金: <%= @estaevent.price%>円/人</p>
+      <p>場所: <%= @estaevent.place %></p>
+      <p>時間: <%= @estaevent.time %></p>
+      <p>日程: <%= @estaevent.day %></p>
+      <% if @group != nil %>
+      <p id="company">参加団体 : <%= @group.name %></p>
+      <% end %>
+      <div class="estaevent-about-content-wrapper">
+        <h2>内容</h2>
+        <%= simple_format(@estaevent.body,:class => "review-content") %>
+      </div>
+      <%= link_to("/groups/#{@estaevent.id}/esta_users") do%>
+      <div class="esta-ateend-users-wrapper">
+        <h2>参加ユーザー</h2>
+        <% @attends.each do |attend| %>
+          <% user = User.find_by(id: attend.user_id)%>
+          <%= image_tag "/user_images/#{user.image}",class:"esta-ateend-users-image"%>
+        <% end %>
+      </div>
+      <% end %>
+      <% if Attend.find_by(user_id: @current_user.id,estaevent_id: @estaevent.id)%>
+      <p class="destroy-attend-btn hover">参加を取り消す</p>
+      <% else %>
+      <p class="attend-btn hover">参加する</p>
+      <% end %>
+  </div>
+</div>
+
+<div id="mask" class="content"></div>
+<div class="attend-appli-wrapper content">
+  <%= image_tag "/company_event_images/#{@estaevent.image}",class: 'estaevent-appli-image'%>
+  <h1><%= @estaevent.title %></h1>
+  <% if Attend.find_by(user_id: @current_user.id,estaevent_id: @estaevent.id)%>
+  <p>このイベントの参加を取り消しますか？</p>
+  <%= link_to('参加を取り消す',"/groups/#{@estaevent.id}/attend_destroy",{method: :post,class:'destroy-decide-attend-btn hover'})%><a class="not-attend-btn hover">キャンセル</a>
+  <% else %>
+  <p>このイベントに参加しますか？</p>
+  <%= link_to('参加します',"/groups/#{@estaevent.id}/attend_system",{method: :post,class:'decide-attend-btn hover'})%><a class="not-attend-btn hover">キャンセル</a>
+  <% end %>
+</div>
+
+<% if flash[:notice] %>
+  <%= link_to("/groups/#{@group.id}/about") do %>
+    <div id="mask" class=""></div>
+    <div class="check-attend-decide">
+      <h1><%="【#{@estaevent.title}】"%><br>参加申し込みが行われました</h1>
+      <p>開催当日まで楽しみにお待ちください！！</p>
+    </div>
+  <% end %>
+<% end %>
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  $(document).on('turbolinks:load', function(){
+
+    $('.attend-btn').click(function(){
+      $('.attend-appli-wrapper').show();
+      $('#mask').show();
+    });
+
+    $('.destroy-attend-btn').click(function(){
+      $('.attend-appli-wrapper').show();
+      $('#mask').show();
+    });
+
+    $('.not-attend-btn').click(function(){
+      $('.attend-appli-wrapper').hide();
+      $('#mask').hide();
+    });
+
+    $('#mask').click(function(){
+      $('.attend-appli-wrapper').hide();
+      $('#mask').hide();
+    });
+
+});
+</script>

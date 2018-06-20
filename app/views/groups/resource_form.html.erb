@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="wrapper-type-a">
+    <h1>リソース共有</h1>
+    <% if @error_message %>
+    <p class="error-message"><%= @error_message %></p>
+    <% end %>
+    <%= form_tag("/groups/#{@group.id}/resource_create",class:"contact-form") do%>
+      <p>タイトル</p>
+      <input type="text" name="title" value="<%= @title%>">
+      <p>内容</p>
+      <textarea name="body" rows="8" cols="80" placeholder="※現在サイト内で連絡を取り合う手段がないため、メンバーの方との連絡手段がない場合は、連絡手段の明記を行ってください。"><%= @body %></textarea>
+      <input type="submit" class=" hover" value="送信">
+    <% end %>
+  </div>
+</div>

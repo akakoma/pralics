@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="managers-info-wrapper">
+    <h1 style="padding-left:10px;">開催イベント編集画面</h1>
+      <h2 style="padding-left:10px;">開催イベントID: <%= @estaevent.id %></h2>
+      <h2 style="padding-left:10px;">created_at : <%= @estaevent.created_at %></h2>
+      <h2 style="padding-left:10px;">updated_at : <%= @estaevent.updated_at %></h2>
+      <%= form_tag("/managers/estaevents/#{@estaevent.id}/update",method: :post,class: "edit-wrapper") do %>
+        <h2>title</h2>
+        <input type="text" name="title" value="<%= @estaevent.title %>">
+        <h2>image</h2>
+        <input type="text" name="image" value="<%= @estaevent.image %>">
+        <h2>place</h2>
+        <input type="text" name="place" value="<%= @estaevent.place %>">
+        <h2>price</h2>
+        <input type="text" name="price" value="<%= @estaevent.price %>">
+        <h2>time</h2>
+        <input type="text" name="time" value="<%= @estaevent.time %>">
+        <h2>day</h2>
+        <input type="text" name="day" value="<%= @estaevent.day %>">
+        <h2>people</h2>
+        <input type="text" name="people" value="<%= @estaevent.people %>">
+        <h2>genre</h2>
+        <input type="text" name="genre" value="<%= @estaevent.genre %>">
+        <h2>conf</h2>
+        <input type="text" name="conf" value="<%= @estaevent.conf %>">
+        <h2>room_id</h2>
+        <input type="text" name="room_id" value="<%= @estaevent.room_id %>">
+        <h2>user_id</h2>
+        <input type="text" name="user_id" value="<%= @estaevent.user_id %>">
+        <h2>company_id</h2>
+        <input type="text" name="company_id" value="<%= @estaevent.company_id %>">
+        <h2>event_id</h2>
+        <input type="text" name="event_id" value="<%= @estaevent.event_id %>">
+        <h2>group_id</h2>
+        <input type="text" name="group_id" value="<%= @estaevent.group_id %>">
+        <h2>user_count</h2>
+        <input type="text" name="user_count" value="<%= @estaevent.user_count %>">
+        <h2>company_count</h2>
+        <input type="text" name="company_count" value="<%= @estaevent.company_count %>">
+        <h2>body</h2>
+        <textarea name="body" rows="8" cols="80"><%= @estaevent.body %></textarea>
+        <h2>review</h2>
+        <textarea name="review" rows="8" cols="80"><%= @estaevent.review %></textarea>
+        <input type="submit" value="編集">
+      <%end%>
+        <%= link_to "削除","/managers/estaevents/#{@estaevent.id}/destroy",method: :post,id: "edit-destroy" %>
+  </div>
+</div>

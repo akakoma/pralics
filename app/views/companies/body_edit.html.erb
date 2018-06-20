@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="wrapper-type-a">
+    <div class="adjustment">
+      <h1>企業情報編集</h1>
+      <%= form_tag("/companies/#{@company.id}/body_edit_system",class:"company-body-edit-wrapper") do %>
+      <% if @current_company.id == @company.id %>
+        <textarea name="body" rows="24" cols="80"><%= @company.body%></textarea>
+          <input type="submit" class=" hover" value="編集">
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

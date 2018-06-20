@@ -1,0 +1,18 @@
+<%= link_to("/pralics/index") do %>
+<div class="dontainer">
+  <div class="wrapper-type-a">
+    <div class="adjustment" id="center" style="color:#333;">
+      <h1 class="group-create-success">団体の作成に成功しました</h1>
+      <p>仲間を集めて団体を盛り上げていきましょう！</p>
+      <%= image_tag("/group_images/#{@group.image}",class: 'group-create-conf-image')%>
+      <h2>【<%= @group.name%>】</h2>
+      <ul style="padding:0;">
+        <li>ジャンル : <span style="color:orange;"><%= @group.genre %></span></li>
+        <li>団体の種類 : <span style="color:orange;"><%= @group.group_type %></span></li>
+        <li>加入パスワード : <span style="color:orange;"><%= @group.sub_password %></span></li>
+        <li>管理パスワード : <span style="color:orange;"><%= @group.mana_password %></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<% end %>

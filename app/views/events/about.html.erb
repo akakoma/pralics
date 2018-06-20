@@ -1,0 +1,194 @@
+<div class="container">
+  <div class="wrapper-type-a">
+    <%= image_tag "/company_event_images/#{@event.image}",class: "event-about-image"%>
+    <div class="like-and-attend">
+      <% if Like.find_by(user_id: @current_user.id, event_id: @event.id) %>
+      <%= link_to("/event_likes/#{@event.id}/destroy", {method: "post"}) do %>
+      <span class="fa fa-heart like-active"></span>
+      <%end%>
+      <% else %>
+      <%= link_to("/event_likes/#{@event.id}/create", {method: "post"}) do %>
+      <span class="fa fa-heart like-nomal"></span>
+      <%end%>
+      <%end%>
+      <% if Like.find_by(event_id: @event.id) %>
+      : <%= Like.where(event_id: @event.id).length %>
+      <% else %>
+      <span>: 0</span>
+      <% end %>
+      <i class="fas fa-walking"></i>
+      <% if @estaevents = Estaevent.where(event_id: @event.id) %>
+      <% i = 0 %>
+      <% @estaevents.each do |estaevent|%>
+      <% if estaevent.review != "" && estaevent.room_id == "" %>
+        <% i += estaevent.people %>
+      <% end %>
+      <% end %>
+      <span>: </span><%= "#{i}人"%>
+      <% else %>
+      <span>: 0</span>
+      <% end %>
+    </div>
+    <div class="black-item"></div>
+    <div class="event-about-content-top">
+      <h1><%= @event.title %></h1>
+      <% if @event.organizer_id != nil %>
+        <p class="event-about-company-name">presented by <%= link_to(@organizer.user_id ,"/users/#{@organizer.id}/info",class: 'organizer-color') %> × <%= link_to(@company.name ,"/companies/#{@company.id}/about",class: 'organizer-color') %></p>
+      <% else %>
+        <p class="event-about-company-name">presented by <%= @company.name %></p>
+      <% end %>
+      <div class="event-about-content-det">
+        <p><span style="color:#ccc;">ジャンル: </span><%= @event.genre %></p>
+        <p><span style="color:#ccc;">期間: </span><%= @event.day %></p>
+        <p><span style="color:#ccc;">設定料金: </span><%= @event.bottom_price %>～<%= @event.top_price %>円</p>
+        <p><span style="color:#ccc;">地域・場所: </span><%= @event.place %></p>
+        <p><span style="color:#ccc;">人数: </span><%= @event.bottom_people %>～<%= @event.top_people %>人</p>
+        <p><span style="color:#ccc;">対応時間: </span><%= @event.time %></p>
+      </div>
+    </div>
+
+    <div class="event-about-content-bottom">
+      <div class="event-about-body">
+        <h1>詳細</h1>
+        <div class="event-more-detail">
+          <%= simple_format(@event.body,:class => "event-more-text") %>
+        </div>
+      </div>
+      <div class="event-about-estaevent">
+        <h1>過去利用されたイベント</h1>
+        <% @estaevents.each do |estaevent| %>
+        <% if @event.provide == "open" && estaevent != nil && estaevent.review != '' %>
+        <% group = Group.find_by(id: estaevent.group_id )%>
+        <%= link_to("/events/#{estaevent.id}/estaevent", class: "color-black") do %>
+        <div class="product">
+          <div class="product-image-wrapper">
+            <%= image_tag "/company_event_images/#{estaevent.image}" ,class: "product-image"%>
+            <div class="clear"></div>
+          </div>
+          <div class="product-content-wrapper">
+            <h2><%= estaevent.title %></h2>
+            <p><i class="far fa-fw fa-question-circle"></i> <%= estaevent.genre %></p>
+            <p><i class="fas fa-fw fa-yen-sign"></i> <%= estaevent.price %>円</p>
+            <p><i class="fas fa-fw fa-users"></i> <%= estaevent.people %>人</p>
+            <p><i class="fas fa-fw fa-map-marker"></i> <%= estaevent.place %></p>
+            <p><i class="far fa-fw fa-clock"></i> <%= estaevent.time %></p>
+            <p><i class="far fa-fw fa-calendar-alt"></i> <%= estaevent.day %></p>
+            <% if group != nil %>
+            <p id="company">参加団体 : <%= group.name %></p>
+            <% end %>
+          </div>
+        </div>
+        <% end %>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+  <span class="make-protevent">企画する</span>
+  <div class="make-protevent-footer">
+    <div class="like-and-attend-footer">
+      <% if Like.find_by(user_id: @current_user.id, event_id: @event.id) %>
+      <%= link_to("/event_likes/#{@event.id}/destroy", {method: "post"}) do %>
+      <span class="fa fa-heart like-active"></span>
+      <%end%>
+      <% else %>
+      <%= link_to("/event_likes/#{@event.id}/create", {method: "post"}) do %>
+      <span class="fa fa-heart like-nomal"></span>
+      <%end%>
+      <%end%>
+      <% if Like.find_by(event_id: @event.id) %>
+      : <%= Like.where(event_id: @event.id).length %>
+      <% else %>
+      <span>: 0</span>
+      <% end %>
+      <i class="fas fa-walking"></i>
+      <% if @estaevents = Estaevent.where(event_id: @event.id) %>
+      <% i = 0 %>
+      <% @estaevents.each do |estaevent|%>
+      <% if estaevent.review != "" && estaevent.room_id == "" %>
+        <% i += estaevent.people %>
+      <% end %>
+      <% end %>
+      <span>: </span><%= "#{i}人"%>
+      <% else %>
+      <span>: 0</span>
+      <% end %>
+    </div>
+    <span class="make-protevent-footer-btn">企画する</span>
+  </div>
+
+<div id="mask hidden"></div>
+<div class="protevent-form content">
+  <i class="fas fa-times" id="back-icon"></i>
+  <div class="container">
+    <%= form_tag("/events/#{@event.id}/protevent_create",class: "protevent-form-content") do%>
+    <h1><%=@event.title%> 企画フォーム</h1>
+      <p>タイトル</p>
+      <input type="text" name="title" value="<%=@event.title%>">
+      <p>開催団体</p>
+      <select name="group_id">
+        <% @usersubgroups.each do |usersubgroup| %>
+        <% group = Group.find_by(id: usersubgroup.group_id) %>
+        <option value="<%= group.id %>"><%= group.name %></option>
+        <% end %>
+      </select>
+      <p>イベントジャンル</p>
+      <input type="text" name="genre" value="<%= @event.genre %>">
+      <p>予算</p>
+      <input type="text" name="price" value="<%= @event.bottom_price %>">
+      <p>予定人数</p>
+      <select class="" name="people">
+        <% if @event.bottom_people && @event.top_people %>
+          <% for i in @event.bottom_people..@event.top_people%>
+            <option value="<%=i%>"><%=i%>人</option>
+          <% end %>
+        <% elsif @event.bottom_people == nil  && @event.top_people %>
+          <% for i in 0..@event.top_people%>
+            <option value="<%=i%>"><%=i%>人</option>
+          <% end %>
+        <% else %>
+          <% for i in @event.bottom_people..1000000 %>
+            <option value="<%=i%>"><%=i%>人</option>
+          <% end %>
+        <% end %>
+      </select>
+      <p>希望場所</p>
+      <input type="text" name="place" value="<%= @event.place%>">
+      <p>希望日程</p>
+      <input type="text" name="day" value="<%= @event.day%>">
+      <p>時間</p>
+      <input type="text" name="time" value="<%= @event.time%>">
+      <h2>詳細・その他希望</h2>
+      <textarea name="name" rows="8" cols="80"></textarea>
+      <input type="submit" class=" hover" value="確認する">
+      <% end %>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  $(document).on('turbolinks:load', function(){
+    $('.make-protevent-footer-btn').click(function(){
+      $('.protevent-form').fadeIn(300);
+      $('#mask').show();
+    });
+
+    $('.make-protevent').click(function(){
+      $('.protevent-form').fadeIn(300);
+      $('#mask').show();
+    });
+
+    $('#back-icon').click(function(){
+      $('.protevent-form').hide();
+      $('#mask').hide();
+    });
+
+    $('#mask').click(function(){
+      $('.protevent-form').hide();
+      $('#mask').hide();
+    });
+
+  });
+
+</script>

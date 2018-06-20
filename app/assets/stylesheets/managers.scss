@@ -1,0 +1,195 @@
+/* manager */
+/* login */
+/* index */
+
+
+.manager-list>li{
+  font-size: 24px;
+  margin: 20px;
+  cursor: pointer;
+}
+
+/* users */
+/* groups */
+/* events */
+/* contact */
+/* establishment */
+.managers-info-wrapper{
+  padding: 50px 0 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+.managers-info-wrapper>select{
+  width: auto;
+  margin: 20px;
+}
+
+.managers-info-wrapper>input{
+  width: 50%;
+}
+
+.managers-info-content{
+  width: 90%;
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+.managers-each-info{
+    width: 100%;
+    overflow: scroll;
+}
+
+// edit
+.edit-wrapper{
+  width: 80%;
+  margin: 0 auto;
+}
+
+.edit-wrapper>input:not(:last-child){
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #eee;
+}
+
+.edit-wrapper>input:last-child{
+  float: left;
+  margin: 10px;
+  text-decoration: none;
+  padding: 3px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #444;
+  color: #fff;
+}
+
+.edit-wrapper>textarea{
+  width: 100%;
+  font-family: Verdana,sans-serif;
+  resize: none;
+  border: 1px solid #eee;
+}
+
+#edit-destroy{
+  display: inline-block;
+  background-color: red;
+  color: #fff;
+  padding: 3px 20px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+
+.edit-wrapper>input:focus{
+  outline: none;
+  border-bottom:1px solid orange;
+}
+
+.edit-wrapper>textarea:focus{
+  outline: none;
+  border-color: orange;
+}
+
+// new
+
+.manager-new-menu{
+  padding: 0;
+  margin: 0 0 10px 0;
+text-align: center;
+}
+
+.manager-new-menu>li{
+  margin: 3px;
+  padding: 3px 6px;
+  display: inline-block;
+  box-sizing: border-box;
+  background-color: #eee;
+  cursor: pointer;
+}
+
+.manager-new-menu>li:not(:last-child){
+  border-right: 1px solid #fff;
+}
+
+.new-wrapper{
+  width: 90%;
+  margin: 0 auto;
+}
+
+.new-wrapper input:not(:last-child){
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #eee;
+}
+
+.new-wrapper input:last-child{
+  float: left;
+  margin: 10px;
+  text-decoration: none;
+  padding: 3px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #444;
+  color: #fff;
+}
+
+
+
+.new-wrapper textarea{
+  width: 100%;
+  font-family: Verdana,sans-serif;
+  resize: none;
+  border: 1px solid #eee;
+}
+
+.new-wrapper input:focus{
+  outline: none;
+  border-bottom:1px solid orange;
+}
+
+.new-wrapper textarea:focus{
+  outline: none;
+  border-color: orange;
+}
+
+.new-wrapper>h1{
+  color: red;
+  text-align: center;
+  margin: 30px 0;
+  padding: 20px 0;
+  border-bottom: 1px solid orange;
+}
+
+.manager-new-menu>.choose{
+  background-color: #777;
+  color:#fff;
+}
+
+.new-wrapper>.user-new-wrapper>.new-sex>input{
+  width: auto;
+  }
+
+// contacts
+.each-contact{
+  margin-bottom: 10px;
+}
+
+.contact-btns{
+  margin-top: 20px;
+}
+
+.contact-btns>a{
+  color: #fff;
+  border-radius: 3px;
+  padding: 5px 10px;
+  font-weight: bold;
+}
+
+.contact-btn-destroy{
+  background-color: red;
+}
+
+.contact-btn-edit{
+  background-color: skyblue;
+}

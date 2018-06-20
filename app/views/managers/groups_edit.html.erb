@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="managers-info-wrapper">
+    <h1 style="padding-left:10px;">グループ編集画面</h1>
+      <h2 style="padding-left:10px;">グループID: <%= @group.id %></h2>
+      <h2 style="padding-left:10px;">created_at : <%= @group.created_at %></h2>
+      <h2 style="padding-left:10px;">updated_at : <%= @group.updated_at %></h2>
+      <%= form_tag("/managers/groups/#{@group.id}/update",method: :post,class: "edit-wrapper") do %>
+        <h2>name</h2>
+        <input type="text" name="name" value="<%= @group.name %>">
+        <h2>image</h2>
+        <input type="text" name="image" value="<%= @group.image %>">
+        <h2>genre</h2>
+        <input type="text" name="genre" value="<%= @group.genre %>">
+        <h2>group_type</h2>
+        <input type="text" name="group_type" value="<%= @group.group_type %>">
+        <h2>format</h2>
+        <input type="text" name="format" value="<%= @group.format %>">
+        <h2>sub_password</h2>
+        <input type="text" name="sub_password" value="<%= @group.sub_password %>">
+        <h2>mana_password</h2>
+        <input type="text" name="mana_password" value="<%= @group.mana_password %>">
+        <input type="submit" value="編集">
+      <%end%>
+        <%= link_to "削除","/managers/groups/#{@group.id}/destroy",method: :post,id: "edit-destroy" %>
+  </div>
+</div>

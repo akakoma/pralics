@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="managers-info-wrapper">
+    <h1 style="padding-left:10px;">メッセージ編集画面</h1>
+      <h2 style="padding-left:10px;">メッセージID: <%= @message.id %></h2>
+      <h2 style="padding-left:10px;">created_at : <%= @message.created_at %></h2>
+      <h2 style="padding-left:10px;">updated_at : <%= @message.updated_at %></h2>
+      <%= form_tag("/managers/messages/#{@message.id}/update",method: :post,class: "edit-wrapper") do %>
+        <h2>to_name</h2>
+        <input type="text" name="to_name" value="<%= @message.to_name %>">
+        <h2>from_name</h2>
+        <input type="text" name="from_name" value="<%= @message.from_name %>">
+        <h2>room_id</h2>
+        <input type="text" name="room_id" value="<%= @message.room_id %>">
+        <h2>user_count</h2>
+        <input type="text" name="user_count" value="<%= @message.user_count %>">
+        <h2>company_count</h2>
+        <input type="text" name="company_count" value="<%= @message.company_count %>">
+        <h2>image</h2>
+        <input type="file" name="" value="">
+        <h2>text</h2>
+        <textarea name="text" rows="8" cols="80"><%= @message.text %></textarea>
+        <input type="submit" value="編集">
+      <%end%>
+        <%= link_to "削除","/managers/messages/#{@message.id}/destroy",method: :post,id: "edit-destroy" %>
+  </div>
+</div>

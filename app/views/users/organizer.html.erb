@@ -1,0 +1,15 @@
+<% if @current_user.id == @user.id %>
+<div class="organizer-copy-wrapper">
+  <div class="organizer-box">
+    <h1 class="organizer-copy">本気で遊べることは才能だ</h1>
+  </div>
+</div>
+<div class="organizer-container">
+  <h1>現在pralicsでは主催者を募集しています！！</h1>
+  <h2>将来のYoutuberならぬPralicserを目指しませんか？</h2>
+  <h3>pralicsでは、主催者になることで企業と協力して自分だけのオリジナルのサービスを作れるようになります。</h3>
+  <p style="color:red;">※現在はプロトタイプのため、お手数ですが直接会ってご説明や登録の方をさせていただいております。</p>
+  <p style="color:red;">※もしも、興味のある方は下のボタンをクリックしてください。後程登録されているメールアドレスからご連絡をさせていただきます。</p>
+  <%= link_to('主催者に興味がある / 話を聞いてみたい',"/users/#{@user.id}/organizer_contact",{method: :post,class: "organizer-btn hover"})%>
+</div>
+<% end %>

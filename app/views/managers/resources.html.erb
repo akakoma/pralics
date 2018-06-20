@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="managers-info-wrapper">
+    <h1>リソース共有情報</h1>
+    <h2>リソース共有総数 : <%= @resources.length %></h2>
+
+    <select class="" name="">
+      <option value="">id</option>
+      <option value="">group_id</option>
+      <option value="">user_id</option>
+      <option value="">title</option>
+      <option value="">body</option>
+      <option value="">created_at</option>
+      <option value="">updated_at</option>
+    </select>
+    <input type="serch" name="" value="">
+    <div class="managers-each-info">
+      <h3>All</h3>
+      <table border="1" class="managers-info-content">
+        <tr>
+          <th>id</th>
+          <th>group_id</th>
+          <th>user_id</th>
+          <th>title</th>
+          <th>body</th>
+          <th>created_at</th>
+          <th>updated_at</th>
+          <th>編集</th>
+        </tr>
+
+        <% @resources.each do |resource| %>
+        <tr>
+          <td><%= resource.id %></td>
+          <td><%= resource.group_id %></td>
+          <td><%= resource.user_id %></td>
+          <td><%= resource.title %></td>
+          <td><%= resource.body %></td>
+          <td><%= resource.created_at %></td>
+          <td><%= resource.updated_at %></td>
+          <td><%= link_to "編集","/managers/resources/#{resource.id}/edit"%></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+
+  </div>
+</div>

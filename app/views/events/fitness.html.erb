@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="wrapper-type-a">
+    <div class="adjustment">
+      <h1>フィットネス</h1>
+      <div class="each-products-wrapper clearfix" >
+        <% @events_fit.each do |event| %>
+        <% estaevent = Estaevent.find_by(event_id: event.id)%>
+        <% @company = Company.find_by(id: event.company_id) %>
+        <% if event.provide == "open" && estaevent != nil && estaevent.review != "" %>
+        <%= link_to("/events/#{event.id}/about") do%>
+        <div class="product">
+          <div class="product-image-wrapper">
+            <%= image_tag "/company_event_images/#{event.image}" ,class: "product-image"%>
+            <div class="count-content">
+              <% if Like.find_by(user_id: @current_user.id, event_id: event.id) %>
+              <%= link_to("/likes/#{event.id}/fitness_destroy", {method: "post"}) do %>
+              <span class="fa fa-heart like-active"></span>
+              <%end%>
+              <% else %>
+              <%= link_to("/likes/#{event.id}/fitness_create", {method: "post"}) do %>
+              <span class="fa fa-heart like-nomal"></span>
+              <%end%>
+              <%end%>
+              <% if Like.find_by(event_id: event.id) %>
+              : <%= Like.where(event_id: event.id).length %>
+              <% else %>
+              <span>: 0</span>
+              <% end %>
+              <i class="fas fa-walking awsome-size"></i>
+              <% if estaevents = Estaevent.where(event_id: event.id) %>
+              <% i = 0 %>
+              <% estaevents.each do |estaevent|%>
+              <% if estaevent.review != "" && estaevent.room_id == "" %>
+              <% i += estaevent.people %>
+              <% end %>
+              <% end %>
+              <span>: </span><%= "#{i}人"%>
+              <% else %>
+              <span>: 0</span>
+              <% end %>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <% end %>
+          <div class="product-content-wrapper">
+            <%= link_to("/events/#{event.id}/about" , class: "color-black" ) do%>
+            <h2><%= event.title %></h2>
+            <p><i class="far fa-fw fa-question-circle"></i> <%= event.genre %></p>
+            <p><i class="fas fa-fw fa-yen-sign"></i> <%= event.bottom_price %>～<%= event.top_price %>円</p>
+            <p><i class="fas fa-fw fa-users"></i> <%= event.bottom_people %>～<%= event.top_people %>人</p>
+            <p><i class="fas fa-fw fa-map-marker"></i> <%= event.place %></p>
+            <p><i class="far fa-fw fa-clock"></i> <%= event.time %></p>
+            <p><i class="far fa-fw fa-calendar-alt"></i> <%= event.day %></p>
+            <p id="company">運営会社 : <%= @company.name %></p>
+          </div>
+        </div>
+        <% end %>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

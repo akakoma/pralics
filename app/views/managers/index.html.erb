@@ -1,0 +1,29 @@
+  <div class="container">
+    <div class="wrapper-type-b">
+      <% if @current_manager%>
+      管理者: <%= @current_manager.name %><br>
+      <%= link_to("ログアウト",'/managers/logout',{method: :post},)%>
+      <%end%>
+      <h1>データベース</h1>
+      <ul class="manager-list">
+        <li><a href="/managers/information">お知らせ</a></li>
+        <li><a href="/managers/contacts">フィードバック</a></li>
+        <li><a href="/managers/new">新規作成</a></li>
+        <li><a href="/managers/users">User</a></li>
+        <li><a href="/managers/groups">Group</a></li>
+        <li><a href="/managers/companies">Company</a></li>
+        <li><a href="/managers/events">Event</a></li>
+        <li><a href="/managers/estaevents">Estaevent</a></li>
+        <li><a href="/managers/managers">Manager</a></li>
+        <li><a href="/managers/attends">Attend</a></li>
+        <li><a href="/managers/likes">Like</a></li>
+        <li><a href="/managers/usersubgroups">Usersubgroup</a></li>
+        <li><a href="/managers/messages">Message</a></li>
+        <li><a href="/managers/appsubgroups">Appsubgroup</a></li>
+        <li><a href="/managers/informations">Information</a></li>
+        <li><a href="/managers/resources">Resource</a></li>
+      </ul>
+
+
+    </div>
+  </div>

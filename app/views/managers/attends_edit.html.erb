@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="managers-info-wrapper">
+    <h1 style="padding-left:10px;">参加編集画面</h1>
+      <h2 style="padding-left:10px;">参加ID: <%= @attend.id %></h2>
+      <h2 style="padding-left:10px;">created_at : <%= @attend.created_at %></h2>
+      <h2 style="padding-left:10px;">updated_at : <%= @attend.updated_at %></h2>
+      <%= form_tag("/managers/attends/#{@attend.id}/update",method: :post,class: "edit-wrapper") do %>
+        <h2>estaevent_id</h2>
+        <input type="text" name="estaevent_id" value="<%= @attend.estaevent_id %>">
+        <h2>user_id</h2>
+        <input type="text" name="user_id" value="<%= @attend.user_id %>">
+        <input type="submit" value="編集">
+      <%end%>
+        <%= link_to "削除","/managers/attends/#{@attend.id}/destroy",method: :post,id: "edit-destroy" %>
+  </div>
+</div>

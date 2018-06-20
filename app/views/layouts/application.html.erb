@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>pralics</title>
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="shortcut icon" type"image/x-icon" href="/assets/icon.ico">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+  </head>
+
+
+  <body>
+    <header class="clearfix">
+      <div class="top-container">
+        <% if @current_company || @current_manage %>
+        <% elsif @current_user %>
+        <% if @top_information %>
+        <div class="top-count-box">
+          <i class="fas fa-cog menu-bar" id="show"></i>
+          <% if  @current_user.user_info != @top_information.length && @current_user.user_info < @top_information.length && @top_information.length - @current_user.user_info > 0 %>
+          <p class="header-counter"><%= @top_information.length - @current_user.user_info %></p>
+          <% end %>
+          <% end %>
+        </div>
+        <% end %>
+        <% if @current_company %>
+          <%= link_to('/companies/index') do %>
+          <div class="logo">
+            pralics
+          </div>
+          <% end %>
+        <% elsif @current_manager %>
+          <%= link_to('/managers') do %>
+          <div class="logo">
+            pralics
+          </div>
+          <% end %>
+        <% elsif @current_user %>
+          <%= link_to('/pralics/index') do %>
+          <div class="logo">
+            pralics
+          </div>
+          <% end %>
+          <% else %>
+          <div class="logo">
+            pralics
+          </div>
+        <% end %>
+        <% if @current_company %>
+          <%= link_to("/companies/#{@current_company.id}/about") do%>
+            <%= image_tag "/company_event_images/#{@current_company.image}", class: 'company-hedder-icon' %>
+            <p class="company-hedder-name"><%= @current_company.name %></p>
+          <% end %>
+        <% elsif @current_manager %>
+          <p class="manager-hedder-name">管理者 : <%= @current_manager.name %></p>
+        <% elsif @current_user %>
+        <%= link_to("/users/#{@current_user.id}/info",class:"user-info clearfix") do %>
+            <%= image_tag "/user_images/#{@current_user.image}", class: 'user-icon' %>
+            <p class="current-user-name"><%= @current_user.user_id %></p>
+            <% end %>
+          </div>
+        <% end %>
+    </div>
+
+<div id="cover"></div>
+
+  <div id="hide-menu">
+    <i class="fa fa-times" id="hide"></i>
+    <% if @current_user %>
+    <%= link_to("/users/#{@current_user.id}/info") do %>
+    <div class="hide-user-info">
+      <%= image_tag "/user_images/#{@current_user.image}",class: 'user-icon' %>
+      <p><%= @current_user.user_id%></p>
+    </div>
+    <% end %>
+    <% end %>
+    <ul>
+      <% if @current_user %>
+      <%=link_to 'ユーザー情報',"/users/#{@current_user.id}/info",class: 'hide-menu-link'%>
+      <% end %>
+      <% if @current_user %>
+      <% if @current_user.organizer_id %>
+      <%=link_to 'イベントを企画する',"/events/#{@current_user.organizer_id}/make_event",class: 'hide-menu-link'%>
+      <% else %>
+      <%=link_to '主催者になる',"/users/#{@current_user.id}/organizer",class: 'hide-menu-link'%>
+      <% end %>
+      <% end %>
+      <%=link_to '企業一覧','/companies/list',class: 'hide-menu-link'%>
+      <div class='count-box'>
+        <%=link_to 'お知らせ','/users/informations',class: 'hide-menu-link'%>
+        <% if @top_information %>
+          <% if  @current_user.user_info != @top_information.length && @current_user.user_info < @top_information.length && @top_information.length - @current_user.user_info > 0 %>
+          <p class="user-right-info-count"><%= @top_information.length - @current_user.user_info %></p>
+          <% end %>
+        <% end %>
+      </div>
+      <%=link_to 'フィードバック','/contacts',class: 'hide-menu-link'%>
+      <li id='logout-open' class="hide-menu-link">ログアウト</li>
+    </ul>
+  </div>
+
+  <div id="mask" class="hidden"></div>
+
+  <div id="logout-wrapper" class="hidden">
+    <h2>ログアウト</h2>
+    <h3>ログアウトしますか？</h3>
+    <p>※再度ログインをするためには、<br>ログインフォームからの入力が必要となります。</p>
+    <div id='logout' class="hover">
+      <%= link_to("ログアウト",'/logout',{method: :post})%>
+    </div>
+    <div id="cancel" class="hover">
+      キャンセル
+    </div>
+  </div>
+
+
+    </header>
+
+    <%= yield %>
+    <script type="text/javascript">
+      (function(){
+        'use strict';
+
+        var show = document.getElementById('show');
+        var hide = document.getElementById('hide');
+        var cover = document.getElementById('cover');
+        var logoutOpen = document.getElementById('logout-open');
+        var logoutWrapper = document.getElementById('logout-wrapper');
+        var cancel = document.getElementById('cancel');
+        var mask = document.getElementById('mask');
+
+
+        show.addEventListener('click',function(){
+          document.body.className = 'menu-open';
+        });
+
+        hide.addEventListener('click',function(){
+          document.body.className = '';
+        });
+
+        cover.addEventListener('click',function(){
+          document.body.className = '';
+        });
+
+        logoutOpen.addEventListener('click',function(){
+          logoutWrapper.className = '';
+          mask.className = '';
+        });
+
+        cancel.addEventListener('click',function(){
+          logoutWrapper.className = 'hidden';
+          mask.className = 'hidden';
+        });
+
+        mask.addEventListener('click',function(){
+          logoutWrapper.className = 'hidden';
+          mask.className = 'hidden';
+        });
+
+      })();
+    </script>
+  </body>
+</html>

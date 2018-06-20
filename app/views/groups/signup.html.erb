@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="wrapper-type-a" id="center">
+    <div class="into-content">
+      <h2>団体作成</h2>
+      <div class="into-form">
+        <% @group.errors.full_messages.each do |message| %>
+          <div class="errors-message">
+            ※<%= message %>
+          </div>
+        <%end%>
+        <%= form_tag('/groups/create',{multipart: true,class:'signup-form'}) do %>
+          <h3>画像</h3>
+            <label class="image-label-c">
+              <img src="no-image.jpg" alt="" class="signup-image-box">
+              <i class="fas fa-camera signup-camera hover"></i>
+              <input type="file" name="image" class="message-image-file">
+            </label>
+          <h3>団体名</h3>
+            <input type="text" name="name" value="<%= @group.name %>">
+          <h3>団体のジャンル</h3>
+          <select class="make-event-select"  name="genre">
+            <option selected>選択してください</option>
+            <option value="パーティー">パーティー</option>
+            <option value="旅行">旅行</option>
+            <option value="フィットネス">フィットネス</option>
+            <option value="セミナー">セミナー</option>
+            <option value="オールラウンド">オールラウンド</option>
+            <option value="その他">その他</option>
+          </select>
+          <h3>団体カテゴリー</h3>
+            <input type="text" name="group_type" placeholder="例) 学生サークル・スポーツチーム etc." value="<%= @group.group_type %>">
+          <h3>加入パスワード</h3>
+            <input type="text" name="sub_password" placeholder="団体加入の際に利用するパスワードです" value="<%= @group.sub_password %>">
+          <h3>管理者パスワード</h3>
+          <input type="text" name="mana_password" placeholder="団体の管理に利用するパスワードです" value="<%= @group.mana_password %>">
+          <input type="submit" name="" value="新規登録" class="into-btn hover">
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  $(document).on('turbolinks:load', function(){
+
+    var setFileInput = $('.image-label-c'),
+    setFileImg = $('.signup-image-box');
+
+    setFileInput.each(function(){
+        var selfFile = $(this),
+        selfInput = $(this).find('input[type=file]'),
+        prevElm = selfFile.find(setFileImg),
+        orgPass = prevElm.attr('src');
+
+        selfInput.change(function(){
+            var file = $(this).prop('files')[0],
+            fileRdr = new FileReader();
+
+            if (!this.files.length){
+                prevElm.attr('src', orgPass);
+                return;
+            } else {
+                if (!file.type.match('image.*')){
+                    prevElm.attr('src', orgPass);
+                    return;
+                } else {
+                    fileRdr.onload = function() {
+                        prevElm.attr('src', fileRdr.result);
+                    }
+                    fileRdr.readAsDataURL(file);
+                }
+            }
+        });
+    });
+  });
+</script>

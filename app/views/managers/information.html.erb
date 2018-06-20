@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="managers-info-wrapper">
+    <h1 style="padding-left:10px;">お問い合わせ</h1>
+      <%= form_tag("/managers/information_create",{multipart: true,class: "edit-wrapper"}) do %>
+        <h2>対象ユーザー(0で全体)</h2>
+        <input type="text" name="user_id" value="">
+        <h2>対象団体(0で全体)</h2>
+        <input type="text" name="group_id" value="">
+        <h2>対象企業(0で全体)</h2>
+        <input type="text" name="company_id" value="">
+        <h2>タイトル</h2>
+        <input type="text" name="title" value="">
+        <h2>画像</h2>
+        <input type="file" name="image" value="">
+        <h2>内容</h2>
+        <textarea name="body" rows="8" cols="80"></textarea>
+        <input type="submit" value="送信">
+      <%end%>
+  </div>
+</div>

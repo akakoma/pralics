@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="wrapper-type-a">
+    <div class="adjustment clearfix">
+      <%=link_to("投稿する","/groups/#{@group.id}/resource_form",class: "add-resource-btn hover")%>
+      <h1>リソース共有</h1>
+      <% @resources.each do |r| %>
+        <% if r.group_id == @group.id || r.group_id == 0 %>
+          <% user = User.find_by(id: r.user_id)%>
+          <div class="resource-wrapper clearfix">
+            <div class="resource-title clearfix">
+              <%= image_tag("/user_images/#{user.image}",class:"resource-user-image")%>
+              <h2><%= r.title %></h2>
+            </div>
+            <div class="resource-content">
+              <%= simple_format(r.body)%>
+            </div>
+            <div class="resource-others">
+              <p>...</p>
+              <%= link_to('詳細はこちら',"/groups/#{r.id}/resource_about",class:' hover')%>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

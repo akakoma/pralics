@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="managers-info-wrapper">
+    <h1 style="padding-left:10px;">団体加入申請編集画面</h1>
+      <h2 style="padding-left:10px;">団体加入申請ID: <%= @appsubgroup.id %></h2>
+      <h2 style="padding-left:10px;">created_at : <%= @appsubgroup.created_at %></h2>
+      <h2 style="padding-left:10px;">updated_at : <%= @appsubgroup.updated_at %></h2>
+      <%= form_tag("/managers/appsubgroups/#{@appsubgroup.id}/update",method: :post,class: "edit-wrapper") do %>
+        <h2>group_id</h2>
+        <input type="text" name="group_id" value="<%= @appsubgroup.group_id %>">
+        <h2>user_id</h2>
+        <input type="text" name="user_id" value="<%= @appsubgroup.user_id %>">
+        <input type="submit" value="編集">
+      <%end%>
+        <%= link_to "削除","/managers/appsubgroups/#{@appsubgroup.id}/destroy",method: :post,id: "edit-destroy" %>
+  </div>
+</div>

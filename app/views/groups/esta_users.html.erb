@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="wrapper-type-a">
+    <div class="adjustment">
+      <h1>参加ユーザー一覧</h1>
+      <% @attends.each do |attend| %>
+      <% user = User.find_by(id: attend.user_id)%>
+      <%= link_to("/users/#{user.id}/info") do %>
+        <div class="each-attend-user clearfix  hover">
+          <%= image_tag "/user_images/#{user.image}",class:"each-esta-users-image"%>
+          <p><%= user.name%></p>
+        </div>
+      <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

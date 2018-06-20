@@ -1,0 +1,187 @@
+<div class="container">
+  <div class="wrapper-type-a">
+    <div class="account-wrapper  clearfix">
+      <div class="account-content clearfix">
+        <% if @current_user && @user == @current_user %>
+        <%= link_to("/users/#{@user.id}/user_id_edit") do %>
+        <h1 class="content-user-id  hover"><%= @user.user_id %><i class="fas fa-edit" style="color:#0086AD;font-size:14px;"></h1></i>
+        <% end %>
+        <% else %>
+        <h1 class="content-user-id"><%= @user.user_id %></h1>
+        <% end %>
+        <% if @user == @current_user %>
+        <%= link_to("/users/#{@current_user.id}/image_edit") do %>
+        <div class="box hover">
+          <%= image_tag "/user_images/#{@user.image}",class:"account-image"%>
+          <i class="fas fa-camera camera-position"></i>
+        </div>
+        <% end %>
+        <% else %>
+          <%= link_to("/users/#{@user.id}/image") do %>
+            <%= image_tag "/user_images/#{@user.image}",class:"account-image hover"%>
+          <% end %>
+        <% end %>
+      </div>
+    <div class="profile">
+      <% if @current_user && @user.id == @current_user.id %>
+        <p style="color:#f26651;">[ <%= @user.name %> ]</p>
+        <p><i class="fas fa-envelope"></i> <span class="user-info-det"><%= @user.email %></span> </p><%= link_to "メールアドレスを変更する","/users/#{@current_user.id}/email_edit",class:' hover skyblue'%>
+        <p><i class="fas fa-unlock"></i> <span class="user-info-det"></span> </p><%= link_to "パスワードを変更する","/users/#{@current_user.id}/password_edit",class:' hover skyblue'%>
+        <p id="user-destroy-btn" style="cursor:pointer;" class="hover">アカウントを削除する</p>
+      <% end %>
+      <p>加入団体数 : <%= Usersubgroup.where(user_id: @user.id).length %></p>
+      <p>参加イベント数 : <%= Attend.where(user_id: @user.id).length %></p>
+      <% if @user.organizer_id == nil %>
+      <p>タイプ : ノーマルユーザー</p>
+      <% else %>
+      <p>タイプ : 主催者ユーザー</p>
+      <p>イベント所持数 : <%= Event.where(organizer_id: @user.organizer_id).length %></p>
+    </div>
+    <div class="clear"></div>
+  </div>
+
+  <div class="user-info-estaevent">
+    <h1>主催しているイベント</h1><%if @user == @current_user%><%= link_to('イベントを作成する',"/events/#{@current_user.organizer_id}/make_event",class:'hover') %> <%end%>
+  </div>
+    <% @events.each do |event| %>
+    <% estaevent = Estaevent.find_by(event_id: event.id)%>
+    <% @company = Company.find_by(id: event.company_id) %>
+    <% if @current_user == @user && event.permission == 'ok' || event.provide == 'open' && estaevent != nil && estaevent.review != nil && event.permission == 'ok'  %>
+    <% if @current_user %>
+    <%= link_to("/events/#{event.id}/about") do%>
+    <div class="product">
+      <div class="product-image-wrapper">
+        <%= image_tag "/company_event_images/#{event.image}" ,class: "product-image"%>
+        <div class="count-content">
+          <% if @current_user && Like.find_by(user_id: @current_user.id, event_id: event.id) %>
+          <%= link_to("/users/likes/#{event.id}/destroy", {method: "post"}) do %>
+          <span class="fa fa-heart like-active"></span>
+          <%end%>
+          <% else %>
+          <%= link_to("/users/likes/#{event.id}/create", {method: "post"}) do %>
+          <span class="fa fa-heart like-nomal"></span>
+          <%end%>
+          <%end%>
+          <% if Like.find_by(event_id: event.id) %>
+          : <%= Like.where(event_id: event.id).length %>
+          <% else %>
+          <span>: 0</span>
+          <% end %>
+          <i class="fas fa-walking awsome-size"></i>
+          <% if @estaevents = Estaevent.where(event_id: event.id) %>
+          <% i = 0 %>
+          <% @estaevents.each do |estaevent|%>
+          <% if estaevent.review != "" && estaevent.room_id == "" %>
+            <% i += estaevent.people %>
+          <% end %>
+          <% end %>
+          <span>: </span><%= "#{i}人"%>
+          <% else %>
+          <span>: 0</span>
+          <% end %>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <% end %>
+      <% else%>
+      <div class="product">
+        <div class="product-image-wrapper">
+          <%= image_tag "/company_event_images/#{event.image}" ,class: "product-image"%>
+          <div class="count-content">
+            <% if @current_user && Like.find_by(user_id: @current_user.id, event_id: event.id) %>
+            <%= link_to("/users/likes/#{event.id}/destroy", {method: "post"}) do %>
+            <span class="fa fa-heart like-active"></span>
+            <%end%>
+            <% else %>
+            <%= link_to("/users/likes/#{event.id}/create", {method: "post"}) do %>
+            <span class="fa fa-heart like-nomal"></span>
+            <%end%>
+            <%end%>
+            <% if Like.find_by(event_id: event.id) %>
+            : <%= Like.where(event_id: event.id).length %>
+            <% else %>
+            <span>: 0</span>
+            <% end %>
+            <i class="fas fa-walking awsome-size"></i>
+            <% if @estaevents = Estaevent.where(event_id: event.id) %>
+            <% i = 0 %>
+            <% @estaevents.each do |estaevent|%>
+            <% if estaevent.review != "" && estaevent.room_id == "" %>
+              <% i += estaevent.people %>
+            <% end %>
+            <% end %>
+            <span>: </span><%= "#{i}人"%>
+            <% else %>
+            <span>: 0</span>
+            <% end %>
+          </div>
+          <div class="clear"></div>
+        </div>
+      <% end %>
+      <% if @current_user %>
+      <div class="product-content-wrapper">
+        <%= link_to("/events/#{event.id}/about" , class: "color-black" ) do%>
+        <h2><%= event.title %></h2>
+        <% if estaevent == nil || estaevent.review == nil %>
+        <p class="organizer-alarm">団体でイベントを開催してください</p>
+        <% end %>
+        <p><i class="far fa-fw fa-question-circle"></i> <%= event.genre %></p>
+        <p><i class="fas fa-fw fa-yen-sign"></i> <%= event.bottom_price %>～<%= event.top_price %>円</p>
+        <p><i class="fas fa-fw fa-users"></i> <%= event.bottom_people %>～<%= event.top_people %>人</p>
+        <p><i class="fas fa-fw fa-map-marker"></i> <%= event.place %></p>
+        <p><i class="far fa-fw fa-clock"></i> <%= event.time %></p>
+        <p><i class="far fa-fw fa-calendar-alt"></i> <%= event.day %></p>
+        <p id="company">運営会社 : <%= @company.name %></p>
+        <% end %>
+      </div>
+      <% else %>
+      <div class="product-content-wrapper">
+        <h2><%= event.title %></h2>
+        <% if estaevent == nil || estaevent.review == nil %>
+        <p class="organizer-alarm">団体でイベントを開催してください</p>
+        <% end %>
+        <p><i class="far fa-fw fa-question-circle"></i> <%= event.genre %></p>
+        <p><i class="fas fa-fw fa-yen-sign"></i> <%= event.bottom_price %>～<%= event.top_price %>円</p>
+        <p><i class="fas fa-fw fa-users"></i> <%= event.bottom_people %>～<%= event.top_people %>人</p>
+        <p><i class="fas fa-fw fa-map-marker"></i> <%= event.place %></p>
+        <p><i class="far fa-fw fa-clock"></i> <%= event.time %></p>
+        <p><i class="far fa-fw fa-calendar-alt"></i> <%= event.day %></p>
+        <p id="company">運営会社 : <%= @company.name %></p>
+      </div>
+    </div>
+    <% end %>
+    <% end %>
+    <% end %>
+      <% end %>
+  </div>
+</div>
+
+<div id="mask" class="content"></div>
+<div class="group-destroy-wrapper content">
+  <h1>本当にアカウントを削除しますか？</h1>
+  <p>※一度削除すると、ユーザー情報の復元はできません。</p>
+  <%= link_to("削除します","/users/#{@user.id}/account_destroy",{method: :post,class:"decide-destroy-btn hover"})%><span class="destroy-cancel-btn hover">キャンセル</span>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).on('turbolinks:load', function(){
+    $('#user-destroy-btn').click(function(){
+      $('.group-destroy-wrapper').show();
+      $('#mask').show();
+    });
+
+    $('#mask').click(function(){
+      $('.group-destroy-wrapper').hide();
+      $('#mask').hide();
+    });
+
+    $('.destroy-cancel-btn').click(function(){
+      $('.group-destroy-wrapper').hide();
+      $('#mask').hide();
+    });
+
+
+});
+</script>

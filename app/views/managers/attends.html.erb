@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="managers-info-wrapper">
+    <h1>参加情報</h1>
+    <h2>参加総数 : <%= @attends.length %></h2>
+
+    <select class="" name="">
+      <option value="">id</option>
+      <option value="">estaevent_id</option>
+      <option value="">user_id</option>
+      <option value="">created_at</option>
+      <option value="">updated_at</option>
+    </select>
+    <input type="serch" name="" value="">
+    <div class="managers-each-info">
+      <h3>All</h3>
+      <table border="1" class="managers-info-content">
+        <tr>
+          <th>id</th>
+          <th>estaevent_id</th>
+          <th>user_id</th>
+          <th>created_at</th>
+          <th>updated_at</th>
+          <th>編集</th>
+        </tr>
+
+        <% @attends.each do |attend| %>
+        <tr>
+          <td><%= attend.id %></td>
+          <td><%= attend.estaevent_id %></td>
+          <td><%= attend.user_id %></td>
+          <td><%= attend.created_at %></td>
+          <td><%= attend.updated_at %></td>
+          <td><%= link_to "編集","/managers/attends/#{attend.id}/edit"%></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+
+  </div>
+</div>

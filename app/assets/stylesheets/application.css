@@ -1,0 +1,568 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+/* common */
+
+body{
+  font-family: Verdana,sans-serif;
+  padding: 0;
+  margin: 0;
+  background-color: #FFF;
+  font-size: 14px;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  cursor: default;
+}
+
+li{
+  list-style: none;
+
+}
+
+a{
+  text-decoration: none;
+}
+
+p{
+  margin: 0;
+  padding: 0;
+}
+
+.container{
+  width: 90%;
+  margin: 0 auto;
+}
+
+.content{
+  display: none;
+}
+
+.active{
+  display: block;
+}
+
+.wrapper-type-a{
+  width: 100%;
+  background-color:#fff;
+  padding: 50px 0 10px;
+  border-radius: 5px;
+}
+
+.wrapper-type-b{
+  width: 100%;
+  background-color:#fff;
+  margin: 80px 0 20px;
+  border-radius: 5px;
+}
+
+.wrapper-type-a>h1{
+
+}
+
+.wrapper-type-b>h1{
+  font-size: 24px;
+  border-bottom: 1px solid #eee;
+  cursor: default;
+  width: 80%;
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px 0;
+  color: #444;
+}
+
+#center{
+  text-align: center;
+}
+
+
+.clearfix:after{
+  content: "";
+  clear: both;
+  display: block;
+}
+
+.hover{
+  cursor: pointer;
+}
+
+.hover:hover{
+  opacity: 0.65;
+}
+  /* 申請系form */
+  .form-content{
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .form-content>h2{
+    border-bottom: 1px solid red;
+    font-size: 18px;
+    margin-top: 30px;
+  }
+
+  .form-content>h3{
+    text-align: center;
+    color: #888;
+  }
+
+  .form-img{
+    width: 100%;
+    border: 3px solid #444;
+    border-radius: 5px;
+  }
+
+  .each-form{
+    margin: 20px;
+  }
+
+
+  .each-form>h3{
+    color:#333;
+    margin: 20px 0 5px;
+    font-size: 18px;
+    padding: 0;
+  }
+
+  .each-form>p{
+    margin: 0 ;
+    padding: 5px 0 0;
+  }
+
+
+  .each-form>input,select{
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #eee;
+    padding: 5px 0;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+
+  .each-form>input:last-child{
+    border-radius: 5px;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+
+  .each-form>input:focus{
+    outline: none;
+    border-color: orange;
+  }
+
+  .each-form>select:focus{
+    outline: none;
+  }
+
+
+  .each-form>textarea{
+    width: 100%;
+    height: 80px;
+    margin: 10px 0;
+    font-family: Verdana,sans-serif;
+    border:  1px solid #eee;
+    border-radius: 5px;
+    resize: none;
+    padding: 5px;
+  }
+
+  .each-form>textarea:focus{
+    outline: none;
+    border-color: orange;
+  }
+  /* 申請系form */
+
+  /* ログイン系フォーム */
+  .into-content{
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 30px 0;
+  }
+
+  .into-content h2{
+    padding-bottom: 20px;
+    border-bottom: 1px solid #777;
+    margin: 0;
+  }
+
+  .into-form h3{
+    text-align: left;
+    margin: 15px 0;
+    color:#333;
+    margin: 20px 0 5px;
+    font-size: 18px;
+  }
+
+  .into-form input{
+    width: 100%;
+    border: none;
+
+    padding: 5px;
+    font-size: 14px;
+  }
+
+  .into-form input:not(:last-child){
+    border-bottom: 1px solid #eee;
+  }
+
+.into-form input:last-child{
+  margin-top: 30px;
+}
+
+
+  .into-form input:focus{
+    outline: none;
+    border-color: orange;
+  }
+
+  .into-btn{
+    margin:20px auto 0;
+    color:white;
+    background-color: #333;
+    border-style: none;
+    padding: 5px 0;
+    border-radius: 5px;
+    width: 100%;
+    display: inline-block;
+  }
+
+  .sex{
+    text-align:left;
+
+  }
+
+  .sex>input{
+    width: auto;
+    margin-left: 5%;
+  }
+
+
+
+  /* ログイン系フォーム */
+
+.terms-service,.policy{
+    text-align: left;
+    border: 1px solid #eee;
+    width: 100%;
+    height: 200px;
+    overflow-y: scroll;
+    border-radius: 3px;
+
+}
+
+.footer{
+width: 100%;
+background-color: #bbb;
+position: fixed;
+bottom: 0;
+text-align: center;
+height: 24px;
+line-height: 24px;
+color:#eee;
+cursor: default;
+}
+
+
+/* application */
+/* header */
+header{
+  background-image: linear-gradient(-90deg, #E04024, #FF816B);
+  position: relative;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-shadow: 0px 2px 1px 0px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0px 2px 1px 0px rgba(0,0,0,0.1);
+  -moz-box-shadow: 0px 2px 1px 0px rgba(0,0,0,0.1);
+  height: 48px;
+  z-index: 2;
+}
+
+.top-container{
+  width: 90%;
+  margin: 0 auto;
+}
+
+.logo{
+  color: #fff;
+  line-height: 48px;
+  font-size: 24px;
+  cursor: default;
+  display: inline-block;
+  float:left;
+}
+
+.manager-hedder-name{
+  float: left;
+  line-height: 48px;
+  color: white;
+  margin-left: 20px;
+  cursor: default;
+}
+
+
+.company-hedder-name{
+  color: #fff;
+  cursor: default;
+  float: left;
+  margin: 0;
+  line-height: 48px;
+}
+
+.company-hedder-icon{
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  float: left;
+  margin: 7px 7px 7px 20px;
+}
+
+.user-info{
+  display: inline-block;
+  padding: 7px 10px;
+}
+.user-info>p{
+  float: left;
+  color: #fff;
+  margin: 0;
+  line-height: 34px;
+  padding-left: 10px;
+  cursor: default;
+}
+
+.user-icon{
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  float:left;
+  border: 1px solid #fff;
+}
+
+.top-count-box{
+position:relative;
+float: right;
+}
+
+.menu-bar{
+  float: right;
+  font-size: 24px;
+  padding: 13.5px 0;
+  cursor: pointer;
+}
+
+.header-counter{
+  position: absolute;
+  top: 5px;
+  left: -10px;
+  background-color: red;
+  color: #fff;
+  width: 15px;
+  height: 15px;
+  text-align: center;
+  line-height: 15px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  font-size: 10px;
+}
+
+#hide-menu{
+  position: absolute;
+  top:0;
+  right: -250px;
+  position: fixed;
+  color: #fff;
+  background: #444;
+  padding: 8px;
+  box-sizing: border-box;
+  width: 250px;
+  min-height: 100%;
+  z-index: 2;
+  transition: 0.4s;
+}
+
+.hide-menu-link{
+  display: block;
+  font-size: 16px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  color: white;
+}
+
+.hide-menu-link:hover{
+  color: orange;
+}
+
+.hide-user-info{
+  margin: 20px 10px;
+  border-bottom: 1px solid #777;
+  padding-bottom: 10px;
+}
+
+.hide-user-info>.user-icon{
+  width: 50px;
+  height: 50px;
+}
+
+.hide-user-info>p{
+  margin: 0 10px;
+  line-height: 52px;
+  display: inline-block;
+  font-size: 18px;
+  cursor: default;
+  color: #fff;
+}
+
+#hide{
+  float: right;
+  cursor: pointer;
+  margin: 5px;
+}
+
+#cover{
+  position: absolute;
+  top:0;
+  right: 0px;
+  position: fixed;
+  background: #000;
+  opacity: 0.6;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: 1;
+  display: none;
+}
+
+body.menu-open #cover{
+  display: block;
+}
+
+body.menu-open #hide-menu{
+  right: 0px;
+}
+
+#mask{
+  position: absolute;
+  top:0;
+  right: 0px;
+  position: fixed;
+  background: #000;
+  opacity: 0.7;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: 3;
+}
+
+#logout-wrapper{
+  background-color: #fff;
+  z-index: 4;
+  width: 70%;
+  margin: 0 auto;
+  border-radius: 5px;
+  position: absolute;
+  top:40px;
+  right: 0;
+  left: 0;
+  margin-top: 100px;
+  padding: 15px;
+  text-align: center;
+}
+
+#logout-wrapper>h2{
+  border-bottom: 1px solid #eee;
+  cursor: default;
+}
+
+#logout-wrapper>p,h3{
+  cursor: default;
+}
+
+#logout-wrapper>p{
+  color: #aaa;
+}
+
+#logout,#cancel,#add,#not,#search-cancel{
+  cursor: pointer;
+  width: 70%;
+  margin: 0 auto;
+  background-color: #777;
+  color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 12px;
+  padding: 3px 0;
+}
+
+#logout>a{
+  color: #fff;
+}
+
+#cancel,#not{
+  background-color: #333;
+}
+
+.hidden{
+  display: none;
+}
+
+.errors-message{
+  color:red;
+  padding-top: 10px;
+  text-align: center;
+}
+
+
+#file{
+  font-size: 12px;
+  padding-top: 5px;
+  border: none;
+}
+
+.adjustment{
+  margin-top: -40px;
+}
+
+@media (max-width:800px){
+  .adjustment{
+    margin-top: 0px;
+    margin-bottom: -60px;
+  }
+
+  .top-count-box{
+    display: none;
+  }
+}
+
+
+@media (max-width:640px){
+  body{
+    background-color: #fff;
+  }
+  .wrapper-type-b{
+    padding: 50px 0 10px;
+    margin: 0;
+  }
+
+  .current-user-name{
+    display: none;
+    cursor: default;
+  }
+
+  .into-content{
+    margin: 0;
+    width: 100%;
+  }
+
+}

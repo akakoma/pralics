@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="managers-info-wrapper">
+    <h1>ユーザー団体加入情報</h1>
+    <h2>ユーザー団体加入総数 : <%= @usersubgroups.length %></h2>
+
+    <select class="" name="">
+      <option value="">id</option>
+      <option value="">group_id</option>
+      <option value="">user_id</option>
+      <option value="">group_info</option>
+      <option value="">created_at</option>
+      <option value="">updated_at</option>
+    </select>
+    <input type="serch" name="" value="">
+    <div class="managers-each-info">
+      <h3>All</h3>
+      <table border="1" class="managers-info-content">
+        <tr>
+          <th>id</th>
+          <th>group_id</th>
+          <th>user_id</th>
+          <th>group_info</th>
+          <th>created_at</th>
+          <th>updated_at</th>
+          <th>編集</th>
+        </tr>
+
+        <% @usersubgroups.each do |usersubgroup| %>
+        <tr>
+          <td><%= usersubgroup.id %></td>
+          <td><%= usersubgroup.group_id %></td>
+          <td><%= usersubgroup.user_id %></td>
+          <td><%= usersubgroup.group_info %></td>
+          <td><%= usersubgroup.created_at %></td>
+          <td><%= usersubgroup.updated_at %></td>
+          <td><%= link_to "編集","/managers/usersubgroups/#{usersubgroup.id}/edit"%></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+
+  </div>
+</div>

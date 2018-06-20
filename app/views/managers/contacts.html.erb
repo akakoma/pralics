@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="wrapper-type-a">
+    <h1>フィードバック一覧</h1>
+    <h2>未回答</h2>
+      <% @contacts.each do |contact| %>
+        <% if contact.reply == 'not' %>
+        <% if contact.title == "主催者申請" %>
+          <div class="each-contact">
+            <p style="color:red;"><%= contact.id %>. <%= contact.title %></p>
+            <p><i class="fas fa-fw fa-users"></i>: <%= contact.name%></p>
+            <p><i class="fas fa-fw fa-envelope-square"></i>: <%= contact.email%></p>
+            <%= link_to('詳細',"/managers/contacts/#{contact.id}/about")%>
+          </div>
+        <% else %>
+          <div class="each-contact">
+            <p><%= contact.id %>. <%= contact.title %></p>
+            <p><i class="fas fa-fw fa-users"></i>: <%= contact.name%></p>
+            <p><i class="fas fa-fw fa-envelope-square"></i>: <%= contact.email%></p>
+            <%= link_to('詳細',"/managers/contacts/#{contact.id}/about")%>
+          </div>
+        <% end %>
+        <% end %>
+      <% end %>
+    <h2>回答済み</h2>
+      <% @contacts.each do |contact| %>
+        <% if contact.reply == 'ok' %>
+        <div class="each-contact">
+          <p><%= contact.id %>. <%= contact.title %></p>
+          <p><i class="fas fa-fw fa-users"></i>: <%= contact.name%></p>
+          <p><i class="fas fa-fw fa-envelope-square"></i>: <%= contact.email%></p>
+          <%= link_to('詳細',"/managers/contacts/#{contact.id}/about")%>
+        </div>
+        <% end %>
+      <% end %>
+  </div>
+</div>

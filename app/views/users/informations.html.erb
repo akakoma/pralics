@@ -1,0 +1,82 @@
+<div class="information-container">
+  <div class="wrapper-type-a">
+    <h1>お知らせ</h1>
+    <ul class="information-menu-wrapper">
+      <li class="information-menu click" data-id='user'><%= @current_user.user_id %>さんへのお知らせ</li>
+      <li class="information-menu" data-id='all'>運営からのお知らせ</li>
+    </ul>
+    <div class="information-wrapper">
+      <div class="content active" id="user">
+        <h2><%= @current_user.user_id %>さんへのお知らせ</h2>
+        <% @informations.each do |information| %>
+        <% if information.user_id == @current_user.id %>
+        <%= link_to("/users/#{information.id}/information_about",class: "black") do %>
+        <div class="each-information-wrapper">
+          <h3 class="information-title"><%= information.title %></h3>
+          <p class="day"><%= information.created_at.strftime('%Y/%m/%d') %></p>
+          <% if information.image %>
+          <%= image_tag("/information_images/#{information.image}",class: 'information-image')%>
+          <% end %>
+          <% if information.body %>
+          <%= simple_format(information.body)%>
+          <% end %>
+        </div>
+        <% end %>
+        <% end %>
+        <% end %>
+      </div>
+      <div class="content" id="all">
+        <h2>運営からのお知らせ</h2>
+        <% @informations.each do |information| %>
+        <% if information.user_id == 0 %>
+        <%= link_to("/users/#{information.id}/information_about",class: "black") do %>
+        <div class="each-information-wrapper">
+          <h3 class="information-title"><%= information.title %></h3>
+          <p class="day"><%= information.created_at.strftime('%Y/%m/%d') %></p>
+          <% if information.image %>
+          <%= image_tag("/information_images/#{information.image}",class: 'information-image')%>
+          <% end %>
+          <% if information.body %>
+          <%= simple_format(information.body)%>
+          <% end %>
+        </div>
+        <% end %>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  (function(){
+    'use strict';
+
+    var informationMenu = document.getElementsByClassName('information-menu');
+    var contents = document.getElementsByClassName('content');
+
+    var i;
+    for(i = 0; i < informationMenu.length; i++){
+      informationMenu[i].addEventListener('click',function(e){
+        e.preventDefault();
+
+        var i;
+        for(i = 0; i < informationMenu.length; i++){
+          informationMenu[i].className = 'information-menu';
+        }
+
+        this.className = 'information-menu click';
+
+        var i;
+        for(i = 0; i < contents.length; i++){
+          contents[i].className = 'content';
+        }
+
+        document.getElementById(this.dataset.id).className = 'content active';
+
+      });
+    }
+  })();
+</script>

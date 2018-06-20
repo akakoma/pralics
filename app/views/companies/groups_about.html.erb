@@ -1,0 +1,222 @@
+<%= image_tag("/group_images/#{@group.image}",class: "group-about-image")%>
+
+<div class="bg"></div>
+
+
+<div class="group-about-top">
+  <div class="group-about-top-wrapper">
+    <h1><%= @group.name %></h1>
+    <% if Estaevent.where(group_id: @group.id) %>
+      <p><i class="fas fa-users"></i> : <%= @usersubgroups.length%> <i class="fas fa-certificate"></i> : <%= Estaevent.where(group_id: @group.id).length%></p>
+    <% else %>
+    <p><i class="fas fa-users"></i> : <%= @usersubgroups.length%> <i class="fas fa-certificate"></i> : 0</p>
+    <% end %>
+  </div>
+</div>
+
+
+  <div class="group-about-left">
+      <%= image_tag("/group_images/#{@group.image}",class: "group-det-image")%>
+    <div class="group-about-left-content">
+      <p>団体名 : <%= @group.name %></p>
+      <p>団体のジャンル : <%= @group.genre %></p>
+    </div>
+  </div>
+
+  <div class="group-about-center">
+    <div class="grup-about-estaevent">
+      <div class="group-about-will-event clearfix">
+        <h1>開催予定イベント</h1>
+        <% @estaevents.each do |estaevent| %>
+        <% attends = Attend.where(estaevent_id: estaevent.id)%>
+        <% attend = Attend.find_by(estaevent_id: estaevent.id)%>
+        <% if estaevent  && attend != nil && estaevent.room_id != nil && estaevent.review == nil %>
+        <% event = Event.find_by(id: estaevent.event_id)%>
+        <%= link_to("/groups/#{estaevent.id}/esta_attend", class: "black ") do %>
+        <div class="group-esta-product clearfix">
+          <h2><%= estaevent.title %></h2>
+          <div class="esta-product-image-wrapper">
+            <%= image_tag "/company_event_images/#{estaevent.image}" ,class: "esta-product-image"%>
+          </div>
+          <div class="esta-product-content-wrapper">
+            <h3>【詳細】</h3>
+              <% if estaevent.genre != '' %>
+                <p><i class="far fa-fw fa-question-circle"></i> <%= estaevent.genre %></p>
+              <% else %>
+                <p><i class="far fa-fw fa-question-circle"></i> 未定</p>
+              <% end %>
+              <% if estaevent.price != '' %>
+                <p><i class="fas fa-fw fa-yen-sign"></i> <%= estaevent.price %>円</p>
+              <% else %>
+                <p><i class="fas fa-fw fa-yen-sign"></i> 未定</p>
+              <% end %>
+              <% if estaevent.place != '' %>
+                <p><i class="fas fa-fw fa-map-marker"></i> <%= estaevent.place %></p>
+              <% else %>
+                <p><i class="fas fa-fw fa-map-marker"></i> 未定</p>
+              <% end %>
+              <% if estaevent.time != '' %>
+                <p><i class="far fa-fw fa-clock"></i> <%= estaevent.time %></p>
+              <% else %>
+                <p><i class="far fa-fw fa-clock"></i> 未定</p>
+              <% end %>
+              <% if estaevent.day != '' %>
+                <p><i class="far fa-fw fa-calendar-alt"></i> <%= estaevent.day %></p>
+              <% else %>
+                <p><i class="far fa-fw fa-calendar-alt"></i> 未定</p>
+              <% end %>
+            <p>定員目安数 : <%= estaevent.people %>人</p>
+            <% if attends.length < estaevent.people %>
+              <p>現在出席数 : <span style="color:red"><%= attends.length %></span>人</p>
+            <% else %>
+              <p>現在出席数 : <span style="color:skyblue;"><%= attends.length %></span>人</p>
+            <% end %>
+          </div>
+          <div class="clear"></div>
+          <% end %>
+          <%= link_to("/groups/#{estaevent.id}/esta_users") do %>
+            <div class="attend-user-wrapper">
+              <h3>【参加ユーザー】</h3>
+              <% attends.each do |attend|%>
+              <% attend_user = User.find_by(id: attend.user_id )%>
+              <%= image_tag "/user_images/#{attend_user.image}",class:"attend-users-image"%>
+          <% end %>
+        </div>
+        </div>
+        <% end %>
+        <% end %>
+        <% end %>
+      </div>
+      <div class="group-about-was-event clearfix">
+        <h1>過去開催したイベント</h1>
+        <% @estaevents.each do |estaevent| %>
+        <% if estaevent && estaevent.room_id == ""  && estaevent.review != "" %>
+        <%= link_to("/events/#{estaevent.id}/estaevent", class: "color-black") do %>
+        <div class="group-about-product">
+          <div class="product-image-wrapper hover">
+            <%= image_tag "/company_event_images/#{estaevent.image}" ,class: "product-image"%>
+            <div class="clear"></div>
+          </div>
+          <% end %>
+          <div class="product-content-wrapper">
+            <%= link_to("/events/#{estaevent.id}/estaevent", class: "color-black") do %>
+            <h2><%= estaevent.title %></h2>
+            <p><i class="far fa-fw fa-question-circle"></i> <%= estaevent.genre %></p>
+            <p><i class="fas fa-fw fa-yen-sign"></i> <%= estaevent.price %>円</p>
+            <p><i class="fas fa-fw fa-users"></i> <%= estaevent.people %>人</p>
+            <p><i class="fas fa-fw fa-map-marker"></i> <%= estaevent.place %></p>
+            <p><i class="far fa-fw fa-clock"></i> <%= estaevent.time %></p>
+            <p><i class="far fa-fw fa-calendar-alt"></i> <%= estaevent.day %></p>
+          </div>
+        </div>
+        <% end %>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="group-about-right">
+    <h2>メンバー</h2>
+    <% @usersubgroups.each do |usersubgroup| %>
+    <% @user = User.find_by(id: usersubgroup.user_id)%>
+    <%= link_to("/users/#{@user.id}/info") do %>
+    <div class="member-wrapper clearfix">
+      <%= image_tag("/user_images/#{@user.image}",class: "subgroup-image hover")%>
+      <p class="subgroup-user-name"><%= @user.user_id %></p>
+    </div>
+    <div class="clear"></div>
+    <% end %>
+    <% end %>
+  </div>
+
+  <div class="group-about-menu-a">
+    <ul>
+      <li id="group-about-event-menu-a"><i class="fab fa-fw fa-hubspot "></i> イベント一覧</li>
+      <li id="group-about-member-menu-a"><i class="fas fa-fw fa-users"></i> メンバー</li>
+    </ul>
+  </div>
+
+  <div class="group-about-menu-b">
+    <ul>
+      <li id="group-about-event-menu-b"><i class="fab fa-fw fa-hubspot "></i> イベント一覧</li>
+      <li id="group-about-member-menu-b" class="count-box">
+        <i class="fas fa-fw fa-users"></i> メンバー</li>
+      <li id="group-about-det-menu-b" class="">
+        <i class="fas fa-cog fa-fw count-box">
+        </i>詳細
+      </li>
+    </ul>
+  </div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+    $(document).on('turbolinks:load', function(){
+      $('#group-about-event-menu-a').click(function(){
+        $('.group-about-center').fadeIn();
+        $('.group-about-right').hide();
+      });
+
+      $('#group-about-member-menu-a').click(function(){
+        $('.group-about-right').fadeIn();
+        $('.group-about-center').hide();
+      });
+
+
+    $('#group-about-event-menu-b').click(function(){
+      $('.group-about-center').fadeIn();
+      $('.group-about-right').hide();
+      $('.group-about-left').hide();
+    });
+
+    $('#group-about-member-menu-b').click(function(){
+      $('.group-about-center').hide();
+      $('.group-about-right').fadeIn();
+      $('.group-about-left').hide();
+    });
+
+    $('#group-about-det-menu-b').click(function(){
+      $('.group-about-center').hide();
+      $('.group-about-right').hide();
+      $('.group-about-left').fadeIn();
+    });
+
+    $(window).resize(function(){
+      var ww = $(window).width();
+      if (ww >= 1001){
+        $('.group-about-right').show();
+        $('.group-about-center').show();
+      };
+    });
+
+
+    $(window).resize(function(){
+      var ww = $(window).width();
+      if (ww >= 700){
+        $('.group-about-left').show();
+        $('.group-about-center').show();
+      };
+    });
+
+    $('.unsubscribe').click(function(){
+      $('.unsubscribe-wrapper').show();
+      $('#mask').show();
+    });
+
+    $('.not-unsubscribe-btn').click(function(){
+      $('.unsubscribe-wrapper').hide();
+      $('#mask').hide();
+    });
+
+    $('#mask').click(function(){
+      $('.unsubscribe-wrapper').hide();
+      $('#mask').hide();
+    });
+
+
+
+
+    });
+
+  </script>

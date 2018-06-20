@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="managers-info-wrapper">
+    <h1>メッセージ情報</h1>
+    <h2>メッセージ総数 : <%= @messages.length %></h2>
+
+    <select class="" name="">
+      <option value="">id</option>
+      <option value="">to_name</option>
+      <option value="">from_name</option>
+      <option value="">room_id</option>
+      <option value="">image</option>
+      <option value="">text</option>
+      <option value="">user_count</option>
+      <option value="">company_count</option>
+      <option value="">created_at</option>
+      <option value="">updated_at</option>
+    </select>
+    <input type="serch" name="" value="">
+    <div class="managers-each-info">
+      <h3>All</h3>
+      <table border="1" class="managers-info-content">
+        <tr>
+          <th>id</th>
+          <th>to_name</th>
+          <th>from_name</th>
+          <th>room_id</th>
+          <th>text</th>
+          <th>user_count</th>
+          <th>company_count</th>
+          <th>image</th>
+          <th>created_at</th>
+          <th>updated_at</th>
+          <th>編集</th>
+        </tr>
+
+        <% @messages.each do |message| %>
+        <tr>
+          <td><%= message.id %></td>
+          <td><%= message.to_name %></td>
+          <td><%= message.from_name %></td>
+          <td><%= message.room_id %></td>
+          <td><%= message.text %></td>
+          <td><%= message.user_count %></td>
+          <td><%= message.company_count %></td>
+          <td><%= message.image %></td>
+          <td><%= message.created_at %></td>
+          <td><%= message.updated_at %></td>
+          <td><%= link_to "編集","/managers/messages/#{message.id}/edit"%></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+
+  </div>
+</div>

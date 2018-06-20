@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="managers-info-wrapper">
+    <h1 style="padding-left:10px;">企業編集画面</h1>
+      <h2 style="padding-left:10px;">企業ID: <%= @company.id %></h2>
+      <h2 style="padding-left:10px;">created_at : <%= @company.created_at %></h2>
+      <h2 style="padding-left:10px;">updated_at : <%= @company.updated_at %></h2>
+      <%= form_tag("/managers/companies/#{@company.id}/update",method: :post,class: "edit-wrapper") do %>
+        <h2>name</h2>
+        <input type="text" name="name" value="<%= @company.name %>">
+        <h2>image</h2>
+        <%= image_tag("/company_event_images/#{@company.image}",:size => "160x120")%>
+        <input type="text" name="image" value="<%= @company.image %>">
+        <h2>genre</h2>
+        <input type="text" name="genre" value="<%= @company.genre %>">
+        <h2>email</h2>
+        <input type="text" name="email" value="<%= @company.email %>">
+        <h2>password</h2>
+        <input type="text" name="password" value="<%= @company.password %>">
+        <h2>manager</h2>
+        <input type="text" name="manager" value="<%= @company.manager %>">
+        <h2>tel</h2>
+        <input type="text" name="tel" value="<%= @company.tel %>">
+        <h2>company_info</h2>
+        <input type="text" name="company_info" value="<%= @company.company_info %>">
+        <h2>body</h2>
+        <textarea name="body" rows="8" cols="80"><%= @company.body %></textarea>
+        <input type="submit" value="編集">
+      <%end%>
+        <%= link_to "削除","/managers/companies/#{@company.id}/destroy",method: :post,id: "edit-destroy" %>
+  </div>
+</div>

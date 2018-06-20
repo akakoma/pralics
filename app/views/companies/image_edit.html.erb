@@ -1,0 +1,56 @@
+<% if @current_company.id == @company.id %>
+
+<div class="container">
+  <div class="wrapper-type-a">
+    <div class="users-edit">
+      <h1>トップ画像</h1>
+      <%= form_tag("/companies/#{@company.id}/edit",{multipart:true,class:"users-edit-form"}) do %>
+        <label class="image-label  hover">
+          <div class="edit-image-box ">
+            <%= image_tag "/company_event_images/#{@company.image}",class:"user-edit-image"%>
+            <i class="fas fa-camera edit-camera-position"></i>
+          </div>
+          <input type="file" name="image" class="image-edit-file">
+        </label>
+      <input type="submit" class=" hover" value="変更">
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% end %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).on('turbolinks:load', function(){
+    var setFileInput = $('.image-label'),
+    setFileImg = $('.user-edit-image');
+
+    setFileInput.each(function(){
+        var selfFile = $(this),
+        selfInput = $(this).find('input[type=file]'),
+        prevElm = selfFile.find(setFileImg),
+        orgPass = prevElm.attr('src');
+
+        selfInput.change(function(){
+            var file = $(this).prop('files')[0],
+            fileRdr = new FileReader();
+
+            if (!this.files.length){
+                prevElm.attr('src', orgPass);
+                return;
+            } else {
+                if (!file.type.match('image.*')){
+                    prevElm.attr('src', orgPass);
+                    return;
+                } else {
+                    fileRdr.onload = function() {
+                        prevElm.attr('src', fileRdr.result);
+                    }
+                    fileRdr.readAsDataURL(file);
+                }
+            }
+        });
+    });
+});
+</script>

@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="wrapper-type-a">
+    <div class="information-about-wrapper">
+      <% if @current_user.id == @user.id %>
+      <%= form_tag("/groups/#{@resource.id}/resource_edit") do %>
+      <div class="resource-about-title clearfix">
+        <input type="text" name="title" value="<%= @resource.title%>">
+      </div>
+        <div class="resource-about-container">
+          <textarea name="body" rows="25" cols="80"><%= @resource.body%></textarea>
+        </div>
+        <%= link_to('削除',"/groups/#{@resource.id}/resource_destroy",{method: :post,class:"resource-btn recource-delete-btn hover"})%>
+        <input type="submit" class="resource-btn recource-edit-btn hover" value="編集">
+        <% end %>
+      <%else%>
+        <%= image_tag("/user_images/#{@user.image}",class:"resource-user-image")%>
+        <p class="resource-name"><%= @user.user_id%></p>
+        <div class="clear"></div>
+        <h1><%= @resource.title%></h1>
+        <div class="resource-about-container">
+          <%= simple_format("#{@resource.body}")%>
+        </div>
+        <% end %>
+    </div>
+  </div>
+</div>

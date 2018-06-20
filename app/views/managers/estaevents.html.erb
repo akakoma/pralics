@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="managers-info-wrapper">
+    <h1>開催イベント情報</h1>
+    <h2>開催イベント総数 : <%= @estaevents.length %></h2>
+
+    <select class="" name="">
+      <option value="">id</option>
+      <option value="">title</option>
+      <option value="">image</option>
+      <option value="">place</option>
+      <option value="">price</option>
+      <option value="">body</option>
+      <option value="">time</option>
+      <option value="">day</option>
+      <option value="">people</option>
+      <option value="">genre</option>
+      <option value="">review</option>
+      <option value="">conf</option>
+      <option value="">event_id</option>
+      <option value="">group_id</option>
+      <option value="">room_id</option>
+      <option value="">user_id</option>
+      <option value="">company_id</option>
+      <option value="">company_count</option>
+      <option value="">user_count</option>
+      <option value="">created_at</option>
+      <option value="">updated_at</option>
+    </select>
+    <input type="serch" name="" value="">
+    <div class="managers-each-info">
+      <h3>All</h3>
+      <table border="1" class="managers-info-content">
+        <tr>
+          <th>id</th>
+          <th>title</th>
+          <th>image</th>
+          <th>place</th>
+          <th>price</th>
+          <th>time</th>
+          <th>day</th>
+          <th>people</th>
+          <th>genre</th>
+          <th>conf</th>
+          <th>room_id</th>
+          <th>user_id</th>
+          <th>company_id</th>
+          <th>event_id</th>
+          <th>group_id</th>
+          <th>user_count</th>
+          <th>company_count</th>
+          <th>body</th>
+          <th>review</th>
+          <th>created_at</th>
+          <th>updated_at</th>
+          <th>編集</th>
+        </tr>
+
+        <% @estaevents.each do |estaevent| %>
+        <tr>
+          <td><%= estaevent.id %></td>
+          <td><%= estaevent.title %></td>
+          <td><%= estaevent.image %></td>
+          <td><%= estaevent.place %></td>
+          <td><%= estaevent.price %></td>
+          <td><%= estaevent.time %></td>
+          <td><%= estaevent.day %></td>
+          <td><%= estaevent.people %></td>
+          <td><%= estaevent.genre %></td>
+          <td><%= estaevent.conf %></td>
+          <td><%= estaevent.room_id %></td>
+          <td><%= estaevent.user_id %></td>
+          <td><%= estaevent.company_id %></td>
+          <td><%= estaevent.event_id %></td>
+          <td><%= estaevent.group_id %></td>
+          <td><%= estaevent.user_count %></td>
+          <td><%= estaevent.company_count %></td>
+          <td><%= estaevent.body %></td>
+          <td><%= estaevent.review %></td>
+          <td><%= estaevent.created_at %></td>
+          <td><%= estaevent.updated_at %></td>
+          <td><%= link_to "編集","/managers/estaevents/#{estaevent.id}/edit"%></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+
+  </div>
+</div>

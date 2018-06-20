@@ -1,0 +1,601 @@
+// room
+    .contact-image-wrapper{
+      text-align: center;
+      padding-top: 10px;
+    }
+
+
+    .talk-session{
+      width: 80%;
+      margin: 0 auto;
+      margin-bottom: 90px;
+    }
+
+    .from-comment{
+      margin: 20px;
+      background-color: #FACDC6;
+      border-radius: 5px;
+    }
+
+    .to-comment{
+      margin: 20px;
+      background-color: #eee;
+      border-radius: 5px;
+    }
+
+    .contact-name{
+      float: left;
+      line-height: 50px;
+      padding-left: 5%;
+    }
+
+    .from-contact-top{
+      margin: 10px;
+      padding: 10px;
+      border-bottom: 1px solid #EF4E39;
+    }
+
+    .to-contact-top{
+      margin: 10px;
+      padding: 10px;
+      border-bottom: 1px solid #bbb;
+    }
+
+    .talk-session-img{
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: inline-block;
+      float: left;
+    }
+
+    .time{
+      float: right;
+      cursor: default;
+      color: #888;
+    }
+
+    .contact-content{
+      padding: 3%;
+      width: 70%;
+      margin: 0 auto;
+      cursor: default;
+    }
+
+    .contact-protevent{
+      background-color: #fff;
+      border-radius: 3px;
+      width: 90%;
+      margin: 0 auto 10px;
+      padding: 1% 5% 5%;
+    }
+    .contact-protevent>span{
+      float: right;
+    }
+
+    .contact-protevent>h2{
+      text-align: center;
+      color: red;
+      clear: both;
+      font-weight: normal;
+    }
+
+
+    .talk-content-img{
+      width: 100%;
+      height: 350px;
+      margin-top: 10px;
+    }
+
+    .make-message-wrapper{
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      background-color: #fff;
+      padding: 10px 0 10px;
+      box-shadow:0 0 2px 1px #ddd;
+    }
+
+    .message-form>textarea{
+      box-sizing: border-box;
+      width: 50%;
+      margin-left: 20%;
+      resize: none;
+      font-size: 14px;
+      font-family:Verdana,sans-serif;
+      border-radius: 10px;
+      padding: 0 10px;
+    }
+
+    .message-form>textarea:focus{
+      outline: none;
+    }
+
+
+    .image-label{
+      box-sizing: border-box;
+      display: inline-block;
+      margin: 0 0 0 2%;
+    }
+
+    .tran-label{
+      box-sizing: border-box;
+      display: inline-block;
+      margin: 0 2%;
+    }
+
+    .message-image-box{
+      box-sizing: border-box;
+      width: 60px;
+      height: 40px;
+      display: inline-block;
+    }
+
+    .message-camera{
+      color:#0086AD;
+      font-size: 32px;
+    }
+
+    .message-tran{
+      font-size: 32px;
+
+    }
+
+    .message-image-file{
+      display: none;
+    }
+
+    .message-tran-btn{
+      display: none;
+    }
+
+    .event-edit-btn{
+      position: fixed;
+      top: 60px;
+      right: 5%;
+      background-color: orange;
+      color: white;
+      font-weight: bold;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    .event-edit-btn:hover{
+      opacity: 0.9;
+    }
+
+    .event_edit-wrapper{
+      position: fixed;
+      top: 10%;
+      right: 0;
+      left: 0;
+      width: 90%;
+      margin: 0 auto;
+      height: 80%;
+      background-color: #fff;
+      z-index: 3;
+      border-radius: 5px;
+      text-align: center;
+      overflow-y: scroll;
+    }
+    .cancel-mark{
+      float: left;
+      font-size: 30px;
+      color: #666;
+      margin: 20px 0 0 20px
+    }
+
+    .event_edit-wrapper>h1{
+      border-bottom: 1px solid #eee;
+      width: 80%;
+      margin: 10px auto;
+      padding: 10px;
+    }
+    .event_edit-wrapper>.container{
+      text-align: left;
+    }
+
+    .event_edit-content{
+      margin: 10px 0;
+    }
+
+    .event_edit-title{
+      font-size: 24px;
+      text-align:center;
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px 0;
+      border: none;
+      color: orange;
+      padding: 5px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .event_edit-wrapper>.container>p>input{
+      border: none;
+      color: orange;
+      padding: 5px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .event_edit-wrapper input:focus{
+      outline: none;
+      border-bottom: 1px solid orange;
+    }
+
+    .event_edit-wrapper textarea{
+      border-radius: 5px;
+      resize: none;
+      font-family: Verdana,sans-serif;
+    }
+
+    .event_edit-wrapper textarea:focus{
+      outline: none;
+    }
+
+    .event-edit-edit-btn{
+      display: inline-block;
+      width: 100%;
+      margin: 0;
+      color: #fff;
+      background-color: orange;
+      border:none;
+      border-radius: 5px;
+      font-weight: bold;
+      padding: 5px 0;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+
+    .event-edit-decision-btn{
+      display: inline-block;
+      width: 90%;
+      margin: 0;
+      color: #fff;
+      background-color: #555;
+      border:none;
+      border-radius: 5px;
+      font-weight: bold;
+      padding: 5px 0;
+      margin-bottom: 10px;
+    }
+
+    .conf-btn{
+      display: inline-block;
+      width: 100%;
+      margin: 0;
+      color: #fff;
+      background-color: orange;
+      border:none;
+      border-radius: 5px;
+      font-weight: bold;
+      padding: 5px 0;
+      margin: 10px 0;
+      text-align: center;
+    }
+
+    .cansel-conf-btn{
+      display: inline-block;
+      width: 100%;
+      margin: 0;
+      color: #fff;
+      background-color: #888;
+      border:none;
+      border-radius: 5px;
+      font-weight: bold;
+      padding: 5px 0;
+      margin: 10px 0;
+      text-align: center;
+    }
+
+
+    .review-btn{
+      background-color: orange;
+      width: 100%;
+      display: inline-block;
+      text-align: center;
+      border-radius: 5px;
+      padding: 3px 0;
+      margin-top: 5px;
+      font-weight: bold;
+    }
+// contacts
+
+  .error-message{
+    color: red;
+  }
+  .contact-form>input,textarea{
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .contact-form>textarea{
+    border: 1px solid #eee;
+    resize:none;
+    font-family: Verdana,sans-serif;
+  }
+
+  .contact-form>textarea:focus{
+    border: 1px solid orange;
+    outline: none;
+  }
+
+  .contact-form>input{
+    border: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  .contact-form>input:focus{
+    outline: none;
+    border-bottom: 1px solid orange;
+  }
+
+  .contact-form>input:last-child{
+    padding: 5px 0;
+    color: #fff;
+    font-weight: bold;
+    background-color: #777;
+    border: none;
+    border-radius: 5px;
+  }
+
+  .contact-form>input:last-child:focus{
+    border-bottom:none;
+  }
+
+  .thanks-btn{
+    background-color: orange;
+    color: #fff;
+    padding: 5px 20px;
+    border-radius: 5px;
+    margin: 20px 0;
+    font-weight: bold;
+    display: inline-block;
+  }
+
+// review_create
+  .review-image{
+    pointer-events: none;
+    width: 480px;
+    height: 270px;
+  }
+
+  .review-create-image-box{
+    position: relative;
+    width: 480px;
+    height: 270px;
+  }
+
+  .review-create-camera-position{
+    position: absolute;
+    right: 5%;
+    bottom: 2%;
+    font-size: 48px;
+    color:#0086AD;
+  }
+
+  .review_create-wrapper{
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .review_create-wrapper>input{
+    display:block;
+  }
+
+  .review_create-wrapper>textarea{
+    resize:none;
+    border-radius: 3px;
+    width: 100%;
+    height: 180px;
+    font-family: Verdana,sans-serif;
+  }
+
+  .review_create-wrapper>textarea:focus{
+    outline: none;
+    border: 1px solid orange;
+  }
+
+  .review_create-btn{
+    width: 100%;
+    border: none;
+    color: #fff;
+    background-color: orange;
+    border-radius: 5px;
+    padding: 10px 0;
+    margin: 20px 0;
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  .review_create-btn:focus{
+    outline: none;
+  }
+
+
+ @media (max-width:1000px){
+   .talk-session{
+     width: 90%;
+     margin: 0 auto 80px;
+   }
+
+   .talk-content-img{
+     width: 100%;
+     height: 250px;
+     margin-top: 10px;
+   }
+ }
+
+
+@media (max-width:800px){
+  .talk-session{
+    margin: 0 auto ;
+  }
+
+  .time{
+    font-size: 14px;
+  }
+
+  .contact-content{
+    width: 85%;
+  }
+
+
+  .talk-content-img{
+    width: 100%;
+    height: 200px;
+    margin-top: 10px;
+  }
+
+  .review-image{
+    width: 100%;
+  }
+
+  .review-create-image-box{
+    width: 100%;
+  }
+
+  .review_create-btn{
+    padding: 5px 0;
+    margin: 10px 0 0 0;
+  }
+
+}
+
+@media (max-width:600px){
+  .time{
+    font-size: 12px;
+  }
+  .talk-session{
+    width: 100%;
+    margin: 0;
+    margin-bottom: -20px;
+  }
+
+  .contact-protevent>h2{
+    font-size: 18px;
+  }
+
+  .contact-protevent>p{
+    font-size: 12px;
+  }
+
+  .from-comment{
+    margin: 20px 0;
+  }
+
+  .to-comment{
+    margin: 20px 0;
+  }
+
+  .contact-content{
+    width: 90%;
+  }
+
+
+  .talk-content-img{
+    width: 90%;
+    height: 150px;
+    margin: 10px 5% 0;
+  }
+
+  .make-message-wrapper{
+    padding: 0;
+  }
+
+  .message-form>textarea{
+    margin-left: 9%;
+    font-size: 14px;
+  }
+
+  .image-label{
+    margin: 0 0 0 1%;
+  }
+
+  .tran-label{
+    margin: 0 5%;
+  }
+
+  .message-image-box{
+    width: 50px;
+    height: 30px;
+  }
+
+  .message-camera{
+    font-size: 26px;
+  }
+
+  .message-tran{
+    font-size: 26px;
+  }
+
+  .thanks-wrapper>h1{
+    font-size: 18px;
+    margin-bottom: 25px;
+  }
+
+  .thanks-wrapper>p{
+    font-size: 12px;
+  }
+
+  .review-image{
+    height: 200px;
+  }
+
+  .review-create-image-box{
+    height: 200px;
+  }
+
+  .review-create-camera-position{
+    font-size: 40px;
+  }
+
+  .review_create-wrapper>h2{
+    font-size: 13px;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width:400px){
+  .time{
+    font-size: 10px;
+  }
+
+  .talk-session{
+    margin-bottom: -30px;
+  }
+
+  .message-form>textarea{
+    margin-left: 7%;
+    font-size: 10px;
+  }
+
+  .image-label{
+    margin: 0 0 0 1%;
+  }
+
+  .tran-label{
+    margin: 0 2%;
+  }
+
+  .message-image-box{
+    width: 40px;
+    height: 30px;
+  }
+
+  .message-camera{
+    font-size: 24px;
+  }
+
+  .message-tran{
+    font-size: 24px;
+  }
+
+
+
+
+}

@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="managers-info-wrapper">
+    <h1>ユーザー情報</h1>
+    <h2>ユーザー数 : <%= @users.length %></h2>
+
+    <select class="" name="">
+      <option value="">id</option>
+      <option value="">userName</option>
+      <option value="">userId</option>
+      <option value="">email</option>
+      <option value="">password</option>
+      <option value="">sex</option>
+      <option value="">age</option>
+      <option value="">organizer_id</option>
+      <option value="">user_info</option>
+      <option value="">created_at</option>
+      <option value="">updated_at</option>
+    </select>
+    <input type="serch" name="" value="">
+    <div class="managers-each-info">
+      <h3>全体</h3>
+      <table border="1" class="managers-info-content">
+
+        <tr>
+          <th>id</th>
+          <th>userNeme</th>
+          <th>userId</th>
+          <th>email</th>
+          <th>password_digest</th>
+          <th>image</th>
+          <th>sex</th>
+          <th>age</th>
+          <th>organizer_id</th>
+          <th>user_info</th>
+          <th>created_at</th>
+          <th>updated_at</th>
+          <th>編集</th>
+          <th>詳細</th>
+        </tr>
+
+        <% @users.each do |user| %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.name %></td>
+          <td><%= user.user_id %></td>
+          <td><%= user.email %></td>
+          <td><%= user.password_digest %></td>
+          <td><%= user.image %></td>
+          <td><%= user.sex %></td>
+          <td><%= user.age %></td>
+          <td><%= user.organizer_id %></td>
+          <td><%= user.user_info %></td>
+          <td><%= user.created_at %></td>
+          <td><%= user.updated_at %></td>
+          <td><%= link_to "編集","/managers/users/#{user.id}/edit" %></td>
+          <td><%= link_to "詳細","/users/#{user.id}/info" %></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+
+  </div>
+</div>

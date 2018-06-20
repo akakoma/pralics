@@ -1,0 +1,111 @@
+<div class="container">
+  <div class="wrapper-type-a">
+    <%= image_tag "/company_event_images/#{@event.image}",class: "event-about-image"%>
+    <div class="like-and-attend">
+      <span class="fa fa-heart like-active"></span>
+      <% if Like.find_by(event_id: @event.id) %>
+      : <%= Like.where(event_id: @event.id).length %>
+      <% else %>
+      <span>: 0</span>
+      <% end %>
+      <i class="fas fa-walking"></i>
+      <% if @estaevents = Estaevent.where(event_id: @event.id) %>
+      <% i = 0 %>
+      <% @estaevents.each do |estaevent|%>
+      <% if estaevent.review != "" && estaevent.room_id == "" %>
+        <% i += estaevent.people %>
+      <% end %>
+      <% end %>
+      <span>: </span><%= "#{i}人"%>
+      <% else %>
+      <span>: 0</span>
+      <% end %>
+    </div>
+    <div class="black-item"></div>
+    <div class="event-about-content-top">
+      <h1><%= @event.title %></h1>
+      <% if @event.organizer_id != nil %>
+        <p class="event-about-company-name">presented by <%= link_to(@organizer.user_id ,"/users/#{@organizer.id}/info",class: 'organizer-color') %> × <%= @current_company.name %></p>
+      <% else %>
+        <p class="event-about-company-name">presented by <%= @current_company.name %></p>
+      <% end %>
+      <div class="event-about-content-det">
+        <p><span style="color:#ccc;">ジャンル: </span><%= @event.genre %></p>
+        <p><span style="color:#ccc;">期間: </span><%= @event.day %></p>
+        <p><span style="color:#ccc;">設定料金: </span><%= @event.bottom_price %>～<%= @event.top_price %>円</p>
+        <p><span style="color:#ccc;">地域・場所: </span><%= @event.place %></p>
+        <p><span style="color:#ccc;">人数: </span><%= @event.bottom_people %>～<%= @event.top_people %>人</p>
+        <p><span style="color:#ccc;">対応時間: </span><%= @event.time %></p>
+      </div>
+    </div>
+
+    <div class="event-about-content-bottom">
+      <div class="event-about-body">
+        <h1>詳細</h1>
+        <div class="event-more-detail">
+          <%= simple_format(@event.body,:class => "event-more-text") %>
+        </div>
+      </div>
+      <div class="event-about-estaevent">
+        <h1>過去利用されたイベント</h1>
+        <% @estaevents.each do |estaevent| %>
+        <% group = Group.find_by(id: estaevent.group_id )%>
+        <%= link_to("/events/#{estaevent.id}/estaevent", class: "color-black") do %>
+        <div class="product">
+          <div class="product-image-wrapper">
+            <%= image_tag "/company_event_images/#{estaevent.image}" ,class: "product-image"%>
+            <div class="clear"></div>
+          </div>
+          <div class="product-content-wrapper">
+            <h2><%= estaevent.title %></h2>
+            <p><i class="far fa-fw fa-question-circle"></i> <%= estaevent.genre %></p>
+            <p><i class="fas fa-fw fa-yen-sign"></i> <%= estaevent.price %>円</p>
+            <p><i class="fas fa-fw fa-users"></i> <%= estaevent.people %>人</p>
+            <p><i class="fas fa-fw fa-map-marker"></i> <%= estaevent.place %></p>
+            <p><i class="far fa-fw fa-clock"></i> <%= estaevent.time %></p>
+            <p><i class="far fa-fw fa-calendar-alt"></i> <%= estaevent.day %></p>
+            <% if group != nil %>
+            <p id="company">参加団体 : <%= group.name %></p>
+            <% end %>
+          </div>
+        </div>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<% if @current_company.id == @company.id %>
+<%= link_to('編集する',"/companies/#{@event.id}/event_edit",class:"make-protevent")%>
+<% if @event.organizer_id == nil%>
+  <%= link_to('利用性の作成',"/companies/#{@event.id}/example",class:"make-example-btn")%>
+<% end %>
+<% end %>
+  <div class="make-protevent-footer">
+    <div class="like-and-attend-footer">
+      <span class="fa fa-heart like-active"></span>
+      <% if Like.find_by(event_id: @event.id) %>
+      : <%= Like.where(event_id: @event.id).length %>
+      <% else %>
+      <span>: 0</span>
+      <% end %>
+      <i class="fas fa-walking"></i>
+      <% if @estaevents = Estaevent.where(event_id: @event.id) %>
+      <% i = 0 %>
+      <% @estaevents.each do |estaevent|%>
+      <% if estaevent.review != "" && estaevent.room_id == "" %>
+        <% i += estaevent.people %>
+      <% end %>
+      <% end %>
+      <span>: </span><%= "#{i}人"%>
+      <% else %>
+      <span>: 0</span>
+      <% end %>
+    </div>
+    <% if @current_company.id == @company.id %>
+    <% if @event.organizer_id == nil  %>
+    <%= link_to('利用性の作成',"/companies/#{@event.id}/example",class:"make-example-footer-btn")%>
+    <% end %>
+    <%= link_to('編集する',"/companies/#{@event.id}/event_edit",class:"edit-estaevent-footer-btn")%>
+    <% end %>
+  </div>
