@@ -130,11 +130,7 @@ class ManagersController < ApplicationController
     @user.user_id = params[:user_id]
     @user.email = params[:email]
     @user.image = params[:image]
-    @user.password = params[:password]
     @user.organizer_id = params[:organizer_id]
-    @user.sex = params[:sex]
-    @user.age = params[:age]
-    @user.user_info = params[:user_info]
     @user.save
     redirect_to('/managers/users')
   end

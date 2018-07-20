@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_19_180050) do
+ActiveRecord::Schema.define(version: 2018_07_20_224426) do
 
   create_table "appsubgroups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 2018_06_19_180050) do
     t.string "conf"
     t.string "permission"
     t.integer "user_count"
+    t.integer "company_count"
   end
 
   create_table "groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

@@ -11,24 +11,9 @@
         <input type="text" name="user_id" value="<%= @user.user_id %>">
         <h2>email</h2>
         <input type="text" name="email" value="<%= @user.email %>">
-        <h2>age</h2>
-        <select class="" name="age">
-          <% for i in 15..100 %>
-          <option value="<%= i %>"><%= i %></option>
-          <% end %>
         </select>
         <h2>image</h2>
         <input type="text" name="image" value="<%= @user.image %>">
-        <h2>sex</h2>
-        <div class="sex">
-          <input type="radio" name="sex" value="Man">男性<br>
-          <input type="radio" name="sex" value="Woman">女性<br>
-          <input type="radio" name="sex" value="LGBT">LGBT<br>
-        </div>
-        <h2>password</h2>
-        <input type="text" name="password" value="<%= @user.password %>">
-        <h2>user_info</h2>
-        <input type="text" name="user_info" value="<%= @user.user_info %>">
         <h2>organizer_id</h2>
         <input type="text" name="organizer_id" value="<%= @user.organizer_id %>">
         <input type="submit" value="編集">
