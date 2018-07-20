@@ -13,7 +13,7 @@
   background-position: center 50%;
   background-size: cover;
   color: white;
-  background-image: url("top.jpg");
+  background-image: image-url("top.jpg");
   z-index: -1;
 }
 
@@ -613,7 +613,7 @@
         cursor: pointer;
         box-shadow: 0 0 0.5px 0 gray inset;
         font-size: 0;
-        
+
       }
 
        .top-footer>ul{

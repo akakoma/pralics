@@ -10,6 +10,14 @@
           <input type="password" name="password" value="<%= @password %>">
           <input type="submit" value="login" class="app-btn">
         <% end %>
+
+        <%= form_tag('/managers/signup') do %>
+          <h3>名前</h3>
+          <input type="text" name="name" value="<%= @name %>">
+          <h3>パスワード</h3>
+          <input type="password" name="password" value="<%= @password %>">
+          <input type="submit" value="login" class="app-btn">
+        <% end %>
       </div>
     </div>
   </div>

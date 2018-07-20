@@ -494,7 +494,7 @@ body.menu-open #hide-menu{
   color: #aaa;
 }
 
-#logout,#cancel,#add,#not,#search-cancel{
+.logout,#cancel,#add,#not,#search-cancel{
   cursor: pointer;
   width: 70%;
   margin: 0 auto;
@@ -504,6 +504,7 @@ body.menu-open #hide-menu{
   text-align: center;
   margin-bottom: 12px;
   padding: 3px 0;
+  display: inline-block;
 }
 
 #logout>a{
