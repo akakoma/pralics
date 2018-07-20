@@ -25,6 +25,7 @@ body{
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   cursor: default;
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
 }
 
 li{
