@@ -31,12 +31,14 @@
 
  .top-title{
    color: white;
-   margin: 60px 0;
+   display: fixed;
+   top:70px;
+   left: 0;
    cursor: default;
  }
 
  .top-title h1{
-   font-size: 60px;
+   font-size: 70px;
    height: 100px 0;
  }
 
@@ -44,6 +46,10 @@
    margin: 0 auto 0;
   font-size: 24px;
   width: 60%;
+  position: fixed;
+  bottom:50px;
+  left: 0;
+  right: 0;
  }
 
  .top-btn{
@@ -793,5 +799,10 @@
    .product-image{
      height: 100px;
    }
+
+   .top-title h1{
+     font-size: 60px;
+   }
+
 
  }

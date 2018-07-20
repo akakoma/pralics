@@ -497,7 +497,7 @@ body.menu-open #hide-menu{
 .logout,#cancel,#add,#not,#search-cancel{
   cursor: pointer;
   width: 70%;
-  margin: 0 auto;
+  margin: 10px auto;
   background-color: #777;
   color: #fff;
   border-radius: 5px;
@@ -544,6 +544,14 @@ body.menu-open #hide-menu{
 
   .top-count-box{
     display: none;
+  }
+
+  #logout-wrapper{
+    width: 90%;
+  }
+
+  .logout,#cancel,#add,#not,#search-cancel{
+    width: 100%;
   }
 }
 
