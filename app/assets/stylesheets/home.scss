@@ -315,7 +315,7 @@
       width: 70%;
       margin: 0 auto;
       border-radius: 5px;
-      position: fixed;
+      position: absolute;
       top:40px;
       right: 0;
       left: 0;
@@ -363,6 +363,7 @@
       background-color: orange;
       margin-bottom: 10px;
       padding: 3px 0 ;
+      width: 100%;
     }
     .group-search-form input:focus{
       border-color: orange;
@@ -788,6 +789,10 @@
 
         .information-image{
           height: 120px;
+        }
+
+        .group-search-form{
+          width: 100%;
         }
 
 
