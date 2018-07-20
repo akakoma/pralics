@@ -13,12 +13,6 @@ class ManagersController < ApplicationController
 ]}
   before_action :forbid_login_manager,{only:[:login]}
 
-  def signup
-    u = Manager.new(name: params[:name],password: params[:password])
-    u.save
-    redirect_to('managers/login')
-  end
-
   def index
   end
 

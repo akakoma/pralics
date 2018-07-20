@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
 
 
-  post 'managers/signup' => "managers#signup"
-
 # companies
   get 'companies/index' => "companies#index"
   get 'companies/:id/groups_about' => "companies#groups_about"
