@@ -1,7 +1,6 @@
 class Event < ApplicationRecord
   validates :title, presence: true
   validates :image, presence: true
-  mount_uploader :image, ImageUploader
   validates :place, presence: true
   validates :time, presence: true
   validates :day, presence: true

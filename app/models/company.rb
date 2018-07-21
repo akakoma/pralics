@@ -3,7 +3,6 @@ class Company < ApplicationRecord
 
   validates :name, presence: true,uniqueness: true
   validates :image, presence: true
-  mount_uploader :image, ImageUploader
   validates :genre, presence: true
   validates :email, presence: true
   validates :password_digest, presence: true
