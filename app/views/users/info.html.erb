@@ -40,6 +40,16 @@
     <div class="clear"></div>
   </div>
 
+  <div class="user-body">
+    <h1>自己紹介</h1>
+    <div class="user-body-wrapper">
+      <%= simple_format(@user.body,class:'each-uset-body')%>
+    <% if @current_user && @user.id == @current_user.id %>
+      <%= link_to('編集する',"/users/#{@current_user.id}/body_edit",class:'body-edit-btn') %>
+    <% end %>
+  </div>
+  </div>
+
   <div class="user-info-estaevent">
     <h1>主催しているイベント</h1><%if @user == @current_user%><%= link_to('イベントを作成する',"/events/#{@current_user.organizer_id}/make_event",class:'hover') %> <%end%>
   </div>

@@ -49,6 +49,15 @@
 
     <div class="event-about-content-bottom">
       <div class="event-about-body">
+        <% if @event.organizer_id %>
+          <h1>主催者</h1>
+          <%= link_to("/users/#{@organizer.id}/info") do %>
+            <div class="event-more-detail clearfix">
+              <%= image_tag("/user_images/#{@organizer.image}",class:'event-organizer-image') %>
+              <p class="event-organizer-name"><%= @organizer.user_id %></p>
+            </div>
+          <% end %>
+        <% end %>
         <h1>詳細</h1>
         <div class="event-more-detail">
           <%= simple_format(@event.body,:class => "event-more-text") %>

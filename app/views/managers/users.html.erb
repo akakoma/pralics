@@ -13,6 +13,7 @@
       <option value="">age</option>
       <option value="">organizer_id</option>
       <option value="">user_info</option>
+      <option value="">body</option>
       <option value="">created_at</option>
       <option value="">updated_at</option>
     </select>
@@ -32,6 +33,7 @@
           <th>age</th>
           <th>organizer_id</th>
           <th>user_info</th>
+          <th>body</th>
           <th>created_at</th>
           <th>updated_at</th>
           <th>編集</th>
@@ -50,6 +52,7 @@
           <td><%= user.age %></td>
           <td><%= user.organizer_id %></td>
           <td><%= user.user_info %></td>
+          <td><%= user.body %></td>
           <td><%= user.created_at %></td>
           <td><%= user.updated_at %></td>
           <td><%= link_to "編集","/managers/users/#{user.id}/edit" %></td>

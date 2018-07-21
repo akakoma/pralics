@@ -177,6 +177,23 @@
       opacity: 0.8;
     }
 
+    .user-body-wrapper{
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+    }
+
+    .each-uset-body{
+      padding: 10px;
+    }
+
+    .body-edit-btn{
+      text-align: right;
+      display: block;
+      margin-right: 10px;
+      color:#2595C7;
+      padding-bottom: 10px;
+    }
+
     .user-info-estaevent{
       border-bottom:1px solid #eee;
     }
@@ -304,6 +321,17 @@
       bottom: 0;
       font-size: 48px;
       color:#0086AD;
+    }
+
+    .body_edit-content{
+      font-family: Verdana,sans-serif;
+      border-radius: 3px;
+      resize: none;
+    }
+
+    .body_edit-content:focus{
+      outline: none;
+      border: 1px solid orange;
     }
 
 // organizer

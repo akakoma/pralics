@@ -130,6 +130,7 @@ class ManagersController < ApplicationController
     @user.user_id = params[:user_id]
     @user.email = params[:email]
     @user.image = params[:image]
+    @user.body = params[:body]
     @user.organizer_id = params[:organizer_id]
     @user.save
     redirect_to('/managers/users')
@@ -541,7 +542,8 @@ class ManagersController < ApplicationController
       image: "userdef.jpg",
       sex: params[:sex],
       user_info: 0,
-      age: params[:age]
+      age: params[:age],
+      body: 'よろしくお願いします！！'
     )
     if @user.save
       redirect_to('/managers/users')

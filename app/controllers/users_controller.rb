@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user,{only:[:join,:edit,:email_edit,:password_edit,:user_id_edit,
     :image_edit,:organizer,:informations,:information_about,:organizer_contact,:like_create,
-    :like_destroy,:appsubgroup_create,:appsubgroup_destroy,:account_destroy
+    :like_destroy,:appsubgroup_create,:appsubgroup_destroy,:account_destroy,:body_edit
     ]}
   before_action :forbid_login_user,{only:[:login,:signup,:login_system]}
 
@@ -35,6 +35,9 @@ class UsersController < ApplicationController
       image = params[:image]
       File.binwrite("#{Rails.root}/public/user_images/#{@user.image}", image.read)
     end
+    if params[:body]
+      @user.body = params[:body]
+    end
     if @user.password == params[:password] && params[:new_password]
       @user.password = params[:new_password]
     end
@@ -55,6 +58,10 @@ class UsersController < ApplicationController
   end
 
   def image_edit
+    @user = User.find_by(id: params[:id])
+  end
+
+  def body_edit
     @user = User.find_by(id: params[:id])
   end
 
@@ -152,6 +159,7 @@ class UsersController < ApplicationController
             sex: params[:sex],
             age: params[:age],
             user_info: 0,
+            body: 'よろしくお願いします！！'
           )
     if @user.save
       session[:id] = @user.id

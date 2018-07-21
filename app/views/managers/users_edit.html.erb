@@ -16,6 +16,8 @@
         <input type="text" name="image" value="<%= @user.image %>">
         <h2>organizer_id</h2>
         <input type="text" name="organizer_id" value="<%= @user.organizer_id %>">
+        <h2>body</h2>
+        <textarea name="body" rows="8" cols="80"><%= @user.body %></textarea>
         <input type="submit" value="編集">
       <%end%>
         <%= link_to "削除","/managers/users/#{@user.id}/destroy",method: :post,id: "edit-destroy" %>

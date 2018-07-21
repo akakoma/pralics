@@ -1,0 +1,13 @@
+current directory: /home/vagrant/pralics/vendor/bundle/ruby/2.4.0/gems/json-2.1.0/ext/json
+/home/vagrant/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20180721-14444-jrlw4b.rb extconf.rb
+creating Makefile
+
+current directory: /home/vagrant/pralics/vendor/bundle/ruby/2.4.0/gems/json-2.1.0/ext/json
+make "DESTDIR=" clean
+
+current directory: /home/vagrant/pralics/vendor/bundle/ruby/2.4.0/gems/json-2.1.0/ext/json
+make "DESTDIR="
+make: `all' に対して行うべき事はありません.
+
+current directory: /home/vagrant/pralics/vendor/bundle/ruby/2.4.0/gems/json-2.1.0/ext/json
+make "DESTDIR=" install

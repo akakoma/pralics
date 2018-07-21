@@ -204,6 +204,7 @@ Rails.application.routes.draw do
   get 'users/:id/user_id_edit' => "users#user_id_edit"
   get 'users/:id/password_edit' => "users#password_edit"
   get 'users/:id/image_edit' => "users#image_edit"
+  get 'users/:id/body_edit' => "users#body_edit"
   get 'users/:id/image' => "users#image"
   get 'users/informations' => "users#informations"
   get 'users/:id/organizer' => "users#organizer"
