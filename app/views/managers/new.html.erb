@@ -71,7 +71,7 @@
   <div class="content " id="company">
     <div class="new-wrapper clearfix">
       <h1>Company</h1>
-    <%= form_tag('/managers/companies/create') do %>
+    <%= form_tag('/managers/companies/create',multipart: true) do %>
     <h2 style="color:#333;">name</h2>
     <input type="text" name="name" value="<%= @company.name %>">
     <h2 style="color:#333;">genre</h2>
@@ -85,7 +85,7 @@
     <h2 style="color:#333;">tel</h2>
     <input type="text" name="tel" value="<%= @company.tel %>">
     <h2 style="color:#333;">image</h2>
-    <input type="text" name="image" value="<%= @company.image %>">
+    <input type="file" name="image" value="">
     <input type="submit" name="" value="作成">
     <% end %>
   </div>

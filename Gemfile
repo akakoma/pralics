@@ -43,6 +43,8 @@ gem 'mysql2'
 
 gem 'carrierwave'
 gem 'fog'
+gem 'paperclip'
+gem 'aws-sdk'
 
 
 group :development, :test do
