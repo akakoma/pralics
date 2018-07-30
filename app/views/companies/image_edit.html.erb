@@ -7,10 +7,10 @@
       <%= form_tag("/companies/#{@company.id}/edit",{multipart:true,class:"users-edit-form"}) do %>
         <label class="image-label  hover">
           <div class="edit-image-box ">
-            <%= image_tag @company.avatar ,class:"user-edit-image"%>
+            <%= image_tag "/company_event_images/#{@company.image}" ,class:"user-edit-image"%>
             <i class="fas fa-camera edit-camera-position"></i>
           </div>
-          <input type="file" name="avatar" class="image-edit-file">
+          <input type="file" name="image" class="image-edit-file">
         </label>
       <input type="submit" class=" hover" value="変更">
       <% end %>

@@ -167,7 +167,9 @@ class CompaniesController < ApplicationController
 
   def edit
     @company = Company.find_by(id: params[:id])
-    @company.avatar = params[:avatar]
+    @company.image = "co_ev_#{rand(99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999)}.jpg"
+    image = params[:image]
+    File.binwrite("#{Rails.root}/public/company_event_images/#{@company.image}", image.read)
     @company.save
     redirect_to("/companies/#{@company.id}/about")
   end
