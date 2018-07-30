@@ -41,10 +41,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bcrypt'
 gem 'mysql2'
 
-gem 'carrierwave'
-gem 'fog'
-gem 'paperclip'
-gem 'aws-sdk'
+
+gem 'aws-sdk-s3'
 
 
 group :development, :test do
